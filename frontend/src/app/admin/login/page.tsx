@@ -69,9 +69,24 @@ export default function AdminLoginPage() {
       {/* Background glowing effects */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-md">
+      {/* Top Navbar Bar with Back Button */}
+      <header className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 flex items-center justify-between">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-bold transition-all backdrop-blur-md"
+        >
+          <span>← Retour à l&apos;accueil</span>
+        </Link>
+        <div className="text-right">
+          <span className="text-[11px] font-bold text-red-400 uppercase tracking-widest hidden sm:inline-block">
+            Accès Réservé Personnel Interne
+          </span>
+        </div>
+      </header>
+
+      <div className="relative z-10 w-full max-w-md my-8">
         {/* Brand Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <Link href="/" className="inline-flex items-center gap-3 group">
             <div className="w-14 h-14 rounded-2xl bg-white p-1.5 flex items-center justify-center shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform flex-shrink-0">
               <Image
@@ -95,12 +110,22 @@ export default function AdminLoginPage() {
         </div>
 
         {/* Dedicated Admin Card */}
-        <div className="bg-white rounded-3xl border border-zinc-200 shadow-2xl p-8 sm:p-10 relative">
-          <div className="mb-6 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#DC2626] border border-red-200 text-xs font-black uppercase tracking-wider mb-3">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Accès Administrateur Dédié</span>
+        <div className="bg-white rounded-3xl border border-zinc-200 shadow-2xl p-7 sm:p-9 relative">
+          {/* Dual Portal Switcher Tabs */}
+          <div className="grid grid-cols-2 gap-1.5 p-1 bg-zinc-100 rounded-2xl mb-7 border border-zinc-200/70">
+            <Link
+              href="/auth/login"
+              className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-zinc-600 hover:text-zinc-900 font-semibold text-xs transition-colors"
+            >
+              <span>Espace Client</span>
+            </Link>
+            <div className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white text-[#09090B] font-bold text-xs shadow-xs border border-zinc-200">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#DC2626]" />
+              <span>Administration</span>
             </div>
+          </div>
+
+          <div className="mb-6">
             <h1 className="text-2xl font-black text-[#09090B]">
               Console Admin
             </h1>
