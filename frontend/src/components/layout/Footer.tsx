@@ -13,7 +13,7 @@ export function Footer() {
           {/* Col 1: TransLogix Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-white p-0.5 flex items-center justify-center shadow-lg shadow-red-500/20 flex-shrink-0 overflow-hidden">
+              <div className="w-14 h-14 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-lg shadow-red-500/10 flex-shrink-0 overflow-hidden">
                 <Image
                   src="/images/logo-herve-official.png"
                   alt="Hervé Logistics Logo"
@@ -101,8 +101,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/track/TL-2025-000123" className="hover:text-white transition-colors text-[#DC2626] font-semibold">
-                  Suivre un envoi (Démo)
+                <Link href="/track" className="hover:text-white transition-colors text-[#DC2626] font-semibold">
+                  Suivre un envoi en direct
                 </Link>
               </li>
             </ul>

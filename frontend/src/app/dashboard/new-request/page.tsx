@@ -27,6 +27,7 @@ import { useApp, ClientShipmentInput } from "@/context/AppContext";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/components/ui/Toast";
+import { PORTS_ORIGIN, DESTINATIONS_LIST } from "@/data/countries";
 
 export default function NewShipmentRequestPage() {
   const router = useRouter();
@@ -59,23 +60,8 @@ export default function NewShipmentRequestPage() {
 
   const [copied, setCopied] = useState(false);
 
-  const predefinedDestinations = [
-    "Douala, Cameroun",
-    "Abidjan, Côte d'Ivoire",
-    "Libreville, Gabon",
-    "Pointe-Noire, Congo",
-    "Dakar, Sénégal",
-    "Kinshasa, RDC",
-    "Lomé, Togo",
-    "Cotonou, Bénin",
-    "Le Havre, France",
-  ];
-
-  const predefinedOrigins = [
-    "Busan, Corée du Sud",
-    "Séoul, Corée du Sud",
-    "Incheon, Corée du Sud",
-  ];
+  const predefinedDestinations = DESTINATIONS_LIST;
+  const predefinedOrigins = PORTS_ORIGIN;
 
   const handleCopyCode = () => {
     if (!generatedShipment) return;

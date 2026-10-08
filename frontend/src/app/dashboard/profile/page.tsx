@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/Toast";
 import { User, Building, Mail, Phone, MapPin, CheckCircle2 } from "lucide-react";
+import { COUNTRIES_LIST } from "@/data/countries";
 
 export default function ClientProfilePage() {
   const { currentUser } = useApp();
@@ -19,7 +20,7 @@ export default function ClientProfilePage() {
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    showToast("Profil mis à jour avec succès (Simulation frontend)", "success");
+    showToast("Profil mis à jour avec succès !", "success");
   };
 
   return (
@@ -34,7 +35,7 @@ export default function ClientProfilePage() {
       <div className="bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-xs">
         <div className="flex items-center gap-4 pb-6 mb-6 border-b border-zinc-100">
           <div className="w-16 h-16 rounded-2xl bg-[#DC2626] text-white flex items-center justify-center font-extrabold text-xl shadow-md shadow-red-500/20">
-            JD
+            {name ? name.slice(0, 2).toUpperCase() : "CL"}
           </div>
           <div>
             <h2 className="text-lg font-bold text-[#09090B]">{name}</h2>
@@ -79,12 +80,20 @@ export default function ClientProfilePage() {
           </div>
 
           <div>
-            <Input
-              label="Pays d'implantation"
+            <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-2">
+              Pays d&apos;implantation / Résidence
+            </label>
+            <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              leftIcon={<MapPin className="w-4 h-4 text-zinc-400" />}
-            />
+              className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-zinc-800 focus:outline-none focus:ring-2 focus:ring-[#DC2626]"
+            >
+              {COUNTRIES_LIST.map((c) => (
+                <option key={c.code} value={c.name}>
+                  {c.name} {c.dialCode ? `(${c.dialCode})` : ""}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="pt-4 flex items-center justify-end gap-3 border-t border-zinc-100">

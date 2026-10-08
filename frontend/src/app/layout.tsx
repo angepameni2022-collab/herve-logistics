@@ -29,8 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`h-full ${jakarta.variable}`}>
-      <body className={`min-h-full flex flex-col bg-[#F8FAFC] text-[#09090B] ${jakarta.className} antialiased`}>
+    <html lang="fr" className={`h-full ${jakarta.variable}`} suppressHydrationWarning>
+      <body
+        className={`min-h-full flex flex-col bg-[#F8FAFC] text-[#09090B] ${jakarta.className} antialiased`}
+        suppressHydrationWarning
+      >
         <ToastProvider>
           <AppProvider>
             {children}

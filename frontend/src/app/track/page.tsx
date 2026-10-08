@@ -57,7 +57,7 @@ export default function TrackIndexPage() {
             </div>
           </div>
 
-          {/* Envois de démonstration disponibles */}
+          {/* Envois récents enregistrés */}
           <div className="mt-12 text-left bg-white p-6 sm:p-8 rounded-2xl border border-zinc-200 shadow-xs">
             <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-4">
               Envois actifs enregistrés

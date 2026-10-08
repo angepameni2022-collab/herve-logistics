@@ -22,9 +22,9 @@ export default function AdminLoginPage() {
   const { showToast } = useToast();
   const { adminLogin, switchUserRole } = useApp();
 
-  const [adminEmail, setAdminEmail] = useState("admin@hervelogistics.com");
-  const [adminPassword, setAdminPassword] = useState("admin2026");
-  const [adminPin, setAdminPin] = useState("2026");
+  const [adminEmail, setAdminEmail] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
+  const [adminPin, setAdminPin] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -33,11 +33,12 @@ export default function AdminLoginPage() {
     setErrorMsg(null);
 
     if (!adminEmail.trim()) {
-      setErrorMsg("Veuillez saisir votre identifiant administrateur.");
+      setErrorMsg("Veuillez saisir votre identifiant administrateur (ex: admin@hervelogistics.com ou admin).");
       return;
     }
-    if (!adminPassword.trim()) {
-      setErrorMsg("Veuillez saisir le mot de passe administrateur.");
+    const secret = adminPassword.trim() || adminPin.trim();
+    if (!secret) {
+      setErrorMsg("Veuillez saisir le mot de passe administrateur (admin2026) ou le code PIN (2026).");
       return;
     }
 
@@ -45,23 +46,15 @@ export default function AdminLoginPage() {
 
     setTimeout(() => {
       setIsLoading(false);
-      const success = adminLogin(adminPassword || adminPin);
+      const success = adminLogin(secret, adminEmail);
       if (success) {
         switchUserRole("admin");
         showToast("✓ Authentification Administrateur validée.", "success");
-        router.push("/admin/displacement");
+        router.push("/admin");
       } else {
-        setErrorMsg("Identifiants incorrects. Veuillez utiliser le code démo '2026'.");
+        setErrorMsg("Identifiants incorrects. Veuillez vérifier vos accès administrateur.");
       }
-    }, 500);
-  };
-
-  const handleFillDemo = () => {
-    setAdminEmail("admin@hervelogistics.com");
-    setAdminPassword("admin2026");
-    setAdminPin("2026");
-    setErrorMsg(null);
-    showToast("Identifiants administrateur préremplis", "info");
+    }, 400);
   };
 
   return (
@@ -88,7 +81,7 @@ export default function AdminLoginPage() {
         {/* Brand Header */}
         <div className="text-center mb-6">
           <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-16 h-16 rounded-full bg-white p-0.5 flex items-center justify-center shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
+            <div className="w-16 h-16 rounded-2xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xl shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
                 src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
@@ -111,28 +104,20 @@ export default function AdminLoginPage() {
 
         {/* Dedicated Admin Card */}
         <div className="bg-white rounded-3xl border border-zinc-200 shadow-2xl p-7 sm:p-9 relative">
-          {/* Dual Portal Switcher Tabs */}
-          <div className="grid grid-cols-2 gap-1.5 p-1 bg-zinc-100 rounded-2xl mb-7 border border-zinc-200/70">
-            <Link
-              href="/auth/login"
-              className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-zinc-600 hover:text-zinc-900 font-semibold text-xs transition-colors"
-            >
-              <span>Espace Client</span>
-            </Link>
-            <div className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white text-[#09090B] font-bold text-xs shadow-xs border border-zinc-200">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#DC2626]" />
-              <span>Administration</span>
-            </div>
-          </div>
-
           <div className="mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#DC2626] text-xs font-bold mb-3 border border-red-100">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Console Restreinte</span>
+            </div>
             <h1 className="text-2xl font-black text-[#09090B]">
-              Console Admin
+              Console d&apos;Administration
             </h1>
             <p className="text-xs sm:text-sm text-zinc-500 mt-1">
               Réservé à l&apos;équipe de pilotage pour la gestion et le déplacement des colis.
             </p>
           </div>
+
+
 
           {errorMsg && (
             <div className="p-3.5 mb-5 rounded-xl bg-red-50 border border-red-200 text-xs text-[#DC2626] flex items-center gap-2 font-semibold">
@@ -149,7 +134,7 @@ export default function AdminLoginPage() {
               <div className="relative">
                 <Mail className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="email"
+                  type="text"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
                   placeholder="admin@hervelogistics.com"
@@ -169,21 +154,20 @@ export default function AdminLoginPage() {
                   type="password"
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="admin2026"
                   className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-3.5 text-sm font-semibold text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all font-mono"
-                  required
                 />
               </div>
             </div>
 
             <div>
               <label className="block text-xs font-bold text-zinc-800 mb-1.5">
-                Code PIN d&apos;autorisation rapide (ex: 2026)
+                Code PIN de sécurité (ou Mot de passe)
               </label>
               <div className="relative">
                 <KeyRound className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="text"
+                  type="password"
                   maxLength={6}
                   value={adminPin}
                   onChange={(e) => setAdminPin(e.target.value)}
@@ -203,18 +187,7 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          {/* Quick Demo Button */}
-          <div className="mt-5 pt-5 border-t border-zinc-100 text-center">
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="text-xs text-zinc-500 hover:text-[#DC2626] font-semibold transition-colors cursor-pointer"
-            >
-              ⚡ Remplir avec les identifiants de démonstration (admin@hervelogistics.com / 2026)
-            </button>
-          </div>
-
-          <div className="mt-4 text-center">
+          <div className="mt-6 pt-5 border-t border-zinc-100 text-center">
             <Link
               href="/auth/login"
               className="text-xs text-zinc-500 hover:text-zinc-800 transition-colors"

@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { useToast } from "@/components/ui/Toast";
 import { useApp } from "@/context/AppContext";
+import { COUNTRIES_LIST } from "@/data/countries";
 import {
   MapPin,
   Mail,
@@ -20,7 +21,9 @@ export default function ContactPage() {
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("+82 ");
+  const [country, setCountry] = useState("Corée du Sud");
+  const [subject, setSubject] = useState("Demande de cotation / Devis de fret maritime ou aérien");
   const [message, setMessage] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +56,7 @@ export default function ContactPage() {
         senderName: fullName,
         senderEmail: email,
         phone: phone || undefined,
-        subject: "Demande de contact via le formulaire",
+        subject: `[${country}] ${subject}`,
         message,
       });
       showToast("✓ Votre message a été envoyé avec succès.", "success");
@@ -213,20 +216,45 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* Ligne à 2 champs : Email & Téléphone */}
+                    {/* Champ 2 : Email */}
+                    <div>
+                      <label className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1.5">
+                        Adresse Email <span className="text-[#DC2626]">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="votre.email@domaine.com"
+                        className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
+                        required
+                      />
+                    </div>
+
+                    {/* Ligne à 2 champs : Pays & Téléphone */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1.5">
-                          Adresse Email <span className="text-[#DC2626]">*</span>
+                          Pays concerné
                         </label>
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="votre.email@domaine.com"
+                        <select
+                          value={country}
+                          onChange={(e) => {
+                            const newCountry = e.target.value;
+                            setCountry(newCountry);
+                            const found = COUNTRIES_LIST.find((c) => c.name === newCountry);
+                            if (found?.dialCode) {
+                              setPhone(found.dialCode + " ");
+                            }
+                          }}
                           className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
-                          required
-                        />
+                        >
+                          {COUNTRIES_LIST.map((c) => (
+                            <option key={c.code} value={c.name}>
+                              {c.name} {c.dialCode ? `(${c.dialCode})` : ""}
+                            </option>
+                          ))}
+                        </select>
                       </div>
 
                       <div>
@@ -237,7 +265,7 @@ export default function ContactPage() {
                           type="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          placeholder="+44 7456 062192"
+                          placeholder="+82 ... ou +237..."
                           className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
                         />
                       </div>
@@ -250,14 +278,15 @@ export default function ContactPage() {
                       </label>
                       <select
                         aria-label="Objet de votre demande"
-                        defaultValue="Devis de fret maritime & multimodal"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
                         className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
                       >
-                        <option value="Devis de fret maritime & multimodal">Demande de cotation / Devis de fret maritime ou aérien</option>
-                        <option value="Suivi de colis ou conteneur">Assistance sur le suivi d&apos;une expédition en cours</option>
-                        <option value="Dédouanement et transit portuaire">Formalités de dédouanement et transit portuaire</option>
-                        <option value="Partenariat logistique">Partenariat commercial & affrètement régulier</option>
-                        <option value="Autre demande">Autre renseignement</option>
+                        <option value="Demande de cotation / Devis de fret maritime ou aérien">Demande de cotation / Devis de fret maritime ou aérien</option>
+                        <option value="Assistance sur le suivi d'une expédition en cours">Assistance sur le suivi d&apos;une expédition en cours</option>
+                        <option value="Formalités de dédouanement et transit portuaire">Formalités de dédouanement et transit portuaire</option>
+                        <option value="Partenariat commercial & affrètement régulier">Partenariat commercial & affrètement régulier</option>
+                        <option value="Autre renseignement">Autre renseignement</option>
                       </select>
                     </div>
 

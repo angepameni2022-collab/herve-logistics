@@ -80,7 +80,7 @@ export function ClientSidebar() {
         {/* Brand Header */}
         <div className="p-5 sm:p-6 border-b border-zinc-100 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full bg-white p-0.5 flex items-center justify-center shadow-md shadow-red-500/15 border border-zinc-100 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
+            <div className="w-12 h-12 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-md shadow-red-500/10 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
                 src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"

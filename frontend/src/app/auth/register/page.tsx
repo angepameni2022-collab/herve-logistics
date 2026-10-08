@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/Toast";
 import { useApp } from "@/context/AppContext";
+import { COUNTRIES_LIST } from "@/data/countries";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -17,8 +18,9 @@ export default function RegisterPage() {
 
   const [fullName, setFullName] = useState("");
   const [company, setCompany] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("Séoul, Corée du Sud");
+  const [country, setCountry] = useState("Corée du Sud");
+  const [city, setCity] = useState("Séoul");
+  const [phone, setPhone] = useState("+82 ");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,7 +54,7 @@ export default function RegisterPage() {
         email,
         phone,
         company: company || "Client Fret & Transit",
-        address,
+        address: city ? `${city}, ${country}` : country,
       });
 
       setIsLoading(false);
@@ -69,7 +71,7 @@ export default function RegisterPage() {
         {/* Brand Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-16 h-16 rounded-full bg-white p-0.5 flex items-center justify-center shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
+            <div className="w-16 h-16 rounded-2xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xl shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
                 src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
@@ -157,9 +159,46 @@ export default function RegisterPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
+                  <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-2">
+                    Pays de résidence *
+                  </label>
+                  <select
+                    value={country}
+                    onChange={(e) => {
+                      const newCountry = e.target.value;
+                      setCountry(newCountry);
+                      const found = COUNTRIES_LIST.find((c) => c.name === newCountry);
+                      if (found?.dialCode) {
+                        setPhone(found.dialCode + " ");
+                      }
+                    }}
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-3 text-sm font-semibold text-zinc-900 focus:outline-none focus:ring-2 focus:ring-[#DC2626]"
+                  >
+                    {COUNTRIES_LIST.map((c) => (
+                      <option key={c.code} value={c.name}>
+                        {c.name} {c.dialCode ? `(${c.dialCode})` : ""}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <Input
+                    label="Ville de résidence *"
+                    placeholder="Ex: Séoul, Douala, Abidjan, Paris..."
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    leftIcon={<MapPin className="w-4 h-4 text-zinc-400" />}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
                   <Input
                     label="Téléphone (avec indicatif) *"
-                    placeholder="Ex: +44 7456 062192 ou +237..."
+                    placeholder="Ex: +82 10... ou +237..."
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     leftIcon={<Phone className="w-4 h-4 text-zinc-400" />}
@@ -167,28 +206,19 @@ export default function RegisterPage() {
                     required
                   />
                 </div>
+
                 <div>
                   <Input
-                    label="Pays / Ville de résidence"
-                    placeholder="Séoul, Corée du Sud / Douala..."
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    leftIcon={<MapPin className="w-4 h-4 text-zinc-400" />}
+                    label="Adresse Email *"
+                    type="email"
+                    placeholder="contact@domaine.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    leftIcon={<Mail className="w-4 h-4 text-zinc-400" />}
+                    error={errors.email}
+                    required
                   />
                 </div>
-              </div>
-
-              <div>
-                <Input
-                  label="Adresse Email *"
-                  type="email"
-                  placeholder="contact@exemple.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  leftIcon={<Mail className="w-4 h-4 text-zinc-400" />}
-                  error={errors.email}
-                  required
-                />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

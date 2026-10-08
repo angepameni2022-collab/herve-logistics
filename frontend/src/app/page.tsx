@@ -43,7 +43,7 @@ export default function HomePage() {
             <div className="max-w-3xl text-left">
               {/* Badge: Official Logo Emblem + International Platform */}
               <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-zinc-700/80 text-white mb-6 shadow-xl">
-                <div className="w-7 h-7 rounded-full bg-white p-0.5 overflow-hidden flex-shrink-0 shadow-sm">
+                <div className="w-7 h-7 rounded-lg bg-black p-0.5 overflow-hidden flex-shrink-0 border border-zinc-700/80 shadow-sm">
                   <img
                     src="/images/logo-herve-official.png"
                     alt="Logo Officiel Hervé Logistics"
@@ -328,7 +328,7 @@ export default function HomePage() {
                   size="lg"
                   className="bg-transparent border-zinc-700 text-white hover:bg-zinc-900 text-base"
                 >
-                  Voir la démo de suivi
+                  Suivre un envoi en direct
                 </Button>
               </Link>
             </div>

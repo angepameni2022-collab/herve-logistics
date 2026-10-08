@@ -58,9 +58,10 @@ interface AppContextType {
   clients: UserProfile[];
   currentUser: UserProfile;
   switchUserRole: (role: "client" | "admin") => void;
+  clientLogin: (emailOrId: string, password?: string) => UserProfile;
 
   isAdminAuthenticated: boolean;
-  adminLogin: (passwordOrPin: string) => boolean;
+  adminLogin: (passwordOrPin: string, email?: string) => boolean;
   adminLogout: () => void;
 }
 
@@ -68,6 +69,8 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const STORAGE_KEY_SHIPMENTS = "hl_shipments_v2";
 const STORAGE_KEY_ADMIN_AUTH = "hl_admin_auth_v2";
+const STORAGE_KEY_CLIENTS = "hl_clients_v2";
+const STORAGE_KEY_CURRENT_CLIENT = "hl_current_client_v2";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [shipments, setShipments] = useState<Shipment[]>(initialShipments);
@@ -78,7 +81,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [currentUser, setCurrentUser] = useState<UserProfile>(currentUserClient);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(false);
 
-  // Load persisted shipments and admin state on client mount
+  // Load persisted shipments, clients and auth state on client mount
   useEffect(() => {
     try {
       if (typeof window !== "undefined") {
@@ -87,6 +90,20 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           const parsed = JSON.parse(savedShipments);
           if (Array.isArray(parsed) && parsed.length > 0) {
             setShipments(parsed);
+          }
+        }
+        const savedClients = localStorage.getItem(STORAGE_KEY_CLIENTS);
+        if (savedClients) {
+          const parsedClients = JSON.parse(savedClients);
+          if (Array.isArray(parsedClients) && parsedClients.length > 0) {
+            setClients(parsedClients);
+          }
+        }
+        const savedUser = localStorage.getItem(STORAGE_KEY_CURRENT_CLIENT);
+        if (savedUser) {
+          const parsedUser = JSON.parse(savedUser);
+          if (parsedUser && parsedUser.email) {
+            setCurrentUser(parsedUser);
           }
         }
         const savedAuth = localStorage.getItem(STORAGE_KEY_ADMIN_AUTH);
@@ -110,16 +127,47 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   }, [shipments]);
 
-  const adminLogin = (passwordOrPin: string): boolean => {
-    // Valid admin keys: "admin2026", "2026", "herve2026", "admin"
+  // Sync clients to localStorage whenever updated
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(STORAGE_KEY_CLIENTS, JSON.stringify(clients));
+      }
+    } catch {}
+  }, [clients]);
+
+  // Sync current client session to localStorage
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined" && currentUser.role === "client") {
+        localStorage.setItem(STORAGE_KEY_CURRENT_CLIENT, JSON.stringify(currentUser));
+      }
+    } catch {}
+  }, [currentUser]);
+
+  const adminLogin = (passwordOrPin: string, email?: string): boolean => {
+    // Valid admin keys: "2026", "admin2026", "herve2026", "admin" or any key >= 4 chars
     const clean = passwordOrPin.trim();
     if (clean === "2026" || clean === "admin2026" || clean === "herve2026" || clean === "admin" || clean.length >= 4) {
       setIsAdminAuthenticated(true);
-      setCurrentUser(currentUserAdmin);
+      const adminEmail = email?.trim() || "admin@hervelogistics.com";
+      const adminName = adminEmail.includes("@")
+        ? adminEmail.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+        : "Admin Principal";
+
+      const updatedAdminUser: UserProfile = {
+        ...currentUserAdmin,
+        name: adminName,
+        email: adminEmail,
+        role: "admin",
+      };
+
+      setCurrentUser(updatedAdminUser);
       try {
         localStorage.setItem(STORAGE_KEY_ADMIN_AUTH, "true");
+        localStorage.setItem(STORAGE_KEY_CURRENT_CLIENT, JSON.stringify(updatedAdminUser));
       } catch {}
-      addActivityLog("Admin", "Connexion", "Portail Admin", "Authentification administrateur réussie");
+      addActivityLog(adminName, "Connexion", adminEmail, "Authentification Console Admin réussie");
       return true;
     }
     return false;
@@ -130,6 +178,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setCurrentUser(currentUserClient);
     try {
       localStorage.removeItem(STORAGE_KEY_ADMIN_AUTH);
+      localStorage.removeItem(STORAGE_KEY_CURRENT_CLIENT);
     } catch {}
   };
 
@@ -182,6 +231,40 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setClients((prev) => [newProfile, ...prev]);
     setCurrentUser(newProfile);
     addActivityLog(clientData.fullName, "Création", clientData.email, "Inscription client obligatoire validée");
+  };
+
+  const clientLogin = (emailOrId: string, _password?: string): UserProfile => {
+    const clean = emailOrId.trim().toLowerCase();
+    const found = clients.find(
+      (c) => c.email.toLowerCase() === clean || c.id.toLowerCase() === clean
+    );
+
+    if (found) {
+      setCurrentUser(found);
+      addActivityLog(found.name, "Connexion", found.email, "Authentification Espace Client réussie");
+      return found;
+    }
+
+    // Auto-create & authenticate real client profile for this account
+    const cleanName = emailOrId.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    const newProfile: UserProfile = {
+      id: `usr-${Date.now().toString().slice(-4)}`,
+      name: cleanName || "Client Hervé Logistics",
+      email: emailOrId.trim(),
+      role: "client",
+      company: "Client Fret & Transit",
+      phone: "+44 7456 062192",
+      country: "Corée du Sud & International",
+      totalShipments: 0,
+      activeShipments: 0,
+      memberSince: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }),
+      status: "Actif",
+    };
+
+    setClients((prev) => [newProfile, ...prev]);
+    setCurrentUser(newProfile);
+    addActivityLog(newProfile.name, "Connexion", newProfile.email, "Authentification Espace Client réussie");
+    return newProfile;
   };
 
   const getDestCoordinates = (dest: string): { lat: number; lng: number } => {
@@ -440,6 +523,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         clients,
         currentUser,
         switchUserRole,
+        clientLogin,
         isAdminAuthenticated,
         adminLogin,
         adminLogout,

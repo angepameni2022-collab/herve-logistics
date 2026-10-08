@@ -13,9 +13,6 @@ import {
   EyeOff,
   User,
   ArrowLeft,
-  CheckCircle2,
-  Sparkles,
-  ShieldAlert,
 } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
 import { useApp } from "@/context/AppContext";
@@ -23,7 +20,7 @@ import { useApp } from "@/context/AppContext";
 export default function LoginPage() {
   const router = useRouter();
   const { showToast } = useToast();
-  const { switchUserRole } = useApp();
+  const { clientLogin } = useApp();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,16 +44,10 @@ export default function LoginPage() {
 
     setTimeout(() => {
       setIsLoading(false);
-      switchUserRole("client");
-      showToast("✓ Bienvenue sur votre Espace Client !", "success");
+      const user = clientLogin(email, password);
+      showToast(`✓ Bienvenue ${user.name || ""} sur votre Espace Client !`, "success");
       router.push("/dashboard");
     }, 600);
-  };
-
-  const handleFillDemo = () => {
-    setEmail("jean.dupont@email.com");
-    setPassword("password123");
-    showToast("Identifiants démo client appliqués", "info");
   };
 
   return (
@@ -95,7 +86,7 @@ export default function LoginPage() {
         {/* Brand Header */}
         <div className="text-center mb-6">
           <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-16 h-16 rounded-full bg-white p-0.5 flex items-center justify-center shadow-xl shadow-red-600/25 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
+            <div className="w-16 h-16 rounded-2xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xl shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
                 src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
@@ -118,23 +109,12 @@ export default function LoginPage() {
 
         {/* Card Formulaire */}
         <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-2xl shadow-zinc-900/10 p-7 sm:p-9 transition-all">
-          {/* Dual Portal Switcher Tabs */}
-          <div className="grid grid-cols-2 gap-1.5 p-1 bg-zinc-100 rounded-2xl mb-7 border border-zinc-200/70">
-            <div className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white text-[#09090B] font-bold text-xs shadow-xs border border-zinc-200">
-              <User className="w-3.5 h-3.5 text-[#DC2626]" />
-              <span>Espace Client</span>
-            </div>
-            <Link
-              href="/admin/login"
-              className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-zinc-600 hover:text-zinc-900 font-semibold text-xs transition-colors"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
-              <span>Administration</span>
-            </Link>
-          </div>
-
           {/* Heading */}
           <div className="mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#DC2626] text-xs font-bold mb-3 border border-red-100">
+              <User className="w-3.5 h-3.5" />
+              <span>Espace Client Sécurisé</span>
+            </div>
             <h1 className="text-2xl font-extrabold text-[#09090B] tracking-tight">
               Connexion Client
             </h1>
@@ -232,20 +212,8 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Quick Demo Fill Pill */}
-          <div className="mt-5 pt-5 border-t border-zinc-100">
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="w-full py-2 px-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/80 text-[11px] font-bold text-zinc-600 hover:text-[#DC2626] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              <span>Remplir automatiquement le compte démo client</span>
-            </button>
-          </div>
-
           {/* Inscription Nouveau Client */}
-          <div className="mt-5 text-center">
+          <div className="mt-6 pt-5 border-t border-zinc-100 text-center">
             <p className="text-xs text-zinc-600">
               Vous n&apos;avez pas encore d&apos;accès ?{" "}
               <Link

@@ -1,15 +1,42 @@
 "use client";
 
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { AdminSidebar } from "@/components/layout/AdminSidebar";
+import { useApp } from "@/context/AppContext";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { isAdminAuthenticated } = useApp();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // If on the dedicated admin login page, display clean standalone layout without sidebar
   if (pathname === "/admin/login") {
     return <>{children}</>;
+  }
+
+  useEffect(() => {
+    if (mounted && !isAdminAuthenticated) {
+      router.push("/admin/login");
+    }
+  }, [mounted, isAdminAuthenticated, router]);
+
+  if (!mounted || !isAdminAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#09090B] flex items-center justify-center text-white">
+        <div className="text-center space-y-3">
+          <div className="w-8 h-8 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs text-zinc-400 font-mono tracking-wider">
+            Vérification des accès administrateur...
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (

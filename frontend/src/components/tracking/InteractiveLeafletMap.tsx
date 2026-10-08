@@ -67,11 +67,11 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
         };
       case "light":
       default:
-        // Pure White / Positron Cartography
+        // Clean Light Cartography (Esri World Light Gray Base - Free, no API key required)
         return {
-          url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-          attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-          maxZoom: 19,
+          url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+          attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+          maxZoom: 16,
         };
     }
   };

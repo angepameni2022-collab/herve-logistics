@@ -393,7 +393,7 @@ export default function AdminShipmentsPage() {
             Êtes-vous sûr de vouloir supprimer l&apos;envoi{" "}
             <span className="font-mono font-bold text-[#09090B]">{deleteTarget?.trackingNumber}</span> ?
           </p>
-          <p className="text-xs text-zinc-400">Cette action retirera l&apos;envoi de l&apos;affichage de démo.</p>
+          <p className="text-xs text-zinc-400">Cette action est irréversible et supprimera définitivement le dossier d&apos;expédition.</p>
         </div>
       </Modal>
     </div>

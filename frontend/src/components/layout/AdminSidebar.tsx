@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Package,
@@ -20,12 +20,15 @@ import {
   ExternalLink,
   Navigation,
 } from "lucide-react";
+import { useToast } from "@/components/ui/Toast";
 import { useApp } from "@/context/AppContext";
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { showToast } = useToast();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { messages, shipments } = useApp();
+  const { messages, shipments, currentUser, adminLogout } = useApp();
 
   const unreadMessagesCount = messages.filter((m) => !m.read).length;
 
@@ -64,7 +67,7 @@ export function AdminSidebar() {
         {/* Brand Header */}
         <div className="p-6 border-b border-zinc-800/80 flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-white p-0.5 flex items-center justify-center shadow-sm shadow-red-500/20 flex-shrink-0 overflow-hidden">
+            <div className="w-12 h-12 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-sm shadow-red-500/20 flex-shrink-0 overflow-hidden">
               <Image
                 src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
@@ -137,11 +140,11 @@ export function AdminSidebar() {
       <div className="p-4 border-t border-zinc-800/80 bg-black/60">
         <div className="flex items-center gap-3 px-2 py-2 mb-3">
           <div className="w-8 h-8 rounded-full bg-red-500/10 text-[#DC2626] flex items-center justify-center font-bold text-xs border border-red-500/20">
-            AD
+            {currentUser?.name ? currentUser.name.slice(0, 2).toUpperCase() : "AD"}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-white truncate">Admin Principal</p>
-            <p className="text-[10px] text-zinc-400 truncate">admin@hervelogistics.com</p>
+            <p className="text-xs font-bold text-white truncate">{currentUser?.name || "Admin Principal"}</p>
+            <p className="text-[10px] text-zinc-400 truncate">{currentUser?.email || "admin@hervelogistics.com"}</p>
           </div>
         </div>
 
@@ -153,13 +156,18 @@ export function AdminSidebar() {
             <ExternalLink className="w-3.5 h-3.5" />
             <span>Site public</span>
           </Link>
-          <Link
-            href="/auth/login"
-            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs text-red-400 hover:text-red-300 hover:bg-red-950/40 transition-colors"
+          <button
+            type="button"
+            onClick={() => {
+              adminLogout();
+              showToast("Session administrateur fermée.", "info");
+              router.push("/admin/login");
+            }}
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs text-red-400 hover:text-red-300 hover:bg-red-950/40 transition-colors cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Déconnexion</span>
-          </Link>
+          </button>
         </div>
       </div>
     </div>

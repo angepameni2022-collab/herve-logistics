@@ -18,6 +18,7 @@ import {
   Calendar,
   MapPin,
   Printer,
+  ShieldCheck,
 } from "lucide-react";
 
 export default function TrackingDetailPage({
@@ -102,13 +103,14 @@ export default function TrackingDetailPage({
           ) : (
             /* 7. PAGE SUIVI VALIDE */
             <div className="space-y-8 animate-in fade-in duration-300">
-              {/* Entête de suivi : EN TRANSIT / TL-2025-000123 / DÉMO */}
+              {/* Entête de suivi : EN TRANSIT / HL-2026-000001 / OFFICIEL */}
               <div className="bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <div className="flex items-center gap-2.5 flex-wrap">
                     <Badge status={shipment.status} size="md" />
-                    <span className="text-xs font-bold uppercase tracking-wider bg-zinc-900 text-white px-2.5 py-1 rounded-full">
-                      DÉMO
+                    <span className="text-xs font-bold uppercase tracking-wider bg-zinc-900 text-white px-2.5 py-1 rounded-full inline-flex items-center gap-1">
+                      <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                      Officiel
                     </span>
                     <span className="text-xs text-zinc-500 font-medium">
                       Mode : {shipment.mode}

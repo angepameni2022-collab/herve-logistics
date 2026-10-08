@@ -14,6 +14,7 @@ import {
   Ship,
   Layers,
 } from "lucide-react";
+import { PORTS_ORIGIN, DESTINATIONS_LIST } from "@/data/countries";
 
 export default function AdminNewShipmentPage() {
   const router = useRouter();
@@ -187,23 +188,37 @@ export default function AdminNewShipmentPage() {
             </div>
 
             <div>
-              <Input
-                label="Origine (Ville, Pays) *"
+              <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-2">
+                Origine (Hub de départ) *
+              </label>
+              <select
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
-                placeholder="Ex: Shanghai, Chine"
-                required
-              />
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-zinc-800 focus:outline-none focus:ring-2 focus:ring-[#DC2626]"
+              >
+                {PORTS_ORIGIN.map((orig) => (
+                  <option key={orig} value={orig}>
+                    {orig}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
-              <Input
-                label="Destination (Ville, Pays) *"
+              <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-2">
+                Destination (Port / Ville d&apos;arrivée) *
+              </label>
+              <select
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
-                placeholder="Ex: Douala, Cameroun"
-                required
-              />
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-zinc-800 focus:outline-none focus:ring-2 focus:ring-[#DC2626]"
+              >
+                {DESTINATIONS_LIST.map((dest) => (
+                  <option key={dest} value={dest}>
+                    {dest}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
