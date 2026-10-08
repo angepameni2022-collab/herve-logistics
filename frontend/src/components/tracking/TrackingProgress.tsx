@@ -39,9 +39,9 @@ export function TrackingProgress({ status, progress }: TrackingProgressProps) {
         {/* Track Line Background */}
         <div className="absolute top-1/2 left-4 right-4 h-2 -translate-y-1/2 bg-zinc-100 rounded-full" />
 
-        {/* Active Track Line in Red / Black Gradient */}
+        {/* Active Track Line in Emerald / Green Gradient */}
         <div
-          className="absolute top-1/2 left-4 h-2 -translate-y-1/2 bg-gradient-to-r from-[#DC2626] via-[#B91C1C] to-[#EF4444] rounded-full transition-all duration-700 overflow-hidden"
+          className="absolute top-1/2 left-4 h-2 -translate-y-1/2 bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-500 rounded-full transition-all duration-700 overflow-hidden shadow-xs shadow-emerald-500/30"
           style={{ width: `calc(${Math.min(Math.max(progress, 0), 100)}% - 2rem)` }}
         >
           <div className="w-full h-full animate-shimmer" />
@@ -60,9 +60,9 @@ export function TrackingProgress({ status, progress }: TrackingProgressProps) {
                 <div
                   className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
                     isCompleted
-                      ? "bg-[#DC2626] text-white shadow-md shadow-red-500/30 ring-4 ring-red-50"
+                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-500/30 ring-4 ring-emerald-50"
                       : isCurrent
-                      ? "bg-white border-2 border-[#DC2626] text-[#DC2626] ring-4 ring-red-50"
+                      ? "bg-white border-2 border-emerald-600 text-emerald-600 ring-4 ring-emerald-50"
                       : "bg-white border-2 border-zinc-200 text-zinc-400"
                   }`}
                 >

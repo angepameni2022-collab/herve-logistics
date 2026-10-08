@@ -340,7 +340,7 @@ export default function ClientDashboardPage() {
                     </div>
                     <div className="w-full h-1.5 bg-zinc-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-[#DC2626] to-[#EF4444] rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-emerald-500 to-green-500 rounded-full transition-all duration-500"
                         style={{ width: `${s.progress}%` }}
                       />
                     </div>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -224,9 +224,9 @@ export default function HomePage() {
                       <span>En transit — 68% complété</span>
                     </div>
 
-                    {/* Progress Bar (Red glow gradient) */}
+                    {/* Progress Bar (Green evolution gradient) */}
                     <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
-                      <div className="h-full w-[68%] bg-gradient-to-r from-[#DC2626] to-[#EF4444] rounded-full animate-shimmer" />
+                      <div className="h-full w-[68%] bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-500 rounded-full shadow-sm shadow-emerald-500/40 animate-shimmer" />
                     </div>
                   </div>
 
