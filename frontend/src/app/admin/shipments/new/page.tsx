@@ -20,22 +20,22 @@ export default function AdminNewShipmentPage() {
   const { addShipment, clients } = useApp();
   const { showToast } = useToast();
 
-  const initialTrackingNumber = `TL-2025-${Math.floor(100000 + Math.random() * 900000)}`;
+  const initialTrackingNumber = `HL-2026-${Math.floor(100000 + Math.random() * 900000)}`;
 
   const [trackingNumber, setTrackingNumber] = useState(initialTrackingNumber);
   const [clientName, setClientName] = useState("Jean Dupont");
   const [clientEmail, setClientEmail] = useState("jean.dupont@email.com");
-  const [sender, setSender] = useState("");
-  const [recipient, setRecipient] = useState("");
+  const [sender, setSender] = useState("Hervé Logistics Korea (Busan Hub)");
+  const [recipient, setRecipient] = useState("Société d'Import & Transit");
 
   const [mode, setMode] = useState<"Maritime" | "Aérien" | "Routier" | "Conteneurs" | "Colis & Fret" | "Import / Export">("Maritime");
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [weight, setWeight] = useState("");
-  const [volume, setVolume] = useState("");
-  const [vesselName, setVesselName] = useState("");
-  const [departureDate, setDepartureDate] = useState("20 avr. 2025");
-  const [eta, setEta] = useState("15 mai 2025");
+  const [origin, setOrigin] = useState("Busan, Corée du Sud");
+  const [destination, setDestination] = useState("Douala, Cameroun");
+  const [weight, setWeight] = useState("14 500 kg");
+  const [volume, setVolume] = useState("2 × Conteneur 40' HC");
+  const [vesselName, setVesselName] = useState("Hervé Korea Express — HL Voyager 07");
+  const [departureDate, setDepartureDate] = useState("10 avr. 2026");
+  const [eta, setEta] = useState("28 avr. 2026");
 
   const [status, setStatus] = useState<ShipmentStatus>("En transit");
   const [progress, setProgress] = useState(45);

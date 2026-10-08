@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -38,10 +39,14 @@ export function ClientSidebar() {
         {/* Brand Header */}
         <div className="p-6 border-b border-zinc-100 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#DC2626] flex items-center justify-center text-white shadow-sm shadow-red-500/30">
-              <span className="text-xs font-black tracking-tighter flex items-center gap-0.5">
-                HL <span className="text-[10px]">▶</span>
-              </span>
+            <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shadow-sm shadow-red-500/20 border border-zinc-100 flex-shrink-0">
+              <Image
+                src="/images/logo-herve.png"
+                alt="Hervé Logistics Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <span className="text-base font-black text-[#09090B] tracking-tight leading-none block">

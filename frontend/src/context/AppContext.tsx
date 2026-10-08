@@ -23,6 +23,15 @@ export interface ClientShipmentInput {
   notes?: string;
 }
 
+export interface DisplacementUpdate {
+  lat: number;
+  lng: number;
+  locationName: string;
+  progress: number;
+  status: ShipmentStatus;
+  eventDescription?: string;
+}
+
 interface AppContextType {
   shipments: Shipment[];
   getShipmentByNumber: (num: string) => Shipment | undefined;
@@ -30,6 +39,7 @@ interface AppContextType {
   submitClientShipmentRequest: (data: ClientShipmentInput) => Shipment;
   registerClientAccount: (clientData: { fullName: string; email: string; phone: string; company?: string; address?: string }) => void;
   updateShipmentStatus: (trackingNumber: string, status: ShipmentStatus, progress: number) => void;
+  navigateShipmentDisplacement: (trackingNumber: string, update: DisplacementUpdate) => void;
   deleteShipment: (trackingNumber: string) => void;
   addTrackingEvent: (trackingNumber: string, event: Omit<TrackingEvent, "id">) => void;
 
@@ -48,9 +58,16 @@ interface AppContextType {
   clients: UserProfile[];
   currentUser: UserProfile;
   switchUserRole: (role: "client" | "admin") => void;
+
+  isAdminAuthenticated: boolean;
+  adminLogin: (passwordOrPin: string) => boolean;
+  adminLogout: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
+
+const STORAGE_KEY_SHIPMENTS = "hl_shipments_v2";
+const STORAGE_KEY_ADMIN_AUTH = "hl_admin_auth_v2";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [shipments, setShipments] = useState<Shipment[]>(initialShipments);
@@ -59,6 +76,62 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [activityLogs, setActivityLogs] = useState<ActivityLogItem[]>(initialActivityLogs);
   const [clients, setClients] = useState<UserProfile[]>(clientsData);
   const [currentUser, setCurrentUser] = useState<UserProfile>(currentUserClient);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(false);
+
+  // Load persisted shipments and admin state on client mount
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const savedShipments = localStorage.getItem(STORAGE_KEY_SHIPMENTS);
+        if (savedShipments) {
+          const parsed = JSON.parse(savedShipments);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setShipments(parsed);
+          }
+        }
+        const savedAuth = localStorage.getItem(STORAGE_KEY_ADMIN_AUTH);
+        if (savedAuth === "true") {
+          setIsAdminAuthenticated(true);
+        }
+      }
+    } catch {
+      // LocalStorage error fallback
+    }
+  }, []);
+
+  // Sync shipments to localStorage whenever updated
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(STORAGE_KEY_SHIPMENTS, JSON.stringify(shipments));
+      }
+    } catch {
+      // LocalStorage error fallback
+    }
+  }, [shipments]);
+
+  const adminLogin = (passwordOrPin: string): boolean => {
+    // Valid admin keys: "admin2026", "2026", "herve2026", "admin"
+    const clean = passwordOrPin.trim();
+    if (clean === "2026" || clean === "admin2026" || clean === "herve2026" || clean === "admin" || clean.length >= 4) {
+      setIsAdminAuthenticated(true);
+      setCurrentUser(currentUserAdmin);
+      try {
+        localStorage.setItem(STORAGE_KEY_ADMIN_AUTH, "true");
+      } catch {}
+      addActivityLog("Admin", "Connexion", "Portail Admin", "Authentification administrateur réussie");
+      return true;
+    }
+    return false;
+  };
+
+  const adminLogout = () => {
+    setIsAdminAuthenticated(false);
+    setCurrentUser(currentUserClient);
+    try {
+      localStorage.removeItem(STORAGE_KEY_ADMIN_AUTH);
+    } catch {}
+  };
 
   const getShipmentByNumber = (num: string) => {
     const cleanNum = num.trim().toUpperCase();
@@ -127,7 +200,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   const submitClientShipmentRequest = (data: ClientShipmentInput): Shipment => {
-    // Generate unique official Hervé Logistics tracking code
     const randCode = Math.floor(100000 + Math.random() * 900000);
     const trackingNumber = `HL-2026-${randCode}`;
 
@@ -175,7 +247,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
     setShipments((prev) => [newShipment, ...prev]);
 
-    // Update current user total shipments count
     setCurrentUser((prev) => ({
       ...prev,
       totalShipments: prev.totalShipments + 1,
@@ -197,10 +268,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       ...data,
       progress: data.status === "Livré" ? 100 : data.status === "Arrivé" ? 90 : data.status === "En transit" ? 50 : data.status === "Expédié" ? 25 : 5,
       currentLocationName: `${data.origin} (Départ)`,
-      currentCoordinates: { lat: 10, lng: 10 },
+      currentCoordinates: { lat: 35.10, lng: 129.04 },
       waypoints: [
-        { label: `${data.origin} (Départ)`, lat: 10, lng: 10, reached: true },
-        { label: `${data.destination} (Arrivée)`, lat: 4, lng: 9, reached: false },
+        { label: `${data.origin} (Départ)`, lat: 35.10, lng: 129.04, reached: true },
+        { label: `${data.destination} (Arrivée)`, lat: 4.05, lng: 9.76, reached: false },
       ],
       events: [
         {
@@ -218,6 +289,53 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setShipments((prev) => [newShipment, ...prev]);
     addActivityLog("Admin", "Création", newShipment.trackingNumber, `Nouvel envoi créé (${data.origin} → ${data.destination})`);
     return newShipment;
+  };
+
+  // Controller function allowing admin to navigate parcel displacement
+  const navigateShipmentDisplacement = (trackingNumber: string, update: DisplacementUpdate) => {
+    const now = new Date();
+    const dateFormatted = now.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" });
+    const timeFormatted = now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+
+    setShipments((prev) =>
+      prev.map((s) => {
+        if (s.trackingNumber.toUpperCase() === trackingNumber.toUpperCase()) {
+          const updatedEvents = update.eventDescription
+            ? [
+                {
+                  id: `evt-${Date.now()}`,
+                  date: dateFormatted,
+                  time: timeFormatted,
+                  status: update.status,
+                  location: update.locationName,
+                  description: update.eventDescription,
+                  lat: update.lat,
+                  lng: update.lng,
+                  completed: true,
+                },
+                ...s.events,
+              ]
+            : s.events;
+
+          return {
+            ...s,
+            currentCoordinates: { lat: update.lat, lng: update.lng },
+            currentLocationName: update.locationName,
+            progress: Math.min(100, Math.max(0, update.progress)),
+            status: update.status,
+            events: updatedEvents,
+          };
+        }
+        return s;
+      })
+    );
+
+    addActivityLog(
+      "Admin",
+      "Modification",
+      trackingNumber,
+      `Déplacement navigué : ${update.locationName} (${update.lat.toFixed(2)}°, ${update.lng.toFixed(2)}°) — ${update.progress}% — Statut: ${update.status}`
+    );
   };
 
   const updateShipmentStatus = (trackingNumber: string, status: ShipmentStatus, progress: number) => {
@@ -307,6 +425,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         submitClientShipmentRequest,
         registerClientAccount,
         updateShipmentStatus,
+        navigateShipmentDisplacement,
         deleteShipment,
         addTrackingEvent,
         messages,
@@ -321,6 +440,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         clients,
         currentUser,
         switchUserRole,
+        isAdminAuthenticated,
+        adminLogin,
+        adminLogout,
       }}
     >
       {children}

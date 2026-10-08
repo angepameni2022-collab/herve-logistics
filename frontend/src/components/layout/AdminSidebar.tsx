@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -17,6 +18,7 @@ import {
   Menu,
   X,
   ExternalLink,
+  Navigation,
 } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 
@@ -30,6 +32,13 @@ export function AdminSidebar() {
   const navItems = [
     { label: "Tableau de bord", href: "/admin", icon: <LayoutDashboard className="w-5 h-5" /> },
     { label: "Envois", href: "/admin/shipments", icon: <Package className="w-5 h-5" />, badge: shipments.length },
+    {
+      label: "Navigateur GPS Colis",
+      href: "/admin/displacement",
+      icon: <Navigation className="w-5 h-5 text-[#DC2626]" />,
+      badge: "LIVE",
+      badgeColor: "bg-emerald-600",
+    },
     { label: "Événements", href: "/admin/events", icon: <CalendarCheck2 className="w-5 h-5" /> },
     { label: "Clients", href: "/admin/clients", icon: <Users className="w-5 h-5" /> },
     {
@@ -55,10 +64,14 @@ export function AdminSidebar() {
         {/* Brand Header */}
         <div className="p-6 border-b border-zinc-800/80 flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#DC2626] flex items-center justify-center text-white shadow-sm shadow-red-500/30">
-              <span className="text-xs font-black tracking-tighter flex items-center gap-0.5">
-                HL <span className="text-[10px]">▶</span>
-              </span>
+            <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shadow-sm shadow-red-500/20 flex-shrink-0">
+              <Image
+                src="/images/logo-herve.png"
+                alt="Hervé Logistics Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <span className="text-base font-black text-white tracking-tight leading-none block">

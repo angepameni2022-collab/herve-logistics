@@ -20,13 +20,17 @@ export default function AdminEventsPage() {
   const { shipments, addTrackingEvent } = useApp();
   const { showToast } = useToast();
 
-  const [selectedTrackingNumber, setSelectedTrackingNumber] = useState<string>("TL-2025-000123");
+  const [selectedTrackingNumber, setSelectedTrackingNumber] = useState<string>(
+    shipments[0]?.trackingNumber || "HL-2026-000001"
+  );
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   // Form State for new event
-  const [targetShipment, setTargetShipment] = useState("TL-2025-000123");
+  const [targetShipment, setTargetShipment] = useState(
+    shipments[0]?.trackingNumber || "HL-2026-000001"
+  );
   const [location, setLocation] = useState("");
-  const [date, setDate] = useState("19 avr. 2025");
+  const [date, setDate] = useState("19 avr. 2026");
   const [time, setTime] = useState("14:30");
   const [status, setStatus] = useState<ShipmentStatus>("En transit");
   const [description, setDescription] = useState("");

@@ -2,62 +2,76 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Shipment } from "@/data/shipments";
-import { Compass, Layers, Maximize2, Radio, Ship, Navigation } from "lucide-react";
+import { Compass, Maximize2, Radio, Ship, Navigation, CheckCircle2 } from "lucide-react";
 import L from "leaflet";
 
 interface InteractiveLeafletMapProps {
   shipment: Shipment;
 }
 
-type MapLayerType = "dark" | "satellite" | "osm";
+type MapLayerType = "light" | "osm" | "satellite" | "dark";
 
 export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
-  const [activeLayer, setActiveLayer] = useState<MapLayerType>("dark");
+  const [activeLayer, setActiveLayer] = useState<MapLayerType>("light");
   const tileLayerRef = useRef<L.TileLayer | null>(null);
+  const vesselMarkerRef = useRef<L.Marker | null>(null);
+  const completedPolylineRef = useRef<L.Polyline | null>(null);
+  const remainingPolylineRef = useRef<L.Polyline | null>(null);
 
-  // Key coordinates (Maritime route from Busan, Korea to Douala, Cameroon)
+  // Derive coordinates dynamically from shipment or fallback to international maritime corridor
   const busanCoords: [number, number] = [35.1028, 129.0403]; // Busan Port, South Korea
   const shanghaiCoords: [number, number] = [31.2304, 121.4737]; // Shanghai, China
   const singaporeCoords: [number, number] = [1.3521, 103.8198]; // Singapore / Malacca
-  const currentVesselCoords: [number, number] = [3.5, 78.5]; // Central Indian Ocean (Current AIS Position)
   const madagascarCoords: [number, number] = [-12.0, 50.0];
   const capeCoords: [number, number] = [-34.35, 18.5];
   const doualaCoords: [number, number] = [4.0511, 9.7679]; // Douala Port, Cameroon
 
-  // Full Route Waypoints
+  const currentCoords: [number, number] = [
+    shipment.currentCoordinates?.lat ?? 3.5,
+    shipment.currentCoordinates?.lng ?? 78.5,
+  ];
+
+  // Full route waypoints
   const routeWaypoints: [number, number][] = [
     busanCoords,
     shanghaiCoords,
     singaporeCoords,
-    currentVesselCoords,
+    currentCoords,
     madagascarCoords,
     capeCoords,
     doualaCoords,
   ];
 
-  // Tile Providers (100% Free, NO API Key, NO Watermarks!)
+  // Map Tile Providers (Free, high performance, light/white default)
   const getTileConfig = (layer: MapLayerType) => {
     switch (layer) {
-      case "satellite":
-        return {
-          url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-          attribution: '&copy; Esri &mdash; Maxar, Earthstar Geographics, USDA',
-          maxZoom: 18,
-        };
       case "osm":
         return {
           url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
           maxZoom: 19,
         };
+      case "satellite":
+        return {
+          url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          attribution: '&copy; Esri &mdash; Maxar, Earthstar Geographics',
+          maxZoom: 18,
+        };
       case "dark":
-      default:
         return {
           url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
           attribution: '&copy; Esri &mdash; DeLorme, NAVTEQ',
           maxZoom: 16,
+        };
+      case "light":
+      default:
+        // Pure White / Positron Cartography
+        return {
+          url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+          attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+          maxZoom: 19,
         };
     }
   };
@@ -65,12 +79,12 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
   useEffect(() => {
     if (!mapContainerRef.current || mapInstanceRef.current) return;
 
-    // Initialize Leaflet Map
+    // Initialize Leaflet Map in Light / White Mode
     const map = L.map(mapContainerRef.current, {
-      center: currentVesselCoords,
+      center: currentCoords,
       zoom: 3,
       minZoom: 2,
-      maxZoom: 16,
+      maxZoom: 18,
       zoomControl: false,
     });
 
@@ -79,36 +93,36 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
     // Add Zoom Control bottom right
     L.control.zoom({ position: "bottomright" }).addTo(map);
 
-    // Initial Tile Layer: ESRI Dark Gray Canvas (Clean, no watermark!)
-    const initialConfig = getTileConfig("dark");
+    // Initial Tile Layer: CartoDB Positron (Clean, pure white/light theme)
+    const initialConfig = getTileConfig("light");
     const tiles = L.tileLayer(initialConfig.url, {
       attribution: initialConfig.attribution,
       maxZoom: initialConfig.maxZoom,
     }).addTo(map);
     tileLayerRef.current = tiles;
 
-    // 1. Custom DivIcon: Origin (Busan, South Korea)
+    // 1. Custom Origin Icon (Busan, South Korea)
     const originIcon = L.divIcon({
       className: "custom-map-icon",
       html: `
-        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;">
-          <div style="position: absolute; width: 26px; height: 26px; background: rgba(220, 38, 38, 0.35); border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
-          <div style="width: 14px; height: 14px; background: #DC2626; border: 2.5px solid #FFFFFF; border-radius: 50%; box-shadow: 0 0 10px rgba(220, 38, 38, 0.9);"></div>
+        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;">
+          <div style="position: absolute; width: 28px; height: 28px; background: rgba(220, 38, 38, 0.25); border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+          <div style="width: 16px; height: 16px; background: #DC2626; border: 2.5px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 8px rgba(220, 38, 38, 0.6);"></div>
         </div>
       `,
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
     });
 
-    // 2. Custom DivIcon: Vessel in Indian Ocean
+    // 2. Custom Vessel / Parcel Live Icon
     const vesselIcon = L.divIcon({
       className: "custom-vessel-icon",
       html: `
-        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;">
-          <div style="position: absolute; width: 40px; height: 40px; background: rgba(220, 38, 38, 0.35); border-radius: 50%; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
-          <div style="position: absolute; width: 28px; height: 28px; background: rgba(220, 38, 38, 0.65); border-radius: 50%;"></div>
-          <div style="position: relative; width: 22px; height: 22px; background: #DC2626; border: 2px solid #FFFFFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 14px #DC2626;">
-            <svg style="width: 12px; height: 12px; fill: white;" viewBox="0 0 24 24">
+        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px;">
+          <div style="position: absolute; width: 44px; height: 44px; background: rgba(220, 38, 38, 0.25); border-radius: 50%; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+          <div style="position: absolute; width: 32px; height: 32px; background: rgba(220, 38, 38, 0.35); border-radius: 50%;"></div>
+          <div style="position: relative; width: 26px; height: 26px; background: #DC2626; border: 2.5px solid #FFFFFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.65);">
+            <svg style="width: 14px; height: 14px; fill: white;" viewBox="0 0 24 24">
               <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.5 0 2.5 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
               <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 6"/>
               <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/>
@@ -118,96 +132,95 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
           </div>
         </div>
       `,
-      iconSize: [44, 44],
-      iconAnchor: [22, 22],
+      iconSize: [48, 48],
+      iconAnchor: [24, 24],
     });
 
-    // 3. Custom DivIcon: Destination (Douala)
+    // 3. Custom Destination Icon (Douala, Cameroon)
     const destIcon = L.divIcon({
       className: "custom-dest-icon",
       html: `
-        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px;">
-          <div style="width: 14px; height: 14px; background: #10B981; border: 2.5px solid #FFFFFF; border-radius: 50%; box-shadow: 0 0 10px rgba(16, 185, 129, 0.9);"></div>
+        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;">
+          <div style="width: 16px; height: 16px; background: #10B981; border: 2.5px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.6);"></div>
         </div>
       `,
-      iconSize: [28, 28],
-      iconAnchor: [14, 14],
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
     });
 
-    // 1. Origin Marker (Busan, Korea)
+    // Origin Marker
     L.marker(busanCoords, { icon: originIcon })
       .addTo(map)
       .bindPopup(`
-        <div style="font-family: inherit;">
-          <div style="color: #DC2626; font-size: 11px; font-weight: 700; text-transform: uppercase;">Hub de départ (Corée du Sud)</div>
-          <div style="font-size: 14px; font-weight: 700; color: #FFFFFF; margin-top: 2px;">Port de Busan, Corée du Sud</div>
-          <div style="font-size: 12px; color: #9CA3AF; margin-top: 4px;">Embarquement & expédition Hervé Logistics</div>
-          <div style="font-size: 11px; color: #10B981; margin-top: 2px;">✓ Prise en charge validée</div>
+        <div style="font-family: inherit; color: #0F172A; min-width: 200px;">
+          <div style="color: #DC2626; font-size: 11px; font-weight: 800; text-transform: uppercase;">Hub de départ (Corée du Sud)</div>
+          <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-top: 2px;">Port de Busan, Corée du Sud</div>
+          <div style="font-size: 11px; color: #64748B; margin-top: 2px;">Prise en charge & scellage Hervé Logistics</div>
+          <div style="font-size: 11px; color: #10B981; font-weight: 600; margin-top: 4px;">✓ Expédié avec succès</div>
         </div>
       `);
 
-    // 2. Waypoint (Shanghai)
-    L.circleMarker(shanghaiCoords, { radius: 4, color: "#DC2626", fillColor: "#FFFFFF", fillOpacity: 1 })
+    // Waypoints
+    L.circleMarker(shanghaiCoords, { radius: 5, color: "#DC2626", fillColor: "#FFFFFF", fillOpacity: 1, weight: 2 })
       .addTo(map)
-      .bindPopup(`<div style="color:#FFF; font-weight:bold;">Escale Shanghai, Chine</div>`);
+      .bindPopup(`<div style="color:#0F172A; font-weight:700; font-size:12px;">Escale Shanghai, Chine</div>`);
 
-    // 3. Waypoint (Singapore)
-    L.circleMarker(singaporeCoords, { radius: 4, color: "#DC2626", fillColor: "#FFFFFF", fillOpacity: 1 })
+    L.circleMarker(singaporeCoords, { radius: 5, color: "#DC2626", fillColor: "#FFFFFF", fillOpacity: 1, weight: 2 })
       .addTo(map)
-      .bindPopup(`<div style="color:#FFF; font-weight:bold;">Détroit de Malacca / Singapour</div>`);
+      .bindPopup(`<div style="color:#0F172A; font-weight:700; font-size:12px;">Passage Détroit de Malacca / Singapour</div>`);
 
-    // 4. Current Vessel Marker (Indian Ocean)
-    const vesselMarker = L.marker(currentVesselCoords, { icon: vesselIcon })
+    // Live Vessel / Parcel Marker
+    const vesselMarker = L.marker(currentCoords, { icon: vesselIcon })
       .addTo(map)
       .bindPopup(`
-        <div style="font-family: inherit; min-width: 220px;">
+        <div style="font-family: inherit; min-width: 230px; color: #0F172A;">
           <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
             <span style="display: inline-block; width: 8px; height: 8px; background: #DC2626; border-radius: 50%;"></span>
-            <span style="color: #F87171; font-size: 11px; font-weight: 700; text-transform: uppercase;">Position AIS en direct</span>
+            <span style="color: #DC2626; font-size: 11px; font-weight: 800; text-transform: uppercase;">Position actuelle du colis</span>
           </div>
-          <div style="font-size: 14px; font-weight: 700; color: #FFFFFF;">${shipment.vesselName || "MAERSK Mc-Kinney Møller"}</div>
-          <div style="font-size: 12px; color: #E5E7EB; margin-top: 4px;">Zone : Océan Indien Central</div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #374151; font-size: 11px;">
-            <div><span style="color: #9CA3AF;">Vitesse :</span> <b style="color: #FFFFFF;">18.4 nœuds</b></div>
-            <div><span style="color: #9CA3AF;">Cap :</span> <b style="color: #FFFFFF;">245° SO</b></div>
-            <div><span style="color: #9CA3AF;">Progression :</span> <b style="color: #DC2626;">${shipment.progress}%</b></div>
-            <div><span style="color: #9CA3AF;">ETA Douala :</span> <b style="color: #10B981;">${shipment.eta}</b></div>
+          <div style="font-size: 14px; font-weight: 800; color: #0F172A;">${shipment.currentLocationName || "En transit international"}</div>
+          <div style="font-size: 11px; color: #64748B; margin-top: 2px;">Convoi : ${shipment.vesselName || "Hervé Korea Express"}</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #E2E8F0; font-size: 11px;">
+            <div><span style="color: #64748B;">Progression :</span> <b style="color: #DC2626;">${shipment.progress}%</b></div>
+            <div><span style="color: #64748B;">Statut :</span> <b style="color: #0F172A;">${shipment.status}</b></div>
+            <div><span style="color: #64748B;">Coordonnées :</span> <b style="color: #0F172A;">${currentCoords[0].toFixed(2)}°, ${currentCoords[1].toFixed(2)}°</b></div>
+            <div><span style="color: #64748B;">ETA Douala :</span> <b style="color: #10B981;">${shipment.eta}</b></div>
           </div>
         </div>
       `);
+    vesselMarkerRef.current = vesselMarker;
 
-    // Auto-open vessel popup
-    vesselMarker.openPopup();
-
-    // 5. Destination Marker (Douala)
+    // Destination Marker
     L.marker(doualaCoords, { icon: destIcon })
       .addTo(map)
       .bindPopup(`
-        <div style="font-family: inherit;">
-          <div style="color: #10B981; font-size: 11px; font-weight: 700; text-transform: uppercase;">Destination Finale</div>
-          <div style="font-size: 14px; font-weight: 700; color: #FFFFFF; margin-top: 2px;">Douala, Cameroun</div>
-          <div style="font-size: 12px; color: #9CA3AF; margin-top: 4px;">Arrivée estimée : <b>${shipment.eta}</b></div>
-          <div style="font-size: 11px; color: #60A5FA; margin-top: 2px;">Dédouanement portuaire programmé</div>
+        <div style="font-family: inherit; min-width: 200px; color: #0F172A;">
+          <div style="color: #10B981; font-size: 11px; font-weight: 800; text-transform: uppercase;">Destination finale</div>
+          <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-top: 2px;">${shipment.destination || "Douala, Cameroun"}</div>
+          <div style="font-size: 11px; color: #64748B; margin-top: 2px;">Arrivée estimée : <b style="color:#0F172A;">${shipment.eta}</b></div>
+          <div style="font-size: 11px; color: #2563EB; font-weight: 600; margin-top: 4px;">Dédouanement portuaire programmé</div>
         </div>
       `);
 
-    // Traveled polyline (Busan -> Shanghai -> Singapore -> Indian Ocean)
-    const completedLeg: [number, number][] = [busanCoords, shanghaiCoords, singaporeCoords, currentVesselCoords];
-    L.polyline(completedLeg, {
+    // Traveled polyline (Busan -> Shanghai -> Singapore -> current position)
+    const completedLeg: [number, number][] = [busanCoords, shanghaiCoords, singaporeCoords, currentCoords];
+    const completedLine = L.polyline(completedLeg, {
       color: "#DC2626",
-      weight: 3.5,
+      weight: 4,
       opacity: 0.95,
       lineCap: "round",
     }).addTo(map);
+    completedPolylineRef.current = completedLine;
 
-    // Remaining polyline (Indian Ocean -> Madagascar -> Cape -> Douala) dashed
-    const remainingLeg: [number, number][] = [currentVesselCoords, madagascarCoords, capeCoords, doualaCoords];
-    L.polyline(remainingLeg, {
-      color: "#EF4444",
-      weight: 2.5,
-      opacity: 0.55,
+    // Remaining polyline (current position -> Madagascar -> Cape -> Douala) dashed
+    const remainingLeg: [number, number][] = [currentCoords, madagascarCoords, capeCoords, doualaCoords];
+    const remainingLine = L.polyline(remainingLeg, {
+      color: "#F87171",
+      weight: 3,
+      opacity: 0.75,
       dashArray: "6, 8",
     }).addTo(map);
+    remainingPolylineRef.current = remainingLine;
 
     // Fit map bounds
     const bounds = L.latLngBounds(routeWaypoints);
@@ -218,6 +231,48 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
       mapInstanceRef.current = null;
     };
   }, []);
+
+  // Effect: update vessel marker & polyline when coordinates change dynamically
+  useEffect(() => {
+    if (!mapInstanceRef.current || !vesselMarkerRef.current) return;
+
+    const newCoords: [number, number] = [
+      shipment.currentCoordinates?.lat ?? 3.5,
+      shipment.currentCoordinates?.lng ?? 78.5,
+    ];
+
+    // Move marker smoothly
+    vesselMarkerRef.current.setLatLng(newCoords);
+
+    // Update popup content
+    vesselMarkerRef.current.setPopupContent(`
+      <div style="font-family: inherit; min-width: 230px; color: #0F172A;">
+        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background: #DC2626; border-radius: 50%;"></span>
+          <span style="color: #DC2626; font-size: 11px; font-weight: 800; text-transform: uppercase;">Position actuelle du colis</span>
+        </div>
+        <div style="font-size: 14px; font-weight: 800; color: #0F172A;">${shipment.currentLocationName || "En transit"}</div>
+        <div style="font-size: 11px; color: #64748B; margin-top: 2px;">Convoi : ${shipment.vesselName || "Hervé Korea Express"}</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #E2E8F0; font-size: 11px;">
+          <div><span style="color: #64748B;">Progression :</span> <b style="color: #DC2626;">${shipment.progress}%</b></div>
+          <div><span style="color: #64748B;">Statut :</span> <b style="color: #0F172A;">${shipment.status}</b></div>
+          <div><span style="color: #64748B;">Coordonnées :</span> <b style="color: #0F172A;">${newCoords[0].toFixed(2)}°, ${newCoords[1].toFixed(2)}°</b></div>
+          <div><span style="color: #64748B;">ETA Douala :</span> <b style="color: #10B981;">${shipment.eta}</b></div>
+        </div>
+      </div>
+    `);
+
+    // Redraw polylines
+    if (completedPolylineRef.current) {
+      completedPolylineRef.current.setLatLngs([busanCoords, shanghaiCoords, singaporeCoords, newCoords]);
+    }
+    if (remainingPolylineRef.current) {
+      remainingPolylineRef.current.setLatLngs([newCoords, madagascarCoords, capeCoords, doualaCoords]);
+    }
+
+    // Pan smoothly to updated location
+    mapInstanceRef.current.panTo(newCoords, { animate: true, duration: 1 });
+  }, [shipment.currentCoordinates?.lat, shipment.currentCoordinates?.lng, shipment.progress, shipment.status, shipment.currentLocationName]);
 
   // Switch Layer
   const setLayer = (layer: MapLayerType) => {
@@ -236,7 +291,7 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
 
   const centerOnVessel = () => {
     if (!mapInstanceRef.current) return;
-    mapInstanceRef.current.flyTo(currentVesselCoords, 6, { duration: 1.5 });
+    mapInstanceRef.current.flyTo(currentCoords, 6, { duration: 1.5 });
   };
 
   const fitFullRoute = () => {
@@ -246,26 +301,26 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
   };
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden border border-zinc-800 bg-[#09090B] shadow-2xl">
-      {/* Map Interactive Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 bg-zinc-950/95 border-b border-zinc-800 backdrop-blur-sm z-10 relative">
+    <div className="relative w-full rounded-2xl overflow-hidden border border-zinc-200 bg-white shadow-lg">
+      {/* Map Interactive Toolbar (Pure White Theme) */}
+      <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 bg-white border-b border-zinc-200 z-10 relative">
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-[#DC2626] text-white shadow-md shadow-red-600/30">
+          <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-[#DC2626] text-white shadow-md shadow-red-500/20">
             <Compass className="w-4 h-4 animate-spin-slow" />
-            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-zinc-950"></div>
+            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></div>
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-red-500 uppercase tracking-wider">
-                CARTE DE SUIVI MARITIME ACTIVE
+              <span className="text-xs font-black text-[#DC2626] uppercase tracking-wider">
+                CARTE DE SUIVI BLANCHE HAUTE PRÉCISION
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-500/10 text-red-400 border border-red-500/20">
-                <Radio className="w-2.5 h-2.5 animate-pulse text-[#DC2626]" />
-                Signal GPS / AIS vérifié
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <Radio className="w-2.5 h-2.5 animate-pulse text-emerald-600" />
+                Signal GPS / AIS actif
               </span>
             </div>
-            <p className="text-xs text-zinc-300 font-medium">
-              Busan, Corée du Sud <span className="text-red-500 font-bold">→</span> {shipment.destination} · Navire : <span className="text-white font-semibold">{shipment.vesselName || "MAERSK Mc-Kinney Møller"}</span>
+            <p className="text-xs text-zinc-600 font-medium">
+              {shipment.origin || "Busan, Corée du Sud"} <span className="text-[#DC2626] font-bold">→</span> {shipment.destination || "Douala, Cameroun"} · Position : <span className="text-zinc-900 font-bold">{shipment.currentLocationName}</span>
             </p>
           </div>
         </div>
@@ -274,106 +329,108 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
         <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={centerOnVessel}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs text-zinc-200 transition-colors cursor-pointer"
-            title="Centrer sur la position actuelle du navire"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-xs font-semibold text-zinc-800 transition-colors cursor-pointer"
+            title="Centrer sur la position actuelle du colis"
           >
             <Ship className="w-3.5 h-3.5 text-[#DC2626]" />
-            <span className="hidden sm:inline">Navire</span>
+            <span className="hidden sm:inline">Position colis</span>
           </button>
 
           <button
             onClick={fitFullRoute}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs text-zinc-200 transition-colors cursor-pointer"
-            title="Afficher tout l'itinéraire"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-xs font-semibold text-zinc-800 transition-colors cursor-pointer"
+            title="Afficher tout l'itinéraire mondial"
           >
-            <Maximize2 className="w-3.5 h-3.5 text-zinc-400" />
+            <Maximize2 className="w-3.5 h-3.5 text-zinc-600" />
             <span className="hidden sm:inline">Trajet complet</span>
           </button>
 
-          {/* 3 Watermark-Free Layer Toggles */}
-          <div className="flex items-center bg-zinc-900 p-0.5 rounded-lg border border-zinc-800 text-xs">
+          {/* Layer Selector */}
+          <div className="flex items-center bg-zinc-100 p-0.5 rounded-lg border border-zinc-200 text-xs font-semibold">
             <button
-              onClick={() => setLayer("dark")}
-              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                activeLayer === "dark"
-                  ? "bg-[#DC2626] text-white font-bold"
-                  : "text-zinc-400 hover:text-white"
+              onClick={() => setLayer("light")}
+              className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-md transition-all cursor-pointer ${
+                activeLayer === "light"
+                  ? "bg-white text-[#DC2626] font-bold shadow-xs border border-zinc-200"
+                  : "text-zinc-600 hover:text-zinc-900"
               }`}
             >
-              Mode Sombre
-            </button>
-            <button
-              onClick={() => setLayer("satellite")}
-              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                activeLayer === "satellite"
-                  ? "bg-[#DC2626] text-white font-bold"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              Satellite
+              Carte Blanche
             </button>
             <button
               onClick={() => setLayer("osm")}
-              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+              className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-md transition-all cursor-pointer ${
                 activeLayer === "osm"
-                  ? "bg-[#DC2626] text-white font-bold"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-white text-[#DC2626] font-bold shadow-xs border border-zinc-200"
+                  : "text-zinc-600 hover:text-zinc-900"
               }`}
             >
               OSM
+            </button>
+            <button
+              onClick={() => setLayer("satellite")}
+              className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-md transition-all cursor-pointer ${
+                activeLayer === "satellite"
+                  ? "bg-white text-[#DC2626] font-bold shadow-xs border border-zinc-200"
+                  : "text-zinc-600 hover:text-zinc-900"
+              }`}
+            >
+              Satellite
             </button>
           </div>
         </div>
       </div>
 
-      {/* Leaflet Map Canvas */}
-      <div className="relative w-full h-[420px] sm:h-[480px] bg-[#09090B]">
+      {/* Leaflet Map Canvas (White Base) */}
+      <div className="relative w-full h-[400px] sm:h-[500px] bg-[#F8FAFC]">
         <div ref={mapContainerRef} className="w-full h-full z-0" />
 
-        {/* Floating Telemetry HUD Card */}
+        {/* Floating Telemetry HUD Card (Clean White Glass) */}
         <div className="absolute top-4 left-4 z-[500] pointer-events-none hidden md:block">
-          <div className="p-3.5 bg-zinc-950/90 backdrop-blur-md rounded-xl border border-zinc-800 shadow-xl pointer-events-auto max-w-[240px]">
+          <div className="p-3.5 bg-white/95 backdrop-blur-md rounded-xl border border-zinc-200 shadow-xl pointer-events-auto max-w-[250px]">
             <div className="flex items-center gap-2 mb-2">
               <Navigation className="w-3.5 h-3.5 text-[#DC2626]" />
-              <span className="text-[11px] font-bold tracking-wide uppercase text-zinc-300">
-                TÉLÉMÉTRIE EN COURS
+              <span className="text-[11px] font-black tracking-wide uppercase text-zinc-800">
+                TÉLÉMÉTRIE EN DIRECT
               </span>
             </div>
             <div className="space-y-1.5 text-xs">
-              <div className="flex justify-between text-zinc-400">
-                <span>Lat/Long:</span>
-                <span className="font-mono text-zinc-200">03°30&apos;N / 78°30&apos;E</span>
+              <div className="flex justify-between text-zinc-600">
+                <span>Position actuelle:</span>
+                <span className="font-mono font-bold text-zinc-900">
+                  {currentCoords[0].toFixed(2)}°N / {currentCoords[1].toFixed(2)}°E
+                </span>
               </div>
-              <div className="flex justify-between text-zinc-400">
-                <span>Vitesse fond:</span>
-                <span className="font-medium text-emerald-400">18.4 nœuds</span>
+              <div className="flex justify-between text-zinc-600">
+                <span>Progression:</span>
+                <span className="font-bold text-[#DC2626]">{shipment.progress}%</span>
               </div>
-              <div className="flex justify-between text-zinc-400">
-                <span>Prochaine escale:</span>
-                <span className="font-medium text-zinc-200">Cap de Bonne-Esp.</span>
+              <div className="flex justify-between text-zinc-600">
+                <span>Statut du convoi:</span>
+                <span className="font-bold text-emerald-600">{shipment.status}</span>
               </div>
-              <div className="flex justify-between text-zinc-400">
-                <span>Arrivée prévue:</span>
-                <span className="font-medium text-[#DC2626]">{shipment.eta}</span>
+              <div className="flex justify-between text-zinc-600">
+                <span>Arrivée prévue (ETA):</span>
+                <span className="font-bold text-zinc-900">{shipment.eta}</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Legend Overlay at bottom left */}
-        <div className="absolute bottom-4 left-4 z-[500] pointer-events-none">
-          <div className="px-3 py-2 bg-zinc-950/90 backdrop-blur-md rounded-lg border border-zinc-800 text-[11px] text-zinc-300 flex items-center gap-3">
+        {/* Legend Overlay at bottom left (White Theme) */}
+        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-[500] pointer-events-none max-w-[calc(100%-1.5rem)]">
+          <div className="px-2.5 py-1.5 sm:px-3.5 sm:py-2 bg-white/95 backdrop-blur-md rounded-xl border border-zinc-200 text-[10px] sm:text-[11px] font-semibold text-zinc-700 flex flex-wrap items-center gap-2 sm:gap-4 shadow-md">
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#DC2626] ring-2 ring-red-500/30"></span>
-              Départ (Corée)
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#DC2626] ring-2 ring-red-200"></span>
+              <span>Départ ({shipment.origin?.split(",")[0] || "Busan"})</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
-              Position active
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#DC2626] animate-ping"></span>
+              <span>Position ({shipment.progress}%)</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              Arrivée (Douala)
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-500"></span>
+              <span>Destination ({shipment.destination?.split(",")[0] || "Douala"})</span>
             </span>
           </div>
         </div>

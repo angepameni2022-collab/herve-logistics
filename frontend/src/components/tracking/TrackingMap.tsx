@@ -11,10 +11,10 @@ const InteractiveLeafletMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-[420px] bg-[#09090B] rounded-2xl border border-zinc-800 flex flex-col items-center justify-center text-zinc-400 gap-3">
+      <div className="w-full h-[420px] bg-white rounded-2xl border border-zinc-200 flex flex-col items-center justify-center text-zinc-500 gap-3 shadow-md">
         <div className="w-10 h-10 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
-        <span className="text-sm font-medium animate-pulse text-zinc-300">
-          Chargement de la carte satellite interactive...
+        <span className="text-sm font-semibold animate-pulse text-zinc-700">
+          Chargement de la carte blanche interactive...
         </span>
       </div>
     ),
@@ -43,7 +43,7 @@ export function TrackingMap({ shipment }: TrackingMapProps) {
             }`}
           >
             <Globe className="w-3.5 h-3.5" />
-            <span>Carte Satellite & AIS Interactive</span>
+            <span>Carte Blanche & AIS Interactive</span>
           </button>
 
           <button

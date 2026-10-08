@@ -24,6 +24,7 @@ import {
   Trash2,
   AlertTriangle,
   ExternalLink,
+  Navigation,
 } from "lucide-react";
 
 export default function AdminShipmentsPage() {
@@ -85,11 +86,18 @@ export default function AdminShipmentsPage() {
           </p>
         </div>
 
-        <Link href="/admin/shipments/new">
-          <Button variant="primary" leftIcon={<Plus className="w-4 h-4" />}>
-            + Nouvel envoi
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+          <Link href="/admin/displacement" className="w-full sm:w-auto">
+            <Button variant="outline" className="w-full sm:w-auto justify-center" leftIcon={<Navigation className="w-4 h-4 text-[#DC2626]" />}>
+              Navigateur GPS (Déplacement)
+            </Button>
+          </Link>
+          <Link href="/admin/shipments/new" className="w-full sm:w-auto">
+            <Button variant="primary" className="w-full sm:w-auto justify-center" leftIcon={<Plus className="w-4 h-4" />}>
+              + Nouvel envoi
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Barre de Recherche et Filtres */}
@@ -181,6 +189,16 @@ export default function AdminShipmentsPage() {
                 <TableCell className="font-medium text-zinc-600 text-xs">{s.eta}</TableCell>
                 <TableCell className="text-right">
                   <div className="flex items-center justify-end gap-1.5">
+                    {/* Action : Piloter déplacement GPS */}
+                    <Link
+                      href="/admin/displacement"
+                      className="p-1.5 rounded-lg text-[#DC2626] bg-red-50 hover:bg-red-100 transition-colors"
+                      title="Piloter le déplacement sur la carte"
+                      aria-label="Piloter le déplacement sur la carte"
+                    >
+                      <Navigation className="w-4 h-4" />
+                    </Link>
+
                     {/* Action : Voir */}
                     <button
                       onClick={() => setViewShipment(s)}

@@ -1,0 +1,106 @@
+[
+  {
+    "trackingNumber": "HL-2026-000001",
+    "clientName": "Jean Dupont",
+    "clientEmail": "jean.dupont@email.com",
+    "sender": "Hervé Logistics Korea Co., Ltd. (Busan Port Hub)",
+    "recipient": "Société d'Importation & Transit SARL",
+    "origin": "Busan, Corée du Sud",
+    "destination": "Douala, Cameroun",
+    "mode": "Maritime",
+    "status": "En transit",
+    "progress": 79,
+    "eta": "25 avr. 2026",
+    "departureDate": "12 avr. 2026",
+    "weight": "14 850 kg",
+    "volume": "2 × Conteneur 40' High Cube",
+    "vesselName": "Hervé Korea Express — HL Voyager 07",
+    "currentLocationName": "En transit maritime — Océan Indien Central",
+    "currentCoordinates": {
+      "lat": -4.21,
+      "lng": 55.45
+    },
+    "waypoints": [
+      { "label": "Busan, Corée du Sud (Origine)", "lat": 35.10, "lng": 129.04, "reached": true },
+      { "label": "Shanghai, Chine (Escale)", "lat": 31.23, "lng": 121.47, "reached": true },
+      { "label": "Détroit de Malacca", "lat": 2.19, "lng": 102.25, "reached": true },
+      { "label": "Océan Indien (Position actuelle)", "lat": -4.21, "lng": 55.45, "reached": true },
+      { "label": "Cap de Bonne-Espérance", "lat": -34.35, "lng": 18.47, "reached": false },
+      { "label": "Port de Douala, Cameroun (Arrivée)", "lat": 4.05, "lng": 9.76, "reached": false }
+    ],
+    "events": [
+      {
+        "id": "evt-hl-1",
+        "date": "12 avr. 2026",
+        "time": "08:30",
+        "status": "Expédié",
+        "location": "Port de Busan, Corée du Sud",
+        "description": "Marchandise prise en charge par Hervé Logistics, scellage des conteneurs et vérification douanière Corée validée.",
+        "lat": 35.1028,
+        "lng": 129.0403,
+        "completed": true
+      },
+      {
+        "id": "evt-hl-2",
+        "date": "16 avr. 2026",
+        "time": "16:20",
+        "status": "En transit",
+        "location": "Port de Shanghai, Chine",
+        "description": "Embarquement validé sur le navire porte-conteneurs et appareillage vers l'Afrique centrale.",
+        "lat": 31.2304,
+        "lng": 121.4737,
+        "completed": true
+      },
+      {
+        "id": "evt-hl-3",
+        "date": "18 avr. 2026",
+        "time": "10:15",
+        "status": "En transit",
+        "location": "Océan Indien Central",
+        "description": "En transit maritime international. Balise AIS et conditions de navigation optimales.",
+        "lat": -4.21,
+        "lng": 55.45,
+        "completed": true
+      }
+    ]
+  },
+  {
+    "trackingNumber": "HL-2026-000124",
+    "clientName": "Paul Martin",
+    "clientEmail": "paul.martin@africatrade.com",
+    "sender": "Seoul Global Exports Co.",
+    "recipient": "Continental Import Douala",
+    "origin": "Séoul / Incheon, Corée du Sud",
+    "destination": "Douala, Cameroun",
+    "mode": "Aérien",
+    "status": "Livré",
+    "progress": 100,
+    "eta": "14 avr. 2026",
+    "departureDate": "10 avr. 2026",
+    "weight": "850 kg",
+    "volume": "4 Palettes Fret Aérien",
+    "vesselName": "Korean Air Cargo / Flight KE-840",
+    "currentLocationName": "Livré au destinataire — Douala, Cameroun",
+    "currentCoordinates": {
+      "lat": 4.0511,
+      "lng": 9.7679
+    },
+    "waypoints": [
+      { "label": "Aéroport Incheon (ICN)", "lat": 37.46, "lng": 126.44, "reached": true },
+      { "label": "Aéroport Douala (DLA)", "lat": 4.01, "lng": 9.71, "reached": true }
+    ],
+    "events": [
+      {
+        "id": "evt-hl-4",
+        "date": "14 avr. 2026",
+        "time": "14:15",
+        "status": "Livré",
+        "location": "Douala, Cameroun",
+        "description": "Colis dédouané et remis au destinataire contre signature électronique.",
+        "lat": 4.0511,
+        "lng": 9.7679,
+        "completed": true
+      }
+    ]
+  }
+]

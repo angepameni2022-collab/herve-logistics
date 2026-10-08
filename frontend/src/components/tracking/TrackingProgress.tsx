@@ -76,7 +76,7 @@ export function TrackingProgress({ status, progress }: TrackingProgressProps) {
                 </div>
 
                 <span
-                  className={`mt-3 text-xs sm:text-sm font-bold whitespace-nowrap ${
+                  className={`mt-2.5 sm:mt-3 text-[10px] sm:text-xs md:text-sm font-bold text-center leading-tight sm:whitespace-nowrap ${
                     isCompleted || isCurrent ? "text-[#09090B]" : "text-zinc-400"
                   }`}
                 >

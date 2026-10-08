@@ -40,7 +40,7 @@ export default function LegalPage() {
               <ul className="list-disc pl-5 space-y-1 text-zinc-600">
                 <li><strong>Siège social :</strong> 511 Yeongdong-daero, Trade Tower 28F, Gangnam-gu, Séoul 06164, Corée du Sud</li>
                 <li><strong>Hub maritime :</strong> Busan Port International Logistics Terminal, Busan, Corée du Sud</li>
-                <li><strong>Téléphone :</strong> +82 2-6959-8800</li>
+                <li><strong>Téléphone :</strong> +1 579 485 2162</li>
                 <li><strong>Courrier électronique :</strong> contact@hervelogistics.com</li>
                 <li><strong>Directeur de la publication :</strong> Direction Générale Hervé Logistics Korea</li>
               </ul>

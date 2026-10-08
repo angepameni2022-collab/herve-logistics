@@ -1,0 +1,13 @@
+{
+  "name": "herve-transit-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hervé Logistics - Racine du projet",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix BACKEND run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend start"
+  }
+}

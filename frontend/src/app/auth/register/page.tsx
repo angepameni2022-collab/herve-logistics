@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Lock, Mail, User, Phone, Building2, MapPin, ArrowRight, CheckCircle2, ShieldCheck, AlertCircle } from "lucide-react";
 import { Input } from "@/components/ui/Input";
@@ -16,7 +17,7 @@ export default function RegisterPage() {
 
   const [fullName, setFullName] = useState("");
   const [company, setCompany] = useState("");
-  const [phone, setPhone] = useState("+82 ");
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("Séoul, Corée du Sud");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -68,10 +69,15 @@ export default function RegisterPage() {
         {/* Brand Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-[#DC2626] flex items-center justify-center text-white shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform">
-              <span className="text-base font-black tracking-tighter flex items-center gap-0.5">
-                HL <span className="text-xs">▶</span>
-              </span>
+            <div className="w-14 h-14 rounded-2xl bg-white p-1.5 flex items-center justify-center shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform flex-shrink-0">
+              <Image
+                src="/images/logo-herve.png"
+                alt="Hervé Logistics Logo"
+                width={56}
+                height={56}
+                className="w-full h-full object-contain"
+                priority
+              />
             </div>
             <div className="text-left">
               <span className="text-2xl font-black text-white tracking-tight leading-none block">
@@ -153,7 +159,7 @@ export default function RegisterPage() {
                 <div>
                   <Input
                     label="Téléphone (avec indicatif) *"
-                    placeholder="+82 10-1234-5678 ou +237..."
+                    placeholder="Ex: +1 579 485 2162 ou +237..."
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     leftIcon={<Phone className="w-4 h-4 text-zinc-400" />}

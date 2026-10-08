@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
@@ -26,11 +27,16 @@ export function Header() {
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* LOGO HERVÉ LOGISTICS */}
         <Link href="/" className="flex items-center gap-3 group">
-          {/* Red Badge Logo */}
-          <div className="w-10 h-10 rounded-xl bg-[#DC2626] flex items-center justify-center text-white font-black shadow-md shadow-red-500/30 group-hover:scale-105 transition-transform">
-            <span className="text-xs sm:text-sm font-black tracking-tighter flex items-center gap-0.5">
-              HL <span className="text-[10px]">▶</span>
-            </span>
+          {/* Official Red Logo Icon */}
+          <div className="w-11 h-11 rounded-xl bg-white p-1 flex items-center justify-center shadow-md shadow-red-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
+            <Image
+              src="/images/logo-herve.png"
+              alt="Hervé Logistics Logo"
+              width={44}
+              height={44}
+              className="w-full h-full object-contain"
+              priority
+            />
           </div>
 
           <div className="flex flex-col">
@@ -67,17 +73,24 @@ export function Header() {
         </nav>
 
         {/* Right Action buttons */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden lg:flex items-center gap-4">
           <Link
             href="/auth/login"
-            className="text-xs sm:text-sm font-black uppercase tracking-wider text-white hover:text-[#DC2626] transition-colors"
+            className="text-xs font-black uppercase tracking-wider text-zinc-300 hover:text-white transition-colors"
           >
-            CONNEXION
+            ESPACE CLIENT
+          </Link>
+
+          <Link
+            href="/admin/login"
+            className="text-xs font-black uppercase tracking-wider text-red-400 hover:text-white px-2.5 py-1 rounded-md border border-red-500/30 hover:border-red-500 transition-all flex items-center gap-1.5"
+          >
+            <span>ADMIN</span>
           </Link>
 
           <Link
             href="/track/HL-2026-000001"
-            className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-lg bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-red-500/30 active:scale-98 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-red-500/30 active:scale-98 transition-all"
           >
             <span>SUIVRE UN COLIS</span>
           </Link>
@@ -119,20 +132,27 @@ export function Header() {
             })}
           </nav>
 
-          <div className="pt-4 mt-4 border-t border-zinc-800 flex flex-col gap-3">
+          <div className="pt-4 mt-4 border-t border-zinc-800 flex flex-col gap-2.5">
             <Link
               href="/auth/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider text-white border border-zinc-700 hover:bg-zinc-900"
+              className="w-full text-center py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white border border-zinc-700 hover:bg-zinc-900"
             >
-              CONNEXION
+              Espace Client
+            </Link>
+            <Link
+              href="/admin/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-red-400 border border-red-800/80 hover:bg-red-950/40"
+            >
+              Portail Administrateur
             </Link>
             <Link
               href="/track/HL-2026-000001"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-3 rounded-lg text-sm font-black uppercase tracking-wider bg-[#DC2626] hover:bg-[#B91C1C] text-white shadow-md shadow-red-500/30"
+              className="w-full text-center py-3 rounded-lg text-xs font-black uppercase tracking-wider bg-[#DC2626] hover:bg-[#B91C1C] text-white shadow-md shadow-red-500/30"
             >
-              SUIVRE UN COLIS
+              Suivre un colis
             </Link>
           </div>
         </div>

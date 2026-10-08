@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Box, Lock, Mail, ArrowRight, ShieldCheck } from "lucide-react";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { Lock, Mail, ArrowRight, ShieldCheck, Eye, EyeOff, User } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
 import { useApp } from "@/context/AppContext";
 
@@ -15,7 +14,8 @@ export default function LoginPage() {
   const { switchUserRole } = useApp();
 
   const [email, setEmail] = useState("jean.dupont@email.com");
-  const [password, setPassword] = useState("••••••••");
+  const [password, setPassword] = useState("password123");
+  const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,29 +25,10 @@ export default function LoginPage() {
 
     setTimeout(() => {
       setIsLoading(false);
-      showToast("Connexion réussie (Mode Démo)", "success");
-      if (email.includes("admin")) {
-        switchUserRole("admin");
-        router.push("/admin");
-      } else {
-        switchUserRole("client");
-        router.push("/dashboard");
-      }
-    }, 600);
-  };
-
-  const handleQuickLogin = (role: "client" | "admin") => {
-    if (role === "admin") {
-      setEmail("admin@translogix.com");
-      switchUserRole("admin");
-      showToast("Connexion en tant qu'Administrateur", "info");
-      router.push("/admin");
-    } else {
-      setEmail("jean.dupont@email.com");
       switchUserRole("client");
-      showToast("Connexion en tant que Client", "info");
+      showToast("Connexion réussie à votre Espace Client !", "success");
       router.push("/dashboard");
-    }
+    }, 600);
   };
 
   return (
@@ -56,59 +37,85 @@ export default function LoginPage() {
       <div className="absolute top-0 left-0 right-0 h-80 bg-[#09090B] border-b border-zinc-800 -z-0" />
 
       <div className="relative z-10 w-full max-w-md">
-        {/* Logo Card Top */}
+        {/* Logo Top */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-[#DC2626] flex items-center justify-center text-white shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform">
-              <span className="text-base font-black tracking-tighter flex items-center gap-0.5">
-                HL <span className="text-xs">▶</span>
-              </span>
+            <div className="w-14 h-14 rounded-2xl bg-white p-1.5 flex items-center justify-center shadow-xl shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0">
+              <Image
+                src="/images/logo-herve.png"
+                alt="Hervé Logistics Logo"
+                width={56}
+                height={56}
+                className="w-full h-full object-contain"
+                priority
+              />
             </div>
             <div className="text-left">
               <span className="text-2xl font-black text-white tracking-tight leading-none block">
                 HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
               </span>
               <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                Transit & Logistique Internationale · Corée du Sud
+                Transit & Logistique Internationale
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Card Formulaire */}
+        {/* Card Formulaire Client */}
         <div className="bg-white rounded-3xl border border-zinc-200 shadow-2xl p-8 sm:p-10">
           <div className="mb-6 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 text-zinc-800 text-xs font-bold uppercase tracking-wider mb-2">
+              <User className="w-3.5 h-3.5 text-[#DC2626]" />
+              <span>Espace Client & Expéditions</span>
+            </div>
             <h1 className="text-2xl font-extrabold text-[#09090B]">
-              Connectez-vous à votre compte
+              Connexion Client
             </h1>
-            <p className="text-sm text-zinc-500 mt-1.5">
-              Accédez à vos envois et suivez vos commandes.
+            <p className="text-xs sm:text-sm text-zinc-500 mt-1">
+              Consultez vos bordereaux, demandes de cotation et historique.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Input
-                label="Email professionnel"
-                type="email"
-                placeholder="nom@entreprise.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                leftIcon={<Mail className="w-4 h-4 text-zinc-400" />}
-                required
-              />
+              <label className="block text-xs font-bold text-zinc-800 mb-1.5">
+                Email ou Identifiant Client
+              </label>
+              <div className="relative">
+                <Mail className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="nom@entreprise.com"
+                  className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-3.5 text-sm font-semibold text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
+                  required
+                />
+              </div>
             </div>
 
             <div>
-              <Input
-                label="Mot de passe"
-                type="password"
-                placeholder="Votre mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                leftIcon={<Lock className="w-4 h-4 text-zinc-400" />}
-                required
-              />
+              <label className="block text-xs font-bold text-zinc-800 mb-1.5">
+                Mot de Passe
+              </label>
+              <div className="relative">
+                <Lock className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Votre mot de passe"
+                  className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-10 text-sm font-semibold text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
 
             {/* Options : Se souvenir de moi & Mot de passe oublié */}
@@ -125,55 +132,46 @@ export default function LoginPage() {
 
               <button
                 type="button"
-                onClick={() => showToast("Lien de réinitialisation simulé envoyé par email", "info")}
+                onClick={() => showToast("Lien de réinitialisation envoyé par email", "info")}
                 className="text-[#DC2626] hover:underline font-bold"
               >
                 Mot de passe oublié ?
               </button>
             </div>
 
-            <Button
+            <button
               type="submit"
-              variant="primary"
-              size="lg"
-              className="w-full mt-4"
-              isLoading={isLoading}
-              rightIcon={<ArrowRight className="w-4 h-4" />}
+              disabled={isLoading}
+              className="w-full mt-3 py-3.5 px-4 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] active:bg-black text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-red-500/25 transition-all disabled:opacity-60 cursor-pointer"
             >
-              Se connecter
-            </Button>
+              <span>{isLoading ? "Connexion en cours..." : "Accéder à mon Espace Client"}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </form>
 
-          {/* Quick Demo Logins for Client / Admin */}
-          <div className="mt-6 pt-6 border-t border-zinc-100">
-            <p className="text-xs text-center text-zinc-400 font-bold mb-3">
-              Accès rapide démo frontend :
+          {/* Inscription Client */}
+          <div className="mt-6 pt-5 border-t border-zinc-100 text-center">
+            <p className="text-xs text-zinc-600">
+              Vous êtes nouveau client ?{" "}
+              <Link href="/auth/register" className="font-bold text-[#DC2626] hover:underline">
+                Créer un compte client
+              </Link>
             </p>
-            <div className="grid grid-cols-2 gap-2.5">
-              <button
-                type="button"
-                onClick={() => handleQuickLogin("client")}
-                className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold bg-[#FEF2F2] text-[#DC2626] hover:bg-red-100 transition-colors border border-red-200"
-              >
-                <span>Accès Client</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickLogin("admin")}
-                className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold bg-zinc-900 text-white hover:bg-black transition-colors"
-              >
-                <span>Accès Admin</span>
-              </button>
-            </div>
           </div>
 
-          {/* Register Link */}
-          <p className="mt-8 text-center text-xs text-zinc-500">
-            Pas encore de compte ?{" "}
-            <Link href="/auth/register" className="font-bold text-[#DC2626] hover:underline">
-              S&apos;inscrire
+          {/* Formulaire Admin Séparé - Lien dédié */}
+          <div className="mt-4 p-3 rounded-2xl bg-zinc-50 border border-zinc-200 text-center">
+            <p className="text-[11px] text-zinc-500 mb-1">
+              Vous faites partie de l&apos;équipe Hervé Logistics ?
+            </p>
+            <Link
+              href="/admin/login"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-900 hover:text-[#DC2626] transition-colors"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-[#DC2626]" />
+              <span>Accéder au formulaire d&apos;administration séparé →</span>
             </Link>
-          </p>
+          </div>
         </div>
 
         {/* Security badge footer */}

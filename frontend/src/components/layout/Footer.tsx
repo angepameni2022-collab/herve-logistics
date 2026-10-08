@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Box, Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
@@ -12,10 +13,14 @@ export function Footer() {
           {/* Col 1: TransLogix Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#DC2626] flex items-center justify-center text-white font-black shadow-md shadow-red-500/30">
-                <span className="text-xs font-black tracking-tighter flex items-center gap-0.5">
-                  HL <span className="text-[10px]">▶</span>
-                </span>
+              <div className="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center shadow-md shadow-red-500/20 flex-shrink-0">
+                <Image
+                  src="/images/logo-herve.png"
+                  alt="Hervé Logistics Logo"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-black uppercase tracking-tight text-white leading-none">
@@ -121,8 +126,19 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#DC2626] flex-shrink-0" />
-                <a href="tel:+82269598800" className="hover:text-white transition-colors">
-                  +82 2-6959-8800 / +82 10-4892-7500
+                <a href="tel:+15794852162" className="hover:text-white transition-colors">
+                  +1 579 485 2162
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <a
+                  href="https://wa.me/15794852162"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-400 hover:text-emerald-300 font-medium text-xs transition-colors"
+                >
+                  WhatsApp Direct : +1 579 485 2162
                 </a>
               </li>
             </ul>

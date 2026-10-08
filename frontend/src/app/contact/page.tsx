@@ -112,17 +112,41 @@ export default function ContactPage() {
                 </span>
               </a>
 
-              {/* Carte 2 : Téléphone (Corée du Sud) */}
+              {/* Carte 2 : Téléphone & WhatsApp */}
               <a
-                href="tel:+82269598800"
+                href="tel:+15794852162"
                 className="bg-white rounded-2xl border border-zinc-200/90 p-5 shadow-xs hover:shadow-md hover:border-red-300 transition-all flex items-center gap-4 group"
               >
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#DC2626] border border-red-100 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                   <Phone className="w-5 h-5" />
                 </div>
-                <span className="text-sm sm:text-base font-semibold text-zinc-800 group-hover:text-[#DC2626] transition-colors">
-                  +82 2-6959-8800 / +82 10-4892-7500
-                </span>
+                <div>
+                  <div className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Téléphone direct</div>
+                  <span className="text-sm sm:text-base font-bold text-zinc-900 group-hover:text-[#DC2626] transition-colors">
+                    +1 579 485 2162
+                  </span>
+                </div>
+              </a>
+
+              {/* Carte WhatsApp */}
+              <a
+                href="https://wa.me/15794852162"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-2xl border border-emerald-200/80 p-5 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all flex items-center gap-4 group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                  <span className="text-lg">💬</span>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-xs text-emerald-700 font-bold uppercase tracking-wider">Support WhatsApp 24/7</span>
+                  </div>
+                  <span className="text-sm sm:text-base font-bold text-emerald-900 group-hover:text-emerald-700 transition-colors">
+                    Discuter au +1 579 485 2162
+                  </span>
+                </div>
               </a>
 
               {/* Carte 3 : Siège social (Séoul, Corée du Sud) */}
@@ -175,13 +199,13 @@ export default function ContactPage() {
                     {/* Champ 1 : Nom complet */}
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1.5">
-                        Nom complet
+                        Nom complet <span className="text-[#DC2626]">*</span>
                       </label>
                       <input
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder=""
+                        placeholder="Ex: Paul Martin"
                         className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
                         required
                       />
@@ -191,13 +215,13 @@ export default function ContactPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1.5">
-                          Email
+                          Adresse Email <span className="text-[#DC2626]">*</span>
                         </label>
                         <input
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder=""
+                          placeholder="votre.email@domaine.com"
                           className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
                           required
                         />
@@ -205,28 +229,49 @@ export default function ContactPage() {
 
                       <div>
                         <label className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1.5">
-                          Téléphone
+                          Numéro de Téléphone
                         </label>
                         <input
                           type="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          placeholder=""
+                          placeholder="+1 579 485 2162"
                           className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
                         />
                       </div>
                     </div>
 
-                    {/* Champ : Message */}
+                    {/* Ligne : Objet de la demande */}
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1.5">
-                        Message
+                        Objet de votre demande
                       </label>
+                      <select
+                        aria-label="Objet de votre demande"
+                        defaultValue="Devis de fret maritime & multimodal"
+                        className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
+                      >
+                        <option value="Devis de fret maritime & multimodal">Demande de cotation / Devis de fret maritime ou aérien</option>
+                        <option value="Suivi de colis ou conteneur">Assistance sur le suivi d&apos;une expédition en cours</option>
+                        <option value="Dédouanement et transit portuaire">Formalités de dédouanement et transit portuaire</option>
+                        <option value="Partenariat logistique">Partenariat commercial & affrètement régulier</option>
+                        <option value="Autre demande">Autre renseignement</option>
+                      </select>
+                    </div>
+
+                    {/* Champ : Message */}
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-xs sm:text-sm font-semibold text-zinc-800">
+                          Votre message détaillé <span className="text-[#DC2626]">*</span>
+                        </label>
+                        <span className="text-[11px] text-zinc-400">Précisez vos volumes et destinations</span>
+                      </div>
                       <textarea
-                        rows={5}
+                        rows={4}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder=""
+                        placeholder="Bonjour, je souhaite expédier un conteneur depuis Busan vers Douala..."
                         className="w-full rounded-xl border border-zinc-200 bg-white p-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all resize-y"
                         required
                       />
@@ -236,10 +281,10 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="w-full py-3.5 px-6 rounded-xl bg-[#09090B] hover:bg-[#18181B] active:bg-black text-white font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all disabled:opacity-60 cursor-pointer"
+                      className="w-full py-3.5 px-6 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] active:bg-black text-white font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-red-500/20 transition-all disabled:opacity-60 cursor-pointer"
                     >
                       <Send className="w-4 h-4 text-white" />
-                      <span>{isLoading ? "Envoi en cours..." : "Envoyer le message"}</span>
+                      <span>{isLoading ? "Envoi en cours..." : "Transmettre ma demande à l'équipe"}</span>
                     </button>
                   </form>
                 )}
