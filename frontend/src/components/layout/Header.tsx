@@ -73,19 +73,12 @@ export function Header() {
         </nav>
 
         {/* Right Action buttons */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-5">
           <Link
             href="/auth/login"
             className="text-xs font-black uppercase tracking-wider text-zinc-300 hover:text-white transition-colors"
           >
             ESPACE CLIENT
-          </Link>
-
-          <Link
-            href="/admin/login"
-            className="text-xs font-black uppercase tracking-wider text-red-400 hover:text-white px-2.5 py-1 rounded-md border border-red-500/30 hover:border-red-500 transition-all flex items-center gap-1.5"
-          >
-            <span>ADMIN</span>
           </Link>
 
           <Link
@@ -139,13 +132,6 @@ export function Header() {
               className="w-full text-center py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white border border-zinc-700 hover:bg-zinc-900"
             >
               Espace Client
-            </Link>
-            <Link
-              href="/admin/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-red-400 border border-red-800/80 hover:bg-red-950/40"
-            >
-              Portail Administrateur
             </Link>
             <Link
               href="/track/HL-2026-000001"
