@@ -57,7 +57,7 @@ Le serveur s'exécutera sur `http://localhost:5000`.
 
 ### 4. Formulaire de Contact
 - **`POST /api/contact`** : Réception et enregistrement des messages de contact.
-- Support téléphonique : **+1 579 485 2162** (WhatsApp & Tel direct).
+- Support téléphonique : **+44 7456 60622192** (WhatsApp & Tel direct).
 
 ---
 
