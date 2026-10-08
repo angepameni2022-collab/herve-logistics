@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -82,7 +82,7 @@ export function ClientSidebar() {
           <Link href="/dashboard" className="flex items-center gap-3 group">
             <div className="w-12 h-12 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-md shadow-red-500/10 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
-                src="/images/logo-herve-official.png"
+                src="/images/logo-herve-hv.png"
                 alt="Hervé Logistics Logo"
                 width={48}
                 height={48}
@@ -221,9 +221,9 @@ export function ClientSidebar() {
       {/* Mobile Top Bar */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-zinc-200 z-30 px-4 flex items-center justify-between">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-full bg-white p-0.5 flex items-center justify-center border border-zinc-200 shadow-xs overflow-hidden">
+          <div className="w-10 h-10 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xs overflow-hidden flex-shrink-0">
             <Image
-              src="/images/logo-herve-official.png"
+              src="/images/logo-herve-hv.png"
               alt="Hervé Logistics Logo"
               width={40}
               height={40}

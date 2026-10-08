@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -45,7 +45,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-zinc-700/80 text-white mb-6 shadow-xl">
                 <div className="w-7 h-7 rounded-lg bg-black p-0.5 overflow-hidden flex-shrink-0 border border-zinc-700/80 shadow-sm">
                   <img
-                    src="/images/logo-herve-official.png"
+                    src="/images/logo-herve-hv.png"
                     alt="Logo Officiel Hervé Logistics"
                     className="w-full h-full object-contain"
                   />

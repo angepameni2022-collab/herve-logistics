@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -73,7 +73,7 @@ export default function RegisterPage() {
           <Link href="/" className="inline-flex items-center gap-3 group">
             <div className="w-16 h-16 rounded-2xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xl shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
-                src="/images/logo-herve-official.png"
+                src="/images/logo-herve-hv.png"
                 alt="Hervé Logistics Logo"
                 width={64}
                 height={64}

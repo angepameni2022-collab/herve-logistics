@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-3">
               <div className="w-14 h-14 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-lg shadow-red-500/10 flex-shrink-0 overflow-hidden">
                 <Image
-                  src="/images/logo-herve-official.png"
+                  src="/images/logo-herve-hv.png"
                   alt="Hervé Logistics Logo"
                   width={56}
                   height={56}

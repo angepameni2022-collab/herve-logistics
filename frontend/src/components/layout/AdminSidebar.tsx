@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -69,7 +69,7 @@ export function AdminSidebar() {
           <Link href="/admin" className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-sm shadow-red-500/20 flex-shrink-0 overflow-hidden">
               <Image
-                src="/images/logo-herve-official.png"
+                src="/images/logo-herve-hv.png"
                 alt="Hervé Logistics Logo"
                 width={48}
                 height={48}
@@ -178,11 +178,17 @@ export function AdminSidebar() {
       {/* Mobile Top Bar */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#09090B] border-b border-zinc-800 z-30 px-4 flex items-center justify-between">
         <Link href="/admin" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#DC2626] flex items-center justify-center text-white">
-            <span className="text-[10px] font-black">HL</span>
+          <div className="w-9 h-9 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-sm overflow-hidden flex-shrink-0">
+            <Image
+              src="/images/logo-herve-hv.png"
+              alt="Hervé Logistics Logo"
+              width={36}
+              height={36}
+              className="w-full h-full object-contain"
+            />
           </div>
-          <span className="text-base font-bold text-white">
-            Hervé Logistics <span className="text-xs text-[#DC2626] font-normal">Admin</span>
+          <span className="text-base font-black text-white">
+            HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
           </span>
         </Link>
         <button

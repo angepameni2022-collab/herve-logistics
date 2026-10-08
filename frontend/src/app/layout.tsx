@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
@@ -16,10 +16,11 @@ export const metadata: Metadata = {
   description: "Plateforme logistique internationale : Transport maritime, aérien, routier, conteneurs, fret et suivi en temps réel par satellite.",
   icons: {
     icon: [
-      { url: "/images/logo-herve-official.png", type: "image/png" },
+      { url: "/images/logo-herve-hv.png", type: "image/png" },
       { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico", type: "image/x-icon" },
     ],
-    apple: "/images/logo-herve-official.png",
+    apple: "/images/logo-herve-hv.png",
   },
 };
 
