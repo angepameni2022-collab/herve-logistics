@@ -14,6 +14,13 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Hervé Logistics — Transit & Logistique Internationale",
   description: "Plateforme logistique internationale : Transport maritime, aérien, routier, conteneurs, fret et suivi en temps réel par satellite.",
+  icons: {
+    icon: [
+      { url: "/images/logo-herve-official.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: "/images/logo-herve-official.png",
+  },
 };
 
 export default function RootLayout({

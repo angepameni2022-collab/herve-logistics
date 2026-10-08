@@ -13,12 +13,12 @@ export function Footer() {
           {/* Col 1: TransLogix Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center shadow-md shadow-red-500/20 flex-shrink-0">
+              <div className="w-14 h-14 rounded-full bg-white p-0.5 flex items-center justify-center shadow-lg shadow-red-500/20 flex-shrink-0 overflow-hidden">
                 <Image
-                  src="/images/logo-herve.png"
+                  src="/images/logo-herve-official.png"
                   alt="Hervé Logistics Logo"
-                  width={48}
-                  height={48}
+                  width={56}
+                  height={56}
                   className="w-full h-full object-contain"
                 />
               </div>

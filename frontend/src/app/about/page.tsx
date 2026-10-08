@@ -42,7 +42,14 @@ export default function AboutPage() {
       <main className="flex-1">
         {/* HERO À PROPOS — NOIR & ROUGE */}
         <section className="bg-[#09090B] text-white py-20 px-4 sm:px-6 lg:px-8 text-center border-b border-zinc-800">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto flex flex-col items-center">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white p-1 mb-6 shadow-2xl shadow-red-500/20 border-2 border-red-500/30 overflow-hidden">
+              <img
+                src="/images/logo-herve-official.png"
+                alt="Logo Officiel Hervé Logistics"
+                className="w-full h-full object-contain"
+              />
+            </div>
             <span className="text-xs font-bold uppercase tracking-widest text-red-400 bg-red-950/60 px-3.5 py-1.5 rounded-full border border-red-500/40">
               Notre Entreprise
             </span>

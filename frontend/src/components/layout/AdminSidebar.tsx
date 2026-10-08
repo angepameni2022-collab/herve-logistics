@@ -64,12 +64,12 @@ export function AdminSidebar() {
         {/* Brand Header */}
         <div className="p-6 border-b border-zinc-800/80 flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shadow-sm shadow-red-500/20 flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-white p-0.5 flex items-center justify-center shadow-sm shadow-red-500/20 flex-shrink-0 overflow-hidden">
               <Image
-                src="/images/logo-herve.png"
+                src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
-                width={40}
-                height={40}
+                width={48}
+                height={48}
                 className="w-full h-full object-contain"
               />
             </div>

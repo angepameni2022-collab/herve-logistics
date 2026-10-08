@@ -69,12 +69,12 @@ export default function RegisterPage() {
         {/* Brand Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-14 h-14 rounded-2xl bg-white p-1.5 flex items-center justify-center shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform flex-shrink-0">
+            <div className="w-16 h-16 rounded-full bg-white p-0.5 flex items-center justify-center shadow-xl shadow-red-600/30 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
-                src="/images/logo-herve.png"
+                src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
-                width={56}
-                height={56}
+                width={64}
+                height={64}
                 className="w-full h-full object-contain"
                 priority
               />

@@ -41,10 +41,19 @@ export default function HomePage() {
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-3xl text-left">
-              {/* Badge: ● PLATEFORME INTERNATIONALE · TEMPS RÉEL (Red pill with white text) */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#DC2626] text-white text-xs font-black tracking-wider uppercase mb-6 shadow-lg shadow-red-500/30">
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                <span>PLATEFORME INTERNATIONALE · TEMPS RÉEL</span>
+              {/* Badge: Official Logo Emblem + International Platform */}
+              <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-zinc-700/80 text-white mb-6 shadow-xl">
+                <div className="w-7 h-7 rounded-full bg-white p-0.5 overflow-hidden flex-shrink-0 shadow-sm">
+                  <img
+                    src="/images/logo-herve-official.png"
+                    alt="Logo Officiel Hervé Logistics"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex items-center gap-2 pr-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-white text-xs font-black tracking-wider uppercase">HERVÉ LOGISTICS · PLATEFORME OFFICIELLE</span>
+                </div>
               </div>
 
               {/* H1 Main Title: Pure white and vibrant red accent */}

@@ -27,13 +27,13 @@ export function Header() {
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* LOGO HERVÉ LOGISTICS */}
         <Link href="/" className="flex items-center gap-3 group">
-          {/* Official Red Logo Icon */}
-          <div className="w-11 h-11 rounded-xl bg-white p-1 flex items-center justify-center shadow-md shadow-red-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
+          {/* Official Emblem */}
+          <div className="w-12 h-12 rounded-full bg-white p-0.5 flex items-center justify-center shadow-lg shadow-red-500/20 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
             <Image
-              src="/images/logo-herve.png"
+              src="/images/logo-herve-official.png"
               alt="Hervé Logistics Logo"
-              width={44}
-              height={44}
+              width={56}
+              height={56}
               className="w-full h-full object-contain"
               priority
             />

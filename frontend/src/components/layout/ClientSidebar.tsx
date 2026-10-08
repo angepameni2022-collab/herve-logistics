@@ -80,12 +80,12 @@ export function ClientSidebar() {
         {/* Brand Header */}
         <div className="p-5 sm:p-6 border-b border-zinc-100 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-white p-1.5 flex items-center justify-center shadow-md shadow-red-500/15 border border-zinc-100 group-hover:scale-105 transition-transform flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-white p-0.5 flex items-center justify-center shadow-md shadow-red-500/15 border border-zinc-100 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
-                src="/images/logo-herve.png"
+                src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
-                width={44}
-                height={44}
+                width={48}
+                height={48}
                 className="w-full h-full object-contain"
                 priority
               />
@@ -221,12 +221,12 @@ export function ClientSidebar() {
       {/* Mobile Top Bar */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-zinc-200 z-30 px-4 flex items-center justify-between">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-white p-1 flex items-center justify-center border border-zinc-200 shadow-xs">
+          <div className="w-10 h-10 rounded-full bg-white p-0.5 flex items-center justify-center border border-zinc-200 shadow-xs overflow-hidden">
             <Image
-              src="/images/logo-herve.png"
+              src="/images/logo-herve-official.png"
               alt="Hervé Logistics Logo"
-              width={32}
-              height={32}
+              width={40}
+              height={40}
               className="w-full h-full object-contain"
             />
           </div>
