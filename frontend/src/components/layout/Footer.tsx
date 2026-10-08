@@ -126,19 +126,19 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#DC2626] flex-shrink-0" />
-                <a href="tel:+44745660622192" className="hover:text-white transition-colors">
-                  +44 7456 60622192
+                <a href="tel:+447456062192" className="hover:text-white transition-colors">
+                  +44 7456 062192
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <a
-                  href="https://wa.me/44745660622192"
+                  href="https://wa.me/447456062192"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-emerald-400 hover:text-emerald-300 font-medium text-xs transition-colors"
                 >
-                  WhatsApp Direct : +44 7456 60622192
+                  WhatsApp Direct : +44 7456 062192
                 </a>
               </li>
             </ul>

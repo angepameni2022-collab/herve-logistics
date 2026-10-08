@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: "Message transmis avec succès à l'équipe Hervé Logistics",
-      supportPhone: "+44 7456 60622192",
+      supportPhone: "+44 7456 062192",
     });
   } catch (error) {
     return NextResponse.json(

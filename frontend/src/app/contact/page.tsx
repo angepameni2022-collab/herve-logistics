@@ -114,7 +114,7 @@ export default function ContactPage() {
 
               {/* Carte 2 : Téléphone & WhatsApp */}
               <a
-                href="tel:+44745660622192"
+                href="tel:+447456062192"
                 className="bg-white rounded-2xl border border-zinc-200/90 p-5 shadow-xs hover:shadow-md hover:border-red-300 transition-all flex items-center gap-4 group"
               >
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#DC2626] border border-red-100 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
@@ -123,14 +123,14 @@ export default function ContactPage() {
                 <div>
                   <div className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Téléphone direct</div>
                   <span className="text-sm sm:text-base font-bold text-zinc-900 group-hover:text-[#DC2626] transition-colors">
-                    +44 7456 60622192
+                    +44 7456 062192
                   </span>
                 </div>
               </a>
 
               {/* Carte WhatsApp */}
               <a
-                href="https://wa.me/44745660622192"
+                href="https://wa.me/447456062192"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white rounded-2xl border border-emerald-200/80 p-5 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all flex items-center gap-4 group"
@@ -144,7 +144,7 @@ export default function ContactPage() {
                     <span className="text-xs text-emerald-700 font-bold uppercase tracking-wider">Support WhatsApp 24/7</span>
                   </div>
                   <span className="text-sm sm:text-base font-bold text-emerald-900 group-hover:text-emerald-700 transition-colors">
-                    Discuter au +44 7456 60622192
+                    Discuter au +44 7456 062192
                   </span>
                 </div>
               </a>
@@ -235,7 +235,7 @@ export default function ContactPage() {
                           type="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          placeholder="+44 7456 60622192"
+                          placeholder="+44 7456 062192"
                           className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all"
                         />
                       </div>

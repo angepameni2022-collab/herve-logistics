@@ -159,7 +159,7 @@ export default function RegisterPage() {
                 <div>
                   <Input
                     label="Téléphone (avec indicatif) *"
-                    placeholder="Ex: +44 7456 60622192 ou +237..."
+                    placeholder="Ex: +44 7456 062192 ou +237..."
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     leftIcon={<Phone className="w-4 h-4 text-zinc-400" />}

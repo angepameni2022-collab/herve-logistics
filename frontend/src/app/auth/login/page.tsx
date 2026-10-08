@@ -85,7 +85,7 @@ export default function LoginPage() {
 
         <div className="text-right">
           <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest hidden sm:inline-block">
-            Support Client : <a href="tel:+44745660622192" className="text-white hover:text-[#DC2626] transition-colors">+44 7456 60622192</a>
+            Support Client : <a href="tel:+447456062192" className="text-white hover:text-[#DC2626] transition-colors">+44 7456 062192</a>
           </span>
         </div>
       </header>

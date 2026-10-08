@@ -398,14 +398,14 @@ export default function ClientDashboardPage() {
               Besoin d&apos;un enlèvement urgent ou d&apos;une cotation conteneur ?
             </h3>
             <p className="text-xs text-zinc-600 mt-1 max-w-xl">
-              Votre gestionnaire de compte Hervé Logistics est joignable directement par téléphone ou WhatsApp au <b>+44 7456 60622192</b>.
+              Votre gestionnaire de compte Hervé Logistics est joignable directement par téléphone ou WhatsApp au <b>+44 7456 062192</b>.
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
           <a
-            href="https://wa.me/44745660622192"
+            href="https://wa.me/447456062192"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-colors"

@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
     service: "Hervé Logistics Backend REST API",
     status: "online",
     version: "1.0.0",
-    phoneSupport: "+44 7456 60622192",
+    phoneSupport: "+44 7456 062192",
     adminController: "Actif (/api/shipments/:trackingNumber/displacement)",
     timestamp: new Date().toISOString(),
   });
@@ -298,6 +298,6 @@ app.listen(PORT, () => {
   console.log(`🚀 HERVÉ LOGISTICS - BACKEND SERVEUR ACTIF`);
   console.log(`📡 URL API : http://localhost:${PORT}`);
   console.log(`🗺️ Contrôleur GPS : http://localhost:${PORT}/api/shipments/:id/displacement`);
-  console.log(`📞 Téléphone Support : +44 7456 60622192`);
+  console.log(`📞 Téléphone Support : +44 7456 062192`);
   console.log(`====================================================`);
 });
