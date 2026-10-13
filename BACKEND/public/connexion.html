@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Connexion — Hervé Transit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rouge: #d62828;
+      --rouge-dark: #8f1212;
+      --texte: #16130f;
+      --gris-fond: #f8fafc;
+      --gris-bord: #e2e8f0;
+      --gris-texte: #64748b;
+      --blanc: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--gris-fond);
+      color: var(--texte);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      background: var(--blanc);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* En-tête & Menu défilant horizontalement */
+    header {
+      background: var(--blanc);
+      border-bottom: 1px solid var(--gris-bord);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-top {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--texte);
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      background: var(--rouge);
+      color: var(--blanc);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .brand-text h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: var(--rouge);
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gris-texte);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Menu défilant horizontalement pour mobile */
+    .nav-scroll {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 0 12px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      padding: 12px 14px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gris-texte);
+      display: inline-block;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-link:hover {
+      color: var(--rouge);
+    }
+
+    .nav-link.active {
+      color: var(--rouge);
+      border-bottom: 2px solid var(--rouge);
+      font-weight: 700;
+    }
+
+    /* Contenu du formulaire */
+    main {
+      flex: 1;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .auth-card {
+      background: var(--blanc);
+    }
+
+    .auth-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--texte);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .auth-subtitle {
+      font-size: 14px;
+      color: var(--gris-texte);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    /* Message d'alerte */
+    .alert-box {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: none;
+      line-height: 1.4;
+    }
+
+    .alert-error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+    }
+
+    .alert-success {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--texte);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 1.5px solid var(--gris-bord);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--texte);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--rouge);
+      box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.12);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--rouge);
+      color: var(--blanc);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: var(--rouge-dark);
+    }
+
+    .btn-submit:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .demo-credentials {
+      margin-top: 32px;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border: 1px dashed #cbd5e1;
+      font-size: 12px;
+      color: var(--gris-texte);
+    }
+
+    .demo-credentials strong {
+      color: var(--texte);
+    }
+
+    .demo-credentials code {
+      font-family: monospace;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--texte);
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #f1f5f9;
+      font-size: 12px;
+      color: var(--gris-texte);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- En-tête -->
+    <header>
+      <div class="header-top">
+        <a href="/" class="brand">
+          <div class="brand-logo">HV</div>
+          <div class="brand-text">
+            <h1>Hervé Transit</h1>
+            <p>Suivi maritime international</p>
+          </div>
+        </a>
+      </div>
+      <!-- Menu défilant horizontalement -->
+      <nav class="nav-scroll">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="/services" class="nav-link">Services</a>
+        <a href="/a-propos" class="nav-link">À propos</a>
+        <a href="/contact" class="nav-link">Contact</a>
+        <a href="/connexion" class="nav-link active">Connexion</a>
+      </nav>
+    </header>
+
+    <!-- Formulaire de Connexion -->
+    <main>
+      <div class="auth-card">
+        <h2 class="auth-title">Espace Client</h2>
+        <p class="auth-subtitle">Connectez-vous pour accéder au suivi en direct de vos expéditions maritimes.</p>
+
+        <div id="alertBox" class="alert-box"></div>
+
+        <form id="loginForm" autocomplete="on">
+          <div class="form-group">
+            <label class="form-label" for="email">Adresse email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="votre-email@domaine.com"
+              required
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Mot de passe</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="••••••••••••"
+              required
+              autocomplete="current-password"
+            >
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn-submit">
+            Se connecter
+          </button>
+        </form>
+
+        <div class="demo-credentials">
+          <p><strong>Identifiants de démonstration :</strong></p>
+          <p style="margin-top: 6px;">Client : <code>client@hervetransit.com</code> / <code>Client123!Transit</code></p>
+          <p style="margin-top: 4px;">Admin : <code>admin@hervetransit.com</code> / <code>Admin123!Herve</code></p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      © 2026 Hervé Logistics Korea Co., Ltd. Tous droits réservés.
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const alertBox = document.getElementById('alertBox');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function afficherMessage(texte, type = 'error') {
+      alertBox.textContent = texte;
+      alertBox.className = 'alert-box ' + (type === 'success' ? 'alert-success' : 'alert-error');
+      alertBox.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertBox.style.display = 'none';
+
+      const email = document.getElementById('email').value.trim();
+      const mot_de_passe = document.getElementById('password').value;
+
+      if (!email || !mot_de_passe) {
+        afficherMessage("Veuillez renseigner votre email et votre mot de passe.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Connexion en cours...";
+
+      try {
+        const res = await fetch('/api/connexion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ email, mot_de_passe })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          afficherMessage(data.message || "Email ou mot de passe incorrect.");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Se connecter";
+          return;
+        }
+
+        afficherMessage("Connexion réussie ! Redirection...", "success");
+        setTimeout(() => {
+          // Redirection directe vers le suivi
+          window.location.href = '/suivi';
+        }, 600);
+
+      } catch (err) {
+        afficherMessage("Erreur réseau ou serveur indisponible. Veuillez réessayer.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Se connecter";
+      }
+    });
+  </script>
+</body>
+</html>

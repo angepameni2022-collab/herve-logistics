@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Suivi Maritime — Hervé Transit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rouge: #d62828;
+      --rouge-dark: #8f1212;
+      --texte: #16130f;
+      --gris-fond: #f8fafc;
+      --gris-bord: #e2e8f0;
+      --gris-texte: #64748b;
+      --blanc: #ffffff;
+      --ocean: #a9d3ee;
+      --terre: #ffffff;
+      --terre-contour: #8fb6d1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--gris-fond);
+      color: var(--texte);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      background: var(--blanc);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* En-tête */
+    header {
+      background: var(--blanc);
+      border-bottom: 1px solid var(--gris-bord);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-top {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--texte);
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--rouge);
+      color: var(--blanc);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .brand-text h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: var(--rouge);
+    }
+
+    .brand-text p {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gris-texte);
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-deconnexion {
+      padding: 6px 12px;
+      border: 1px solid var(--gris-bord);
+      background: #f8fafc;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gris-texte);
+      cursor: pointer;
+      display: none;
+    }
+
+    .btn-deconnexion:hover {
+      background: #fee2e2;
+      color: var(--rouge);
+      border-color: #fca5a5;
+    }
+
+    /* Menu défilant horizontalement pour téléphone d'abord */
+    .nav-scroll {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 0 12px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      padding: 12px 14px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gris-texte);
+      display: inline-block;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-link:hover {
+      color: var(--rouge);
+    }
+
+    .nav-link.active {
+      color: var(--rouge);
+      border-bottom: 2px solid var(--rouge);
+      font-weight: 700;
+    }
+
+    main {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Notifications & Alertes */
+    .alert-banner {
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .alert-error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+
+    .alert-info {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+    }
+
+    /* Sélecteur de colis */
+    .selector-card {
+      background: #f8fafc;
+      border: 1px solid var(--gris-bord);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .selector-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--gris-texte);
+      letter-spacing: 0.5px;
+    }
+
+    .select-colis {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--gris-bord);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--texte);
+      background: #ffffff;
+      outline: none;
+    }
+
+    /* Carte Numéro de tracking + Copie */
+    .tracking-card {
+      background: #ffffff;
+      border: 1px solid var(--gris-bord);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tracking-info {
+      flex: 1;
+    }
+
+    .tracking-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      background: #fee2e2;
+      color: var(--rouge);
+      border-radius: 20px;
+      margin-bottom: 4px;
+    }
+
+    .tracking-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--texte);
+    }
+
+    .btn-copy {
+      padding: 8px 14px;
+      background: #f1f5f9;
+      border: 1px solid var(--gris-bord);
+      color: var(--texte);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-copy.copied {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #86efac;
+    }
+
+    /* Bloc Position Actuelle - Dégradé rouge foncé #8f1212 → #d62828 */
+    .position-banner {
+      background: linear-gradient(135deg, var(--rouge-dark) 0%, var(--rouge) 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(214, 40, 40, 0.25);
+    }
+
+    .pos-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+
+    .pos-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .pos-details {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 12px;
+    }
+
+    .pos-details span strong {
+      font-size: 13px;
+    }
+
+    /* Barre de Progression animée */
+    .progress-section {
+      background: #ffffff;
+      border: 1px solid var(--gris-bord);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--gris-texte);
+    }
+
+    .progress-percent {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--rouge);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #f1f5f9;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--rouge);
+      width: 0%;
+      border-radius: 20px;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Carte Interactive Maritime */
+    .map-container {
+      background: var(--ocean);
+      border: 1px solid var(--terre-contour);
+      border-radius: 14px;
+      height: 260px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-svg {
+      width: 100%;
+      height: 100%;
+      transform-origin: center center;
+      transition: transform 0.3s ease;
+    }
+
+    .map-controls {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .btn-zoom {
+      width: 32px;
+      height: 32px;
+      background: #ffffff;
+      border: 1px solid var(--terre-contour);
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--texte);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .btn-zoom:hover {
+      background: #f8fafc;
+    }
+
+    .map-legend {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      color: var(--texte);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--terre-contour);
+      z-index: 10;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .line-legend {
+      width: 14px;
+      height: 3px;
+    }
+
+    /* Grille de statistiques */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid var(--gris-bord);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .stat-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gris-texte);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--texte);
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--gris-texte);
+      margin-top: 2px;
+    }
+
+    /* Historique des étapes */
+    .history-card {
+      background: #ffffff;
+      border: 1px solid var(--gris-bord);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: var(--texte);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      left: 6px;
+      width: 2px;
+      background: #f1f5f9;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      background: var(--rouge);
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 2px var(--rouge);
+    }
+
+    .timeline-item:not(:first-child) .timeline-dot {
+      background: #cbd5e1;
+      box-shadow: 0 0 0 2px #cbd5e1;
+    }
+
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--texte);
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      color: var(--gris-texte);
+      margin-top: 2px;
+    }
+
+    .empty-state {
+      padding: 24px;
+      text-align: center;
+      color: var(--gris-texte);
+      font-size: 13px;
+    }
+
+    /* Actions de Partage */
+    .share-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-share {
+      width: 100%;
+      padding: 14px;
+      background: var(--rouge);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-share:hover {
+      background: var(--rouge-dark);
+    }
+
+    .btn-regenerate {
+      width: 100%;
+      padding: 10px;
+      background: #ffffff;
+      border: 1px solid var(--gris-bord);
+      color: var(--gris-texte);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-regenerate:hover {
+      border-color: #cbd5e1;
+      color: var(--texte);
+    }
+
+    .banner-readonly {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Pied de page */
+    footer {
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #f1f5f9;
+      font-size: 12px;
+      color: var(--gris-texte);
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      color: #15803d;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulseAnim 1.5s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- En-tête -->
+    <header>
+      <div class="header-top">
+        <a href="/" class="brand">
+          <div class="brand-logo">HV</div>
+          <div class="brand-text">
+            <h1>Hervé Transit</h1>
+            <p>Suivi maritime international</p>
+          </div>
+        </a>
+        <div class="header-actions">
+          <div class="live-indicator">
+            <span class="pulse"></span>
+            <span>En direct</span>
+          </div>
+          <button id="btnDeconnexion" class="btn-deconnexion" onclick="deconnecter()">
+            Déconnexion
+          </button>
+        </div>
+      </div>
+      <!-- Menu défilant horizontalement pour téléphone d'abord -->
+      <nav class="nav-scroll">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="/services" class="nav-link">Services</a>
+        <a href="/a-propos" class="nav-link">À propos</a>
+        <a href="/contact" class="nav-link">Contact</a>
+        <a href="/connexion" class="nav-link" id="navConnexion">Connexion</a>
+      </nav>
+    </header>
+
+    <!-- Zone principale -->
+    <main>
+      <!-- Bannière de lecture seule en cas de lien de partage -->
+      <div id="bannerReadonly" class="banner-readonly">
+        🔒 Vous visualisez ce suivi en mode invité (lecture seule).
+      </div>
+
+      <!-- Messages et alertes -->
+      <div id="alertBanner" class="alert-banner"></div>
+
+      <!-- Sélecteur de colis (si plusieurs colis) -->
+      <div id="colisSelectorWrapper" class="selector-card" style="display: none;">
+        <label class="selector-label" for="colisSelect">Sélectionner votre colis à suivre</label>
+        <select id="colisSelect" class="select-colis" onchange="changerColis(this.value)"></select>
+      </div>
+
+      <div id="mainContent" style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Numéro de tracking et bouton Copier -->
+        <div class="tracking-card">
+          <div class="tracking-info">
+            <span class="tracking-badge" id="badgeEtat">En mer</span>
+            <div class="tracking-number" id="txtTracking">CHARGEMENT...</div>
+          </div>
+          <button id="btnCopier" class="btn-copy" onclick="copierTracking()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span id="txtBtnCopier">Copier</span>
+          </button>
+        </div>
+
+        <!-- Position actuelle - Dégradé rouge foncé #8f1212 → #d62828 -->
+        <div class="position-banner">
+          <div class="pos-tag">Position Actuelle</div>
+          <div class="pos-title" id="txtPosition">Détroit de Malacca</div>
+          <div class="pos-details">
+            <span>Navire : <strong id="txtNavire">—</strong></span>
+            <span>ETA : <strong id="txtEta">—</strong></span>
+          </div>
+        </div>
+
+        <!-- Barre de Progression Animée -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-label">Progression maritime</span>
+            <span class="progress-percent" id="txtProgression">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:11px; color:var(--gris-texte);">
+            <span id="txtDepartNom">Corée du Sud (A)</span>
+            <span id="txtArriveeNom">Cameroun (B)</span>
+          </div>
+        </div>
+
+        <!-- Carte Maritime : Océan bleu #a9d3ee, terres blanches #ffffff contour #8fb6d1 -->
+        <div class="map-container" id="mapContainer">
+          <div class="map-controls">
+            <button class="btn-zoom" onclick="zoomerCarte(1.2)" title="Zoomer">+</button>
+            <button class="btn-zoom" onclick="zoomerCarte(0.8)" title="Dézoomer">−</button>
+          </div>
+          
+          <svg id="carteSvg" class="map-svg" viewBox="0 0 700 400" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.2"/>
+              </filter>
+            </defs>
+
+            <!-- Terres stylisées (Eurasie & Afrique) -->
+            <!-- Eurasie -->
+            <path d="M 400,20 Q 480,30 580,20 Q 660,60 620,120 Q 560,140 520,190 Q 480,220 460,260 Q 440,240 420,200 Q 380,180 340,160 Q 310,120 320,60 Z"
+                  fill="var(--terre)" stroke="var(--terre-contour)" stroke-width="1.5" />
+            <!-- Péninsule malaise & Indonésie -->
+            <path d="M 470,250 Q 485,280 480,300 Q 460,310 440,290 Z"
+                  fill="var(--terre)" stroke="var(--terre-contour)" stroke-width="1.5" />
+            <!-- Afrique -->
+            <path d="M 280,140 Q 340,150 350,200 Q 360,260 320,330 Q 280,380 250,370 Q 210,320 200,260 Q 180,220 220,170 Z"
+                  fill="var(--terre)" stroke="var(--terre-contour)" stroke-width="1.5" />
+
+            <!-- Trajet maritime complet (Points de passage maritimes) -->
+            <!-- Trajet plein parcouru (Rouge #d62828) -->
+            <path id="pathParcouru" d="M 590,95 Q 520,170 465,260"
+                  fill="none" stroke="var(--rouge)" stroke-width="3.5" stroke-linecap="round" />
+
+            <!-- Trajet restant en pointillé blanc -->
+            <path id="pathRestant" d="M 465,260 Q 400,320 270,360 Q 220,310 240,245"
+                  fill="none" stroke="#ffffff" stroke-dasharray="5,5" stroke-width="3" stroke-linecap="round" />
+
+            <!-- Marqueur Départ (A) -->
+            <g id="markerA" transform="translate(590, 95)">
+              <circle r="9" fill="var(--rouge)" stroke="#ffffff" stroke-width="2"/>
+              <text x="0" y="3.5" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle" font-family="'Inter'">A</text>
+            </g>
+
+            <!-- Marqueur Arrivée (B) -->
+            <g id="markerB" transform="translate(240, 245)">
+              <circle r="9" fill="var(--rouge)" stroke="#ffffff" stroke-width="2"/>
+              <text x="0" y="3.5" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle" font-family="'Inter'">B</text>
+            </g>
+
+            <!-- Navire à sa position actuelle -->
+            <g id="shipMarker" transform="translate(465, 260)" filter="url(#shadow)">
+              <circle r="14" fill="#ffffff" stroke="var(--rouge)" stroke-width="2"/>
+              <!-- Icône de bateau -->
+              <path d="M -6,2 L 6,2 L 4,6 L -4,6 Z M -2,1 L -2,-5 L 3,-2 L -2,-2 Z" fill="var(--rouge)"/>
+            </g>
+          </svg>
+
+          <div class="map-legend">
+            <div class="legend-item">
+              <span class="line-legend" style="background:var(--rouge);"></span>
+              <span>Parcouru</span>
+            </div>
+            <div class="legend-item">
+              <span class="line-legend" style="border-top:2px dashed #ffffff; height:0;"></span>
+              <span>Restant</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistiques détaillées -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-title">Distance parcourue</div>
+            <div class="stat-value" id="txtParcouru">—</div>
+            <div class="stat-sub">Sur un total de <span id="txtTotalKm">—</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Distance restante</div>
+            <div class="stat-value" id="txtRestant">—</div>
+            <div class="stat-sub" id="txtRestantPct">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Vitesse navire</div>
+            <div class="stat-value" id="txtVitesse">—</div>
+            <div class="stat-sub">Vitesse de croisière</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Heures restantes</div>
+            <div class="stat-value" id="txtHeuresRestantes">—</div>
+            <div class="stat-sub">Temps écoulé : <span id="txtHeuresEcoulees">—</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Nombre de colis</div>
+            <div class="stat-value" id="txtNbColis">1</div>
+            <div class="stat-sub" id="txtTypeColis">Conteneur 40' HC</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">N° Conteneur</div>
+            <div class="stat-value" style="font-size:16px;" id="txtConteneur">—</div>
+            <div class="stat-sub">Scellé maritime officiel</div>
+          </div>
+        </div>
+
+        <!-- Historique des étapes -->
+        <div class="history-card">
+          <div class="section-title">
+            <span>Historique des étapes</span>
+            <span style="font-size:12px; color:var(--gris-texte); text-transform:none;" id="txtNbEvents"></span>
+          </div>
+          <div class="timeline" id="timelineList">
+            <!-- Rempli dynamiquement -->
+          </div>
+        </div>
+
+        <!-- Section Partage (Masquée en mode lecture seule) -->
+        <div class="share-section" id="shareSection">
+          <button class="btn-share" onclick="partagerSuivi()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            <span>Partager le suivi</span>
+          </button>
+          <button class="btn-regenerate" onclick="regenererLienPartage()">
+            🔄 Régénérer le lien sécurisé (invalide le précédent)
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      © 2026 Hervé Logistics Korea Co., Ltd. Tous droits réservés.
+    </footer>
+  </div>
+
+  <script>
+    // Configuration : utilisation exclusive de l'API backend
+    const UTILISER_SERVEUR = true;
+
+    // État local
+    let donneesColis = null;
+    let tokenPartageActif = null;
+    let modeLectureSeule = false;
+    let zoomNiveau = 1;
+
+    // Échappement HTML sécurisé
+    function esc(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Affichage des messages
+    function afficherAlerte(texte, type = 'error') {
+      const banner = document.getElementById('alertBanner');
+      banner.textContent = texte;
+      banner.className = 'alert-banner ' + (type === 'error' ? 'alert-error' : 'alert-info');
+      banner.style.display = 'block';
+    }
+
+    function masquerAlerte() {
+      document.getElementById('alertBanner').style.display = 'none';
+    }
+
+    // Initialisation
+    async function initialiserPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const partageToken = urlParams.get('partage');
+
+      if (partageToken) {
+        // Mode Partage : lecture seule
+        modeLectureSeule = true;
+        document.getElementById('bannerReadonly').style.display = 'flex';
+        document.getElementById('shareSection').style.display = 'none';
+        document.getElementById('colisSelectorWrapper').style.display = 'none';
+        document.getElementById('btnDeconnexion').style.display = 'none';
+        await chargerColisPartage(partageToken);
+      } else {
+        // Mode Client connecté
+        await chargerColisClient();
+      }
+
+      // Rafraîchissement automatique toutes les 60 secondes sans rechargement de page
+      setInterval(() => {
+        if (modeLectureSeule && urlParams.get('partage')) {
+          chargerColisPartage(urlParams.get('partage'), true);
+        } else if (!modeLectureSeule) {
+          chargerColisClient(true);
+        }
+      }, 60000);
+    }
+
+    // Charger les colis du client connecté
+    async function chargerColisClient(estRafraichissement = false) {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const filtreTracking = urlParams.get('tracking') || '';
+        const url = '/api/mon-colis' + (filtreTracking ? `?tracking=${encodeURIComponent(filtreTracking)}` : '');
+
+        const res = await fetch(url, { credentials: 'include' });
+
+        if (res.status === 401) {
+          // Session expirée ou visiteur non connecté : renvoi vers /connexion
+          window.location.href = '/connexion';
+          return;
+        }
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          afficherAlerte(data.message || "Erreur lors de la récupération de votre suivi.");
+          return;
+        }
+
+        // Cas : aucun colis associé
+        if (!data.colis && (!data.liste_colis || data.liste_colis.length === 0)) {
+          document.getElementById('mainContent').style.display = 'none';
+          document.getElementById('btnDeconnexion').style.display = 'block';
+          afficherAlerte("Aucun colis n'est associé à ton compte.", 'info');
+          return;
+        }
+
+        donneesColis = data.colis;
+        tokenPartageActif = data.colis.token_partage;
+        document.getElementById('btnDeconnexion').style.display = 'block';
+
+        // Gérer le sélecteur si plusieurs colis
+        const selectWrapper = document.getElementById('colisSelectorWrapper');
+        const select = document.getElementById('colisSelect');
+        if (data.liste_colis && data.liste_colis.length > 1) {
+          selectWrapper.style.display = 'flex';
+          select.innerHTML = data.liste_colis.map(item => `
+            <option value="${esc(item.tracking)}" ${item.tracking === donneesColis.tracking ? 'selected' : ''}>
+              ${esc(item.tracking)} — ${esc(item.navire)} (${esc(item.trajet)})
+            </option>
+          `).join('');
+        } else {
+          selectWrapper.style.display = 'none';
+        }
+
+        rendreInterface(donneesColis, estRafraichissement);
+
+      } catch (err) {
+        console.error("Erreur chargement suivi:", err);
+        if (!estRafraichissement) {
+          afficherAlerte("Une erreur réseau est survenue. Veuillez réessayer ultérieurement.");
+        }
+      }
+    }
+
+    // Charger un colis via un token de partage public
+    async function chargerColisPartage(token, estRafraichissement = false) {
+      try {
+        const res = await fetch(`/api/partage?token=${encodeURIComponent(token)}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          document.getElementById('mainContent').style.display = 'none';
+          afficherAlerte("Lien invalide ou expiré.");
+          return;
+        }
+
+        donneesColis = data.colis;
+        rendreInterface(donneesColis, estRafraichissement);
+
+      } catch (err) {
+        console.error("Erreur lien partage:", err);
+        if (!estRafraichissement) {
+          afficherAlerte("Erreur lors de la vérification du lien. Veuillez réessayer.");
+        }
+      }
+    }
+
+    // Changement de colis depuis le menu déroulant
+    function changerColis(tracking) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tracking', tracking);
+      window.history.pushState({}, '', url);
+      chargerColisClient();
+    }
+
+    // Affichage des informations sur l'interface
+    function rendreInterface(colis, sansAnimation = false) {
+      masquerAlerte();
+      document.getElementById('mainContent').style.display = 'flex';
+
+      // Tracking et État
+      document.getElementById('txtTracking').textContent = colis.tracking || '—';
+      document.getElementById('badgeEtat').textContent = colis.etat || 'En mer';
+      document.getElementById('txtPosition').textContent = colis.position || 'En mer';
+      document.getElementById('txtNavire').textContent = colis.navire || '—';
+      document.getElementById('txtEta').textContent = colis.eta || '—';
+
+      // Noms départ & arrivée
+      document.getElementById('txtDepartNom').textContent = (colis.depart?.nom || 'Origine') + ' (A)';
+      document.getElementById('txtArriveeNom').textContent = (colis.arrivee?.nom || 'Destination') + ' (B)';
+
+      // Progression
+      const pct = Math.min(100, Math.max(0, colis.progression || 0));
+      document.getElementById('txtProgression').textContent = pct + '%';
+
+      const progressFill = document.getElementById('progressFill');
+      if (sansAnimation) {
+        progressFill.style.width = pct + '%';
+      } else {
+        progressFill.style.width = '0%';
+        setTimeout(() => {
+          progressFill.style.width = pct + '%';
+        }, 150);
+      }
+
+      // Statistiques
+      const stats = colis.stats || {};
+      document.getElementById('txtParcouru').textContent = (stats.parcouru ? stats.parcouru.toLocaleString('fr-FR') : '0') + ' km';
+      document.getElementById('txtTotalKm').textContent = (stats.total ? stats.total.toLocaleString('fr-FR') : '0') + ' km';
+      document.getElementById('txtRestant').textContent = (stats.restant ? stats.restant.toLocaleString('fr-FR') : '0') + ' km';
+      document.getElementById('txtRestantPct').textContent = (100 - pct) + '% restant';
+
+      // Vitesse inconnue : afficher "—" plutôt que 0
+      if (stats.vitesse === null || stats.vitesse === undefined || stats.vitesse === 0) {
+        document.getElementById('txtVitesse').textContent = '—';
+      } else {
+        document.getElementById('txtVitesse').textContent = stats.vitesse + ' km/h';
+      }
+
+      document.getElementById('txtHeuresRestantes').textContent = stats.heures_restantes ? (stats.heures_restantes + ' h') : '—';
+      document.getElementById('txtHeuresEcoulees').textContent = (stats.heures_ecoulees || 0) + ' h';
+      document.getElementById('txtNbColis').textContent = stats.nb_colis || 1;
+      document.getElementById('txtTypeColis').textContent = stats.type || "Conteneur 40' HC";
+      document.getElementById('txtConteneur').textContent = stats.conteneur || '—';
+
+      // Historique des événements
+      const timelineList = document.getElementById('timelineList');
+      const events = colis.evenements || [];
+      document.getElementById('txtNbEvents').textContent = events.length > 0 ? `(${events.length} étapes)` : '';
+
+      if (events.length === 0) {
+        timelineList.innerHTML = `<div class="empty-state">Aucun événement répertorié pour le moment.</div>`;
+      } else {
+        // Afficher les étapes, le plus récent en tête
+        timelineList.innerHTML = events.slice().reverse().map((ev, index) => `
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-title">${esc(ev.titre)}</div>
+            <div class="timeline-date">${esc(ev.date)}</div>
+          </div>
+        `).join('');
+      }
+
+      // Mise à jour de la carte SVG en fonction de la position du navire
+      ajusterCarte(colis);
+    }
+
+    // Calcul de coordonnées projetées sur le SVG de la carte
+    function ajusterCarte(colis) {
+      const lat = colis.actuelle?.lat ?? 2.19;
+      const lng = colis.actuelle?.lng ?? 102.25;
+
+      // Projection de référence approximative pour le canvas SVG 700x400
+      // Busan (lat:35, lng:129) -> (590, 95)
+      // Malacca (lat:2.19, lng:102.25) -> (465, 260)
+      // Douala (lat:4.05, lng:9.70) -> (240, 245)
+      let svgX = 465;
+      let svgY = 260;
+
+      if (lng > 70) {
+        // Zone Asie / Océan Indien Est
+        const ratio = (lng - 70) / (130 - 70);
+        svgX = 380 + ratio * 210;
+        svgY = 280 - (lat / 40) * 180;
+      } else {
+        // Zone Afrique / Océan Indien Ouest
+        const ratio = (lng - 5) / (70 - 5);
+        svgX = 230 + ratio * 150;
+        svgY = 250 - (lat / 35) * 100;
+      }
+
+      // Borner
+      svgX = Math.max(100, Math.min(650, svgX));
+      svgY = Math.max(50, Math.min(360, svgY));
+
+      const shipMarker = document.getElementById('shipMarker');
+      if (shipMarker) {
+        shipMarker.setAttribute('transform', `translate(${svgX}, ${svgY})`);
+      }
+
+      // Mise à jour des tracés parcouru et restant
+      const pathParcouru = document.getElementById('pathParcouru');
+      const pathRestant = document.getElementById('pathRestant');
+      if (pathParcouru && pathRestant) {
+        pathParcouru.setAttribute('d', `M 590,95 Q 520,170 ${svgX},${svgY}`);
+        pathRestant.setAttribute('d', `M ${svgX},${svgY} Q 350,340 240,245`);
+      }
+    }
+
+    // Zoom autour du navire
+    function zoomerCarte(facteur) {
+      zoomNiveau *= facteur;
+      if (zoomNiveau < 0.7) zoomNiveau = 0.7;
+      if (zoomNiveau > 2.5) zoomNiveau = 2.5;
+
+      const svg = document.getElementById('carteSvg');
+      svg.style.transform = `scale(${zoomNiveau})`;
+    }
+
+    // Copier le numéro de tracking en 1 clic
+    function copierTracking() {
+      if (!donneesColis?.tracking) return;
+
+      navigator.clipboard.writeText(donneesColis.tracking).then(() => {
+        const btn = document.getElementById('btnCopier');
+        const txt = document.getElementById('txtBtnCopier');
+        btn.classList.add('copied');
+        txt.textContent = 'Copié !';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          txt.textContent = 'Copier';
+        }, 2000);
+      }).catch(err => {
+        console.error('Erreur copie:', err);
+      });
+    }
+
+    // Partager le suivi via l'API Web Share ou copier le lien ?partage=TOKEN
+    async function partagerSuivi() {
+      if (!tokenPartageActif) {
+        afficherAlerte("Jeton de partage non disponible pour ce colis.");
+        return;
+      }
+
+      const lienPartage = window.location.origin + '/suivi?partage=' + encodeURIComponent(tokenPartageActif);
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: `Suivi Hervé Transit — ${donneesColis.tracking}`,
+            text: `Suivez en direct l'acheminement de la cargaison ${donneesColis.tracking} (Busan ➔ Douala) :`,
+            url: lienPartage
+          });
+          return;
+        } catch (err) {
+          // L'utilisateur a annulé ou la plateforme n'a pas pu partager, on copie alors le lien
+        }
+      }
+
+      navigator.clipboard.writeText(lienPartage).then(() => {
+        afficherAlerte("Lien de suivi copié dans le presse-papier !", 'info');
+        setTimeout(masquerAlerte, 4000);
+      });
+    }
+
+    // Régénération du lien de partage
+    async function regenererLienPartage() {
+      if (!donneesColis?.colis_id) return;
+
+      if (!confirm("Voulez-vous vraiment générer un nouveau lien ? L'ancien lien sera immédiatement invalidé.")) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/colis/${donneesColis.colis_id}/regenerer-partage`, {
+          method: 'POST',
+          credentials: 'include'
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          afficherAlerte(data.message || "Impossible de régénérer le lien.");
+          return;
+        }
+
+        tokenPartageActif = data.token_partage;
+        donneesColis.token_partage = data.token_partage;
+        afficherAlerte("Nouveau lien généré avec succès ! L'ancien lien est désormais inactif.", 'info');
+        setTimeout(masquerAlerte, 4000);
+
+      } catch (err) {
+        afficherAlerte("Erreur réseau lors de la régénération du lien.");
+      }
+    }
+
+    // Déconnexion
+    async function deconnecter() {
+      try {
+        await fetch('/api/deconnexion', { method: 'POST', credentials: 'include' });
+      } catch (e) {}
+      window.location.href = '/connexion';
+    }
+
+    // Démarrage
+    window.addEventListener('DOMContentLoaded', initialiserPage);
+  </script>
+</body>
+</html>
