@@ -1,193 +1,124 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Box, Mail, Phone, MapPin } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-[#09090B] text-zinc-300 pt-16 pb-12 border-t border-zinc-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-zinc-800">
-          {/* Col 1: TransLogix Brand */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-lg shadow-red-500/10 flex-shrink-0 overflow-hidden">
-                <Image
-                  src="/images/logo-herve-hv.png"
-                  alt="Hervé Logistics Logo"
-                  width={56}
-                  height={56}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-black uppercase tracking-tight text-white leading-none">
-                  HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
-                </span>
-                <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-1">
-                  TRANSIT & LOGISTIQUE INTERNATIONALE
-                </span>
-              </div>
-            </Link>
-            <p className="mt-4 text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-sm">
-              Offrir à chaque client la même transparence et précision que les plus grands transporteurs mondiaux (DHL, FedEx, UPS, MSC, Maersk, CMA CGM). Nous accompagnons entreprises, importateurs et particuliers dans le suivi de leurs colis, conteneurs et véhicules à travers plus de 180 pays, 24h/24.
-            </p>
-            <div className="mt-6 flex items-center gap-3">
-              <a
-                href="#linkedin"
-                className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 hover:bg-[#DC2626] hover:border-red-600 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="LinkedIn Hervé Logistics"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24m1.4 9.74v-8.37H5.06v8.37h2.8z" />
-                </svg>
-              </a>
-              <a
-                href="#twitter"
-                className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 hover:bg-[#DC2626] hover:border-red-600 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="Twitter Hervé Logistics"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-              <a
-                href="#facebook"
-                className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 hover:bg-[#DC2626] hover:border-red-600 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="Facebook Hervé Logistics"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" />
-                </svg>
-              </a>
-              <a
-                href="#instagram"
-                className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 hover:bg-[#DC2626] hover:border-red-600 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="Instagram TransLogix"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-                </svg>
-              </a>
+    <footer className="bg-[#09090B] text-zinc-300">
+      {/* Ligne accentuée rouge au sommet du footer */}
+      <div className="h-1.5 bg-[#DC2626]"></div>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 grid gap-10 md:grid-cols-4">
+        {/* Colonne 1: Marque & Description */}
+        <div className="md:col-span-2">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative flex h-10 items-center rounded-sm bg-[#DC2626] px-2.5 shadow-sm ring-1 ring-black/5">
+              <span className="font-mono text-[20px] font-black leading-none tracking-tight text-white">
+                HV
+              </span>
+              <span
+                aria-hidden="true"
+                className="ml-1 h-0 w-0 border-y-[9px] border-l-[9px] border-y-transparent border-l-white"
+              />
             </div>
-          </div>
-
-          {/* Col 2: Liens utiles */}
-          <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
-              Liens utiles
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Accueil
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  Nos services
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  À propos
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/track" className="hover:text-white transition-colors text-[#DC2626] font-semibold">
-                  Suivre un envoi en direct
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Informations */}
-          <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
-              Informations
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#DC2626] flex-shrink-0 mt-0.5" />
-                <span>Trade Tower, 511 Yeongdong-daero, Gangnam-gu, Séoul, Corée du Sud</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#DC2626] flex-shrink-0" />
-                <a href="mailto:contact@hervelogistics.com" className="hover:text-white transition-colors">
-                  contact@hervelogistics.com
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#DC2626] flex-shrink-0" />
-                <a href="tel:+447456062192" className="hover:text-white transition-colors">
-                  +44 7456 062192
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <a
-                  href="https://wa.me/447456062192"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-emerald-400 hover:text-emerald-300 font-medium text-xs transition-colors flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4 fill-emerald-500 flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41a8.177 8.177 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m-3.52 4.09c-.19 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.21 3.07.15.2 2.06 3.29 5.09 4.49 2.52 1 3.03.8 3.58.75.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.89-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51z" />
-                  </svg>
-                  <span>WhatsApp Direct : +44 7456 062192</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 4: Légal */}
-          <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
-              Légal
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="/legal" className="hover:text-white transition-colors">
-                  Mentions légales
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="hover:text-white transition-colors">
-                  Confidentialité
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-white transition-colors">
-                  CGU
-                </Link>
-              </li>
-              <li className="pt-2">
-                <Link href="/dashboard" className="text-xs text-zinc-400 hover:text-white transition-colors block">
-                  → Espace Client
-                </Link>
-                <Link href="/admin" className="text-xs text-zinc-400 hover:text-white transition-colors block mt-1">
-                  → Console Admin
-                </Link>
-              </li>
-            </ul>
-          </div>
+            <div className="flex flex-col leading-none">
+              <span className="text-[19px] font-black uppercase tracking-tight text-white">
+                Hervé <span className="text-[#DC2626]">Logistics</span>
+              </span>
+              <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">
+                Global Logistics
+              </span>
+            </div>
+          </Link>
+          <p className="mt-4 max-w-sm text-sm text-white/70 leading-relaxed">
+            Hervé Logistics — plateforme internationale de suivi logistique. Import, export, maritime, aérien, routier et livraison de conteneurs partout dans le monde.
+          </p>
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+        {/* Colonne 2: Navigation */}
+        <div>
+          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#DC2626] mb-4">
+            Navigation
+          </h4>
+          <ul className="space-y-2.5 text-sm text-white/75">
+            <li>
+              <Link href="/" className="hover:text-[#DC2626] transition-colors">
+                Accueil
+              </Link>
+            </li>
+            <li>
+              <Link href="/services" className="hover:text-[#DC2626] transition-colors">
+                Nos services
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:text-[#DC2626] transition-colors">
+                À propos
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-[#DC2626] transition-colors">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link href="/suivi" className="hover:text-[#DC2626] transition-colors font-semibold text-white">
+                Suivi en direct
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Colonne 3: Contact */}
+        <div>
+          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#DC2626] mb-4">
+            Contact
+          </h4>
+          <ul className="space-y-3 text-sm text-white/75">
+            <li className="flex items-start gap-2.5">
+              <MapPin className="h-4 w-4 mt-1 shrink-0 text-[#DC2626]" />
+              <span>
+                <strong className="block font-semibold text-white">Hervé Logistics Korea Co., Ltd.</strong>
+                Trade Tower, 511 Yeongdong-daero<br />
+                Gangnam-gu, Séoul, Corée du Sud
+              </span>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <Mail className="h-4 w-4 shrink-0 text-[#DC2626]" />
+              <a href="mailto:contact@hervelogistics.com" className="hover:text-white transition-colors">
+                contact@hervelogistics.com
+              </a>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <Phone className="h-4 w-4 shrink-0 text-[#DC2626]" />
+              <a href="tel:+447456062192" className="hover:text-white transition-colors">
+                +44 7456 062192
+              </a>
+            </li>
+            <li className="pt-1">
+              <a
+                href="https://wa.me/447456062192"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-emerald-300 font-semibold text-xs flex items-center gap-2"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>WhatsApp Support : +44 7456 062192</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Barre de copyright basse */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
           <p>© 2026 Hervé Logistics. Tous droits réservés.</p>
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2 text-zinc-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              Système de suivi en ligne actif
-            </span>
-          </div>
+          <p className="uppercase tracking-wider text-[10px]">
+            Global Logistics · Import · Export · Sea · Air · Road
+          </p>
         </div>
       </div>
     </footer>

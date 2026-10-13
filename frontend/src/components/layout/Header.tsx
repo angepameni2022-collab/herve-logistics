@@ -1,21 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 
 export function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
-    { label: "ACCUEIL", href: "/" },
-    { label: "NOS SERVICES", href: "/services" },
-    { label: "À PROPOS", href: "/about" },
-    { label: "CONTACT", href: "/contact" },
-    { label: "SUIVI EN DIRECT", href: "/suivi" },
+    { label: "Accueil", href: "/" },
+    { label: "Nos services", href: "/services" },
+    { label: "À propos", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const isActive = (href: string) => {
@@ -24,120 +31,107 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 h-[74px] bg-[#09090B] border-b border-zinc-800/90 shadow-md text-white transition-all">
-      <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#09090B]/95 backdrop-blur-md border-b border-zinc-800 shadow-xl"
+          : "bg-[#09090B]/80 backdrop-blur-sm border-b border-white/10"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* LOGO HERVÉ LOGISTICS */}
         <Link href="/" className="flex items-center gap-3 group">
-          {/* Official Emblem */}
-          <div className="w-12 h-12 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-lg shadow-red-600/15 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
-            <Image
-              src="/images/logo-herve-hv.png"
-              alt="Hervé Logistics Logo"
-              width={56}
-              height={56}
-              className="w-full h-full object-contain"
-              priority
+          <div className="relative flex h-10 items-center rounded-sm bg-[#DC2626] px-2.5 shadow-sm ring-1 ring-black/5">
+            <span className="font-mono text-[20px] font-black leading-none tracking-tight text-white">
+              HV
+            </span>
+            <span
+              aria-hidden="true"
+              className="ml-1 h-0 w-0 border-y-[9px] border-l-[9px] border-y-transparent border-l-white"
             />
           </div>
-
-          <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-black uppercase tracking-tight text-white leading-none">
-              HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
+          <div className="flex flex-col leading-none">
+            <span className="text-[19px] font-black uppercase tracking-tight text-white">
+              Hervé <span className="text-[#DC2626]">Logistics</span>
             </span>
-            <span className="text-[9px] font-bold text-zinc-300 uppercase tracking-widest mt-0.5">
-              TRANSIT & LOGISTIQUE
+            <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">
+              Global Logistics
             </span>
           </div>
         </Link>
 
-        {/* Desktop Nav (Center) */}
-        <nav className="hidden lg:flex items-center gap-8 h-full">
+        {/* Navigation Bureau */}
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {
             const active = isActive(link.href);
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative text-xs sm:text-sm font-black tracking-wider uppercase transition-colors py-2 ${
-                  active
-                    ? "text-[#DC2626]"
-                    : "text-white hover:text-[#DC2626]"
+                className={`text-[13px] font-bold uppercase tracking-wider transition-colors hover:text-[#DC2626] ${
+                  active ? "text-[#DC2626]" : "text-white"
                 }`}
               >
                 {link.label}
-                {active && (
-                  <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-[#DC2626] rounded-full" />
-                )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Right Action buttons */}
-        <div className="hidden lg:flex items-center gap-5">
+        {/* Boutons d'action Bureau */}
+        <div className="hidden md:flex items-center gap-3">
           <Link
-            href="/auth/login"
-            className="text-xs font-black uppercase tracking-wider text-zinc-300 hover:text-white transition-colors"
+            href="/connexion"
+            className="inline-flex items-center justify-center whitespace-nowrap h-8 rounded-md px-3 font-semibold uppercase tracking-wider text-xs text-white hover:bg-white/10 transition-colors"
           >
-            ESPACE CLIENT
+            Connexion
           </Link>
-
           <Link
-            href="/track/HL-2026-000001"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-red-500/30 active:scale-98 transition-all"
+            href="/suivi"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap h-8 px-4 bg-[#DC2626] text-white hover:bg-[#B91C1C] font-bold uppercase tracking-wider text-xs shadow-md rounded-sm transition-all shadow-red-500/20 active:scale-95"
           >
-            <span>SUIVRE UN COLIS</span>
+            <Search className="w-3.5 h-3.5" />
+            <span>Suivre un colis</span>
           </Link>
         </div>
 
-        {/* Mobile Hamburger */}
-        <div className="flex lg:hidden items-center gap-2">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-white hover:bg-zinc-800 transition-colors cursor-pointer"
-            aria-label="Ouvrir le menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+        {/* Bouton Mobile Hamburger */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 rounded-md text-white hover:bg-white/10"
+          aria-label="Menu"
+        >
+          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Menu Déroulant Mobile */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#09090B] border-b border-zinc-800 p-5 animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col gap-2">
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-sm font-black uppercase tracking-wider flex items-center justify-between ${
-                    active
-                      ? "bg-red-500/10 text-[#DC2626]"
-                      : "text-zinc-200 hover:bg-zinc-900"
-                  }`}
-                >
-                  {link.label}
-                  {active && <span className="w-2 h-2 rounded-full bg-[#DC2626]" />}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="pt-4 mt-4 border-t border-zinc-800 flex flex-col gap-2.5">
+        <div className="md:hidden bg-[#09090B] border-b border-zinc-800 px-4 pt-3 pb-6 space-y-3">
+          {navLinks.map((link) => (
             <Link
-              href="/auth/login"
+              key={link.href}
+              href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white border border-zinc-700 hover:bg-zinc-900"
+              className={`block py-2 text-sm font-bold uppercase tracking-wider ${
+                isActive(link.href) ? "text-[#DC2626]" : "text-zinc-200"
+              }`}
             >
-              Espace Client
+              {link.label}
+            </Link>
+          ))}
+          <div className="pt-3 border-t border-zinc-800 flex flex-col gap-2">
+            <Link
+              href="/connexion"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-2.5 rounded-lg border border-zinc-700 text-xs font-bold uppercase text-white hover:bg-zinc-900"
+            >
+              Connexion
             </Link>
             <Link
-              href="/track/HL-2026-000001"
+              href="/suivi"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-3 rounded-lg text-xs font-black uppercase tracking-wider bg-[#DC2626] hover:bg-[#B91C1C] text-white shadow-md shadow-red-500/30"
+              className="w-full text-center py-2.5 rounded-lg bg-[#DC2626] text-xs font-bold uppercase text-white hover:bg-[#B91C1C]"
             >
               Suivre un colis
             </Link>

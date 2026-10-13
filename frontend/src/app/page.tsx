@@ -1,47 +1,59 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TrackingSearchBox } from "@/components/tracking/TrackingSearchBox";
-import { ServiceCard } from "@/components/services/ServiceCard";
-import { servicesData } from "@/data/services";
-import { useApp } from "@/context/AppContext";
 import {
-  ShieldCheck,
+  Ship,
+  Plane,
+  Truck,
+  Boxes,
+  Package,
+  Globe2,
   Zap,
+  Shield,
   Clock,
   ArrowRight,
+  Search,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 
 export default function HomePage() {
-  const { cmsContent } = useApp();
-  const { home, stats } = cmsContent;
+  const router = useRouter();
+  const [ctaTracking, setCtaTracking] = useState("");
+
+  const handleCtaSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (ctaTracking.trim()) {
+      router.push(`/track/${encodeURIComponent(ctaTracking.trim())}`);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
       <Header />
 
       <main className="flex-1">
-        {/* HERO SECTION — EXACT REPRODUCTION OF USER REFERENCE SCREENSHOT */}
+        {/* ============================================================ */}
+        {/* 1. HERO SECTION (INCHANGÉ — GARDE VOTRE HERO ORIGINAL) */}
+        {/* ============================================================ */}
         <section className="relative min-h-[640px] sm:min-h-[720px] lg:min-h-[780px] flex items-center text-white overflow-hidden pt-28 sm:pt-36 pb-16 sm:pb-24">
-          {/* Background Image: Multimodal Logistics (Airplane, Maersk Ship, Truck at Sunset) */}
+          {/* Background Image: Multimodal Logistics */}
           <div className="absolute inset-0 z-0">
             <img
               src="/images/hero-multimodal.png"
               alt="Hervé Logistics - Transport multimodal maritime, aérien et routier"
               className="w-full h-full object-cover object-center"
             />
-            {/* Cinematic Gradient: Balanced contrast for text while showcasing sunset, ship, plane and truck */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-3xl text-left">
-              {/* Badge: Official Logo Emblem + International Platform */}
+              {/* Badge: Official Logo Emblem */}
               <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-zinc-700/80 text-white mb-6 shadow-xl">
                 <div className="w-7 h-7 rounded-lg bg-black p-0.5 overflow-hidden flex-shrink-0 border border-zinc-700/80 shadow-sm">
                   <img
@@ -52,11 +64,13 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-2 pr-1">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-white text-xs font-black tracking-wider uppercase">HERVÉ LOGISTICS · PLATEFORME OFFICIELLE</span>
+                  <span className="text-white text-xs font-black tracking-wider uppercase">
+                    HERVÉ LOGISTICS · PLATEFORME OFFICIELLE
+                  </span>
                 </div>
               </div>
 
-              {/* H1 Main Title: Pure white and vibrant red accent */}
+              {/* H1 Main Title */}
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.08] mb-5 drop-shadow-md">
                 SUIVEZ VOS <span className="text-[#DC2626]">MARCHANDISES</span><br />
                 PARTOUT DANS LE MONDE
@@ -67,11 +81,10 @@ export default function HomePage() {
                 Hervé Logistics réunit le maritime, l&apos;aérien, le routier et la livraison de conteneurs sur une seule plateforme. Suivi GPS, escales, ETA et documents — livrés avec la précision des leaders mondiaux.
               </p>
 
-              {/* Prominent Dark Glass Tracking Box with HL-2026-000001 */}
+              {/* Barre de recherche Hero */}
               <div className="w-full max-w-2xl">
                 <TrackingSearchBox />
 
-                {/* Banner Inscription Obligatoire & Attribution Code Tracking */}
                 <div className="mt-4 p-4 rounded-xl bg-black/75 backdrop-blur-md border border-zinc-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
                   <div className="text-xs text-zinc-300">
                     <span className="font-bold text-white block">
@@ -95,244 +108,326 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SERVICES RAPIDES (6 Cartes sous le Hero) */}
-        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#DC2626]">
-                Solutions multimodales
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#09090B] mt-1">
-                Nos expertises transport
-              </h2>
-            </div>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#DC2626] hover:text-[#09090B] transition-colors"
-            >
-              <span>Découvrir tous les services</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {servicesData.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
-          </div>
-        </section>
-
-        {/* SECTION EXPÉRIENCE DE SUIVI DIGNE DES LEADERS MONDIAUX (EXACT REPRODUCTION FROM SCREENSHOT) */}
-        <section className="py-20 sm:py-28 bg-white border-y border-zinc-200/80 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-              {/* LEFT COLUMN: TITLE & FEATURES */}
-              <div className="lg:col-span-7">
-                {/* Red Overline Badge/Subtitle */}
-                <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#DC2626]">
-                  POURQUOI HERVÉ LOGISTICS
-                </span>
-
-                {/* H2 Title */}
-                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#09090B] mt-3 mb-5 tracking-tight leading-[1.15]">
-                  Une expérience de suivi digne des leaders mondiaux
-                </h2>
-
-                {/* Paragraph Description */}
-                <div className="space-y-3 mb-8 max-w-xl text-zinc-600 text-sm sm:text-base leading-relaxed">
-                  <p>
-                    Notre mission est simple : offrir à chaque client la même transparence, la même précision et le même niveau de service que les plus grands transporteurs mondiaux — <strong className="text-[#09090B]">DHL, FedEx, UPS, MSC, Maersk ou CMA CGM</strong> — dans une interface fluide, moderne et sécurisée.
-                  </p>
-                  <p className="text-xs sm:text-sm text-zinc-500">
-                    Nous accompagnons entreprises, importateurs et particuliers dans le suivi de leurs colis, conteneurs et véhicules à travers plus de 180 pays, 24h/24.
-                  </p>
-                </div>
-
-                {/* 3 Feature Items with Soft Green Badges */}
-                <div className="space-y-6">
-                  {/* Feature 1: Suivi temps réel */}
-                  <div className="flex items-start gap-4 group">
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100/80 flex items-center justify-center flex-shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                      <Zap className="w-5 h-5 fill-emerald-600/20" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm sm:text-base font-bold text-[#09090B]">
-                        Suivi temps réel
-                      </h4>
-                      <p className="text-xs sm:text-sm text-zinc-500 mt-0.5 leading-relaxed">
-                        Position GPS actualisée, escales, ETA et vitesse en direct.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Feature 2: Sécurité maximale */}
-                  <div className="flex items-start gap-4 group">
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100/80 flex items-center justify-center flex-shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                      <ShieldCheck className="w-5 h-5 fill-emerald-600/20" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm sm:text-base font-bold text-[#09090B]">
-                        Sécurité maximale
-                      </h4>
-                      <p className="text-xs sm:text-sm text-zinc-500 mt-0.5 leading-relaxed">
-                        Chiffrement, RLS, protection multi-couches et journal d&apos;activité.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Feature 3: Notifications instantanées */}
-                  <div className="flex items-start gap-4 group">
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100/80 flex items-center justify-center flex-shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                      <Clock className="w-5 h-5 fill-emerald-600/20" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm sm:text-base font-bold text-[#09090B]">
-                        Notifications instantanées
-                      </h4>
-                      <p className="text-xs sm:text-sm text-zinc-500 mt-0.5 leading-relaxed">
-                        À chaque étape, vous êtes informé automatiquement.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+        {/* ============================================================ */}
+        {/* 2. BANDE STATISTIQUES (EXACTEMENT COMME ALAIN-LOGISTICS) */}
+        {/* ============================================================ */}
+        <section className="bg-[#09090B] text-white border-y border-zinc-800">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+                180+
               </div>
-
-              {/* RIGHT COLUMN: HIGH-FIDELITY TRACKING PREVIEW CARD */}
-              <div className="lg:col-span-5 relative">
-                {/* Soft subtle red ambient halo glow behind the card */}
-                <div className="absolute -inset-4 sm:-inset-6 bg-gradient-to-tr from-red-500/20 via-red-100/30 to-transparent rounded-[2.5rem] blur-2xl -z-10 pointer-events-none" />
-
-                <Link
-                  href="/track/HL-2026-000001"
-                  className="block bg-white rounded-3xl border border-zinc-200/90 shadow-2xl hover:shadow-red-500/10 hover:border-zinc-300 transition-all duration-300 overflow-hidden group"
-                  title="Cliquez pour tester le suivi interactif"
-                >
-                  {/* Card Header (Deep Carbon Black) */}
-                  <div className="bg-[#09090B] p-6 sm:p-7 text-white">
-                    <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 font-semibold mb-1">
-                      NUMÉRO DE SUIVI
-                    </div>
-                    <div className="text-xl sm:text-2xl font-black font-mono tracking-tight text-white mb-3 flex items-center justify-between">
-                      <span>HL-2026-000001</span>
-                      <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-zinc-400 group-hover:text-[#DC2626] transition-colors">
-                        Voir →
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 mb-3">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span>En transit — 68% complété</span>
-                    </div>
-
-                    {/* Progress Bar (Green evolution gradient) */}
-                    <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
-                      <div className="h-full w-[68%] bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-500 rounded-full shadow-sm shadow-emerald-500/40 animate-shimmer" />
-                    </div>
-                  </div>
-
-                  {/* Card Body (Vertical Connected Timeline) */}
-                  <div className="p-6 sm:p-8 space-y-6 bg-white">
-                    {/* Step 1: Départ Shanghai */}
-                    <div className="flex items-start gap-4 relative">
-                      <div className="flex flex-col items-center">
-                        <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50 flex-shrink-0" />
-                        <div className="w-0.5 h-9 bg-emerald-500/40 mt-1" />
-                      </div>
-                      <div className="-mt-0.5">
-                        <div className="text-sm font-bold text-[#09090B]">Départ Shanghai</div>
-                        <div className="text-xs text-zinc-400 mt-0.5 font-medium">Il y a 12 jours</div>
-                      </div>
-                    </div>
-
-                    {/* Step 2: Escale Singapour */}
-                    <div className="flex items-start gap-4 relative">
-                      <div className="flex flex-col items-center">
-                        <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50 flex-shrink-0" />
-                        <div className="w-0.5 h-9 bg-zinc-200 mt-1" />
-                      </div>
-                      <div className="-mt-0.5">
-                        <div className="text-sm font-bold text-[#09090B]">Escale Singapour</div>
-                        <div className="text-xs text-zinc-400 mt-0.5 font-medium">Il y a 5 jours</div>
-                      </div>
-                    </div>
-
-                    {/* Step 3: En mer d'Arabie (Current Step in Red) */}
-                    <div className="flex items-start gap-4 relative">
-                      <div className="flex flex-col items-center">
-                        <div className="w-3.5 h-3.5 rounded-full bg-[#DC2626] ring-4 ring-red-100 flex-shrink-0 animate-pulse" />
-                        <div className="w-0.5 h-9 bg-zinc-200 mt-1" />
-                      </div>
-                      <div className="-mt-0.5">
-                        <div className="text-sm font-bold text-[#DC2626]">En mer d&apos;Arabie</div>
-                        <div className="text-xs text-zinc-400 mt-0.5 font-medium">Actuellement</div>
-                      </div>
-                    </div>
-
-                    {/* Step 4: Arrivée Le Havre / Douala (ETA) */}
-                    <div className="flex items-start gap-4">
-                      <div className="w-3.5 h-3.5 rounded-full bg-zinc-300 ring-4 ring-zinc-100 flex-shrink-0" />
-                      <div className="-mt-0.5">
-                        <div className="text-sm font-semibold text-zinc-600">Arrivée Le Havre</div>
-                        <div className="text-xs text-zinc-400 mt-0.5 font-medium">Dans 4 jours (ETA)</div>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+                Pays desservis
               </div>
             </div>
 
-            {/* Optional CMS Stats Block */}
-            {stats && stats.length > 0 && (
-              <div className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-6 pt-12 border-t border-zinc-100">
-                {stats.map((s) => (
-                  <div key={s.id} className="text-center">
-                    <div className="text-3xl sm:text-4xl font-extrabold text-[#DC2626] tracking-tight">
-                      {s.value}
-                    </div>
-                    <div className="text-xs sm:text-sm font-bold text-zinc-700 uppercase tracking-wider mt-1">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
+            <div className="text-center">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+                24/7
               </div>
-            )}
+              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+                Suivi temps réel
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+                99.4%
+              </div>
+              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+                Taux de livraison
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+                10M+
+              </div>
+              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+                Colis suivis
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* CTA BANNER NOIR CARBONE & ROUGE */}
-        <section className="bg-[#09090B] text-white py-16 sm:py-20 relative overflow-hidden border-t border-zinc-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        {/* ============================================================ */}
+        {/* 3. NOS SERVICES (EXACTEMENT LA STRUCTURE D'ALAIN-LOGISTICS) */}
+        {/* ============================================================ */}
+        <section id="services" className="py-24 bg-slate-50/70 border-b border-slate-200/80">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-red-400">
-                Assistance continue
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-3">
-                {home.ctaBannerTitle}
+              <div className="text-xs font-black text-[#DC2626] uppercase tracking-widest">
+                Nos services
+              </div>
+              <h2 className="mt-2 font-black text-3xl sm:text-4xl text-[#09090B] tracking-tight">
+                Une logistique complète, sans frontières
               </h2>
-              <p className="text-base text-zinc-300">{home.ctaBannerDesc}</p>
+              <p className="mt-3 text-sm sm:text-base text-zinc-600">
+                De l&apos;entrepôt d&apos;origine en Corée du Sud à la porte de votre destinataire en Afrique ou à l&apos;international — Hervé Logistics orchestre chaque étape.
+              </p>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link href="/contact">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="bg-[#DC2626] hover:bg-[#B91C1C] text-white shadow-lg shadow-red-600/30 text-base"
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Carte 1: Transport Maritime */}
+              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                  <Ship className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
+                  Transport Maritime
+                </h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
+                  Conteneurs FCL/LCL, fret maritime direct Busan ➔ Douala & Kribi, dédouanement complet.
+                </p>
+              </div>
+
+              {/* Carte 2: Transport Aérien */}
+              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                  <Plane className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
+                  Transport Aérien
+                </h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
+                  Fret express et standard depuis l&apos;aéroport d&apos;Incheon (ICN), tracking temps réel, conformité IATA.
+                </p>
+              </div>
+
+              {/* Carte 3: Transport Routier */}
+              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                  <Truck className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
+                  Transport Routier
+                </h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
+                  Livraison porte-à-porte, acheminement vers les villes intérieures, groupage et camions dédiés.
+                </p>
+              </div>
+
+              {/* Carte 4: Conteneurs */}
+              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                  <Boxes className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
+                  Conteneurs
+                </h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
+                  20&apos;, 40&apos;, High Cube, Reefer. Suivi par coordonnées GPS maritimes et scellés numériques scellés.
+                </p>
+              </div>
+
+              {/* Carte 5: Colis & Fret */}
+              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                  <Package className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
+                  Colis & Fret
+                </h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
+                  Des petits colis aux palettes industrielles complètes, assurance fret maritime incluse.
+                </p>
+              </div>
+
+              {/* Carte 6: Import / Export */}
+              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                  <Globe2 className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
+                  Import / Export
+                </h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
+                  Documentation export Asie, licences maritimes, déclarations en douane et certificat d&apos;origine.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 4. POURQUOI HERVÉ LOGISTICS (SPLIT COLUMN AVEC CARTE TRACKING) */}
+        {/* ============================================================ */}
+        <section className="py-24 bg-white">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+            {/* Colonne Gauche : Argumentaire */}
+            <div>
+              <div className="text-xs font-black text-[#DC2626] uppercase tracking-widest">
+                Pourquoi Hervé Logistics
+              </div>
+              <h2 className="mt-2 text-3xl sm:text-4xl font-black text-[#09090B] tracking-tight">
+                Une expérience de suivi digne des leaders mondiaux
+              </h2>
+              <p className="mt-4 text-sm sm:text-base text-zinc-600 leading-relaxed">
+                Une plateforme logistique conçue pour les importateurs et entreprises exigeantes, avec la finition et la fiabilité que vous attendez d&apos;un opérateur international.
+              </p>
+
+              <div className="mt-10 space-y-6">
+                <div className="flex gap-4">
+                  <div className="shrink-0 h-11 w-11 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                    <Zap className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#09090B]">Suivi temps réel</h3>
+                    <p className="mt-1 text-xs sm:text-sm text-zinc-500">
+                      Position GPS actualisée, escales, ETA et vitesse de navigation en direct.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="shrink-0 h-11 w-11 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                    <Shield className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#09090B]">Sécurité maximale</h3>
+                    <p className="mt-1 text-xs sm:text-sm text-zinc-500">
+                      Chiffrement, cookies httpOnly sécurisés, protection multi-couches et étanchéité des données.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="shrink-0 h-11 w-11 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#09090B]">Notifications instantanées</h3>
+                    <p className="mt-1 text-xs sm:text-sm text-zinc-500">
+                      À chaque étape (empotage, formalités douanières, départ du port), votre statut s&apos;actualise.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Colonne Droite : Carte aperçu du suivi avec progression verte */}
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-zinc-200">
+                <div className="bg-[#09090B] p-6 sm:p-7 text-white">
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-white/70">
+                    Numéro de suivi
+                  </div>
+                  <div className="mt-1 font-mono text-2xl font-black text-white">
+                    HL-2026-000001
+                  </div>
+                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-emerald-400">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>En transit — 68% complété</span>
+                  </div>
+                  <div className="mt-3 h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-[#DC2626] to-emerald-400 rounded-full"
+                      style={{ width: "68%" }}
+                    />
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-4 bg-white">
+                  <div className="flex gap-4">
+                    <div className="relative flex flex-col items-center">
+                      <div className="h-3 w-3 rounded-full bg-emerald-500" />
+                      <div className="w-px flex-1 mt-1 bg-emerald-500" />
+                    </div>
+                    <div className="pb-3">
+                      <div className="text-sm font-semibold text-[#09090B]">Départ Busan (Corée)</div>
+                      <div className="text-xs text-zinc-400">Il y a 12 jours</div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="relative flex flex-col items-center">
+                      <div className="h-3 w-3 rounded-full bg-emerald-500" />
+                      <div className="w-px flex-1 mt-1 bg-emerald-500" />
+                    </div>
+                    <div className="pb-3">
+                      <div className="text-sm font-semibold text-[#09090B]">Escale Singapour</div>
+                      <div className="text-xs text-zinc-400">Il y a 5 jours</div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="relative flex flex-col items-center">
+                      <div className="h-3 w-3 rounded-full bg-[#DC2626] animate-pulse" />
+                      <div className="w-px flex-1 mt-1 bg-zinc-200" />
+                    </div>
+                    <div className="pb-3">
+                      <div className="text-sm font-bold text-[#DC2626]">Détroit de Malacca</div>
+                      <div className="text-xs text-zinc-400">Actuellement (Position en direct)</div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="relative flex flex-col items-center">
+                      <div className="h-3 w-3 rounded-full bg-zinc-300" />
+                    </div>
+                    <div className="pb-3">
+                      <div className="text-sm font-semibold text-zinc-600">Arrivée Douala (Cameroun)</div>
+                      <div className="text-xs text-zinc-400">Dans 4 jours (ETA)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -z-10 -inset-8 bg-red-500/15 opacity-40 blur-3xl rounded-full" />
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 5. BANNIÈRE CTA DE BAS DE PAGE (EXACTEMENT COMME ALAIN-LOGISTICS) */}
+        {/* ============================================================ */}
+        <section className="py-24 bg-gradient-to-br from-[#09090B] via-[#18181B] to-[#8f1212] text-white relative overflow-hidden">
+          <div className="mx-auto max-w-4xl text-center px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight">
+              Prêt à suivre votre marchandise ?
+            </h2>
+            <p className="mt-4 text-white/85 text-base sm:text-lg max-w-xl mx-auto">
+              Entrez votre numéro de suivi officiel et accédez immédiatement à la position exacte et aux documents.
+            </p>
+
+            <div className="mt-10">
+              <form
+                onSubmit={handleCtaSearch}
+                className="flex flex-col sm:flex-row gap-3 p-3 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 max-w-2xl mx-auto"
+              >
+                <div className="flex-1 flex items-center gap-3 px-4">
+                  <Search className="h-5 w-5 text-white/70" />
+                  <input
+                    placeholder="Entrez votre numéro de suivi (ex : HL-2026-000001)"
+                    className="w-full bg-transparent outline-none py-3 text-sm sm:text-base text-white placeholder:text-white/60"
+                    value={ctaTracking}
+                    onChange={(e) => setCtaTracking(e.target.value)}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#DC2626] text-white hover:bg-[#B91C1C] shadow-md h-12 sm:h-auto px-7 text-sm font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
                 >
-                  {home.ctaButtonText}
-                </Button>
-              </Link>
-              <Link href="/track/HL-2026-000001">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-transparent border-zinc-700 text-white hover:bg-zinc-900 text-base"
-                >
-                  Suivre un envoi en direct
-                </Button>
+                  <span>Suivre</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+            </div>
+
+            <div className="mt-8 flex justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-xs font-bold uppercase tracking-wider transition-colors border border-white/40 bg-white/10 text-white hover:bg-white hover:text-[#09090B] h-10 px-5 shadow-xs"
+              >
+                Contactez-nous
               </Link>
             </div>
           </div>
+
+          {/* Sphères de flou d'ambiance */}
+          <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-red-600/30 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-emerald-600/20 blur-3xl pointer-events-none" />
         </section>
       </main>
 
