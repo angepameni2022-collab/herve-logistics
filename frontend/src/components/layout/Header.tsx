@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -15,6 +15,7 @@ export function Header() {
     { label: "NOS SERVICES", href: "/services" },
     { label: "À PROPOS", href: "/about" },
     { label: "CONTACT", href: "/contact" },
+    { label: "SUIVI EN DIRECT", href: "/suivi" },
   ];
 
   const isActive = (href: string) => {
