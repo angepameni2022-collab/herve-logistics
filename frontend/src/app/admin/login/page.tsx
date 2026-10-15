@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
     }
     const secret = adminPassword.trim() || adminPin.trim();
     if (!secret) {
-      setErrorMsg("Veuillez saisir le mot de passe administrateur (admin2026) ou le code PIN (2026).");
+      setErrorMsg("Veuillez saisir votre mot de passe administrateur ou votre code PIN.");
       return;
     }
 
@@ -154,7 +154,7 @@ export default function AdminLoginPage() {
                   type="password"
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
-                  placeholder="admin2026"
+                  placeholder="••••••••••••"
                   className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-3.5 text-sm font-semibold text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all font-mono"
                 />
               </div>
@@ -171,7 +171,7 @@ export default function AdminLoginPage() {
                   maxLength={6}
                   value={adminPin}
                   onChange={(e) => setAdminPin(e.target.value)}
-                  placeholder="2026"
+                  placeholder="••••"
                   className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-3.5 text-sm font-bold text-zinc-900 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all font-mono tracking-widest"
                 />
               </div>

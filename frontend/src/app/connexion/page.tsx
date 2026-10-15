@@ -14,9 +14,6 @@ import {
   EyeOff,
   ArrowRight,
   ShieldCheck,
-  UserCheck,
-  KeyRound,
-  Sparkles,
 } from "lucide-react";
 
 export default function ConnexionPage() {
@@ -30,17 +27,6 @@ export default function ConnexionPage() {
   const [rememberMe, setRememberMe] = useState(true);
   const [message, setMessage] = useState<{ text: string; type: "error" | "success" } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  // Pré-remplissage en un clic des identifiants démo
-  const handleAutofill = (demoEmail: string, demoMdp: string) => {
-    setEmail(demoEmail);
-    setPassword(demoMdp);
-    setMessage({
-      text: `✓ Identifiants (${demoEmail.startsWith("admin") ? "Admin" : "Client"}) préremplis avec succès. Cliquez sur "Se connecter".`,
-      type: "success",
-    });
-    showToast("Identifiants préremplis !", "info");
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -232,66 +218,8 @@ export default function ConnexionPage() {
               </button>
             </form>
 
-            {/* SÉPARATEUR ÉLÉGANT */}
-            <div className="relative my-7">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase tracking-wider">
-                <span className="bg-white px-3 text-slate-400 font-bold">
-                  Accès Rapide Démonstration
-                </span>
-              </div>
-            </div>
-
-            {/* ENCART IDENTIFIANTS DÉMONSTRATION EN 1 CLIC */}
-            <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-red-50/30 border border-slate-200/90 space-y-2.5">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#DC2626]" />
-                  <span>Comptes de test (cliquez pour préremplir) :</span>
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                {/* Bouton Compte Client */}
-                <button
-                  type="button"
-                  onClick={() => handleAutofill("client@hervetransit.com", "Client123!Transit")}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-red-300 hover:bg-red-50/50 text-left transition-all shadow-xs group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <UserCheck className="w-3.5 h-3.5 text-[#DC2626]" />
-                    <span className="text-xs font-extrabold text-slate-900 group-hover:text-[#DC2626]">
-                      Espace Client
-                    </span>
-                  </div>
-                  <div className="mt-1 text-[11px] font-mono text-slate-600 truncate">
-                    client@hervetransit.com
-                  </div>
-                </button>
-
-                {/* Bouton Compte Admin */}
-                <button
-                  type="button"
-                  onClick={() => handleAutofill("admin@hervetransit.com", "Admin123!Herve")}
-                  className="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-red-300 hover:bg-red-50/50 text-left transition-all shadow-xs group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <KeyRound className="w-3.5 h-3.5 text-amber-600" />
-                    <span className="text-xs font-extrabold text-slate-900 group-hover:text-[#DC2626]">
-                      Espace Admin
-                    </span>
-                  </div>
-                  <div className="mt-1 text-[11px] font-mono text-slate-600 truncate">
-                    admin@hervetransit.com
-                  </div>
-                </button>
-              </div>
-            </div>
-
             {/* Lien d'inscription */}
-            <div className="mt-6 pt-5 border-t border-slate-100 text-center text-xs text-slate-600">
+            <div className="mt-8 pt-6 border-t border-slate-100 text-center text-xs text-slate-600">
               <span>Vous souhaitez expédier et obtenir un code officiel ? </span>
               <Link
                 href="/auth/register"
