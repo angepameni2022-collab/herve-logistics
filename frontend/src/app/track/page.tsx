@@ -32,28 +32,33 @@ export default function TrackIndexPage() {
 
           <TrackingSearchBox />
 
-          {/* BANNIÈRE : Inscription obligatoire & obtention de code */}
+          {/* BANNIÈRE : Attribution du code de suivi par messagerie */}
           <div className="mt-8 bg-[#00243D] text-white rounded-2xl p-6 border border-[#003B64] shadow-xl text-left flex flex-col sm:flex-row items-center justify-between gap-5">
             <div>
               <span className="font-display text-[11px] font-bold uppercase tracking-widest text-[#42B0D5] bg-white/10 px-2.5 py-0.5 rounded-sm inline-block mb-1">
-                INSCRIPTION OBLIGATOIRE · ATTRIBUTION DU CODE DE SUIVI
+                ATTRIBUTION DU CODE DE SUIVI · CONTACTEZ VOTRE AGENT
               </span>
               <h3 className="font-display text-xl font-bold uppercase text-white">
                 Vous n&apos;avez pas encore de numéro de suivi ?
               </h3>
               <p className="text-xs text-white/70 mt-1 max-w-lg">
-                Pour faire expédier une marchandise depuis la Corée du Sud, vous devez obligatoirement vous inscrire. Transmettez-nous vos informations et recevez immédiatement votre code de suivi officiel.
+                Pour faire expédier une marchandise ou localiser un colis, transmettez vos informations ou bordereaux à notre équipe par messagerie. Votre agent dédié vous remet directement votre numéro officiel pour activer le suivi en direct.
               </p>
             </div>
             <div className="flex items-center gap-3 w-full sm:w-auto flex-shrink-0">
-              <Link href="/auth/register" className="w-full sm:w-auto">
+              <a
+                href="https://wa.me/447456062192?text=Bonjour%2C%20je%20souhaite%20exp%C3%A9dier%20un%20colis%20ou%20obtenir%20mon%20code%20de%20suivi%20officiel."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto"
+              >
                 <button
                   type="button"
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] font-display font-extrabold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] font-display font-extrabold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
                 >
-                  S&apos;inscrire & Déclarer
+                  <span>Contacter sur WhatsApp</span>
                 </button>
-              </Link>
+              </a>
             </div>
           </div>
 

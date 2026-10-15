@@ -23,6 +23,7 @@ import {
   CheckCircle2,
   Navigation,
   Anchor,
+  MessageSquare,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -78,24 +79,30 @@ export default function HomePage() {
               <div id="tracking" className="mt-10 max-w-3xl scroll-mt-28">
                 <TrackingSearchBox />
 
-                {/* Carte d'information expédition (Style Maersk Navy Glassmorphism) */}
+                {/* Carte d'information expédition (Transmettez vos informations par messagerie) */}
                 <div className="mt-4 p-4 rounded-2xl glass-dark shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
                   <div className="text-xs text-white/80">
                     <span className="font-display font-bold text-white uppercase tracking-wider block text-sm">
-                      Vous souhaitez expédier des marchandises depuis la Corée ?
+                      Vous souhaitez expédier ou obtenir votre code de suivi ?
                     </span>
                     <span className="text-white/70 font-normal mt-0.5 block">
-                      Inscription obligatoire : déposez vos informations pour recevoir votre code officiel Hervé Logistics.
+                      Transmettez vos bordereaux ou détails par messagerie. Votre agent dédié enregistre votre fret et vous remet directement votre code officiel.
                     </span>
                   </div>
-                  <Link href="/auth/register" className="flex-shrink-0 w-full sm:w-auto">
+                  <a
+                    href="https://wa.me/447456062192?text=Bonjour%2C%20je%20souhaite%20exp%C3%A9dier%20un%20colis%20ou%20obtenir%20mon%20code%20de%20suivi%20officiel."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 w-full sm:w-auto"
+                  >
                     <button
                       type="button"
-                      className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-white hover:bg-white/90 text-[#00243D] font-display font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
+                      className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] font-display font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2"
                     >
-                      S&apos;inscrire & Expédier
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Contacter sur WhatsApp</span>
                     </button>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -451,172 +458,174 @@ export default function HomePage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 4. POURQUOI HERVÉ LOGISTICS (STYLE MAERSK & APERÇU TRACKING)  */}
+        {/* 4. POURQUOI HERVÉ LOGISTICS (EXACTEMENT COMME LA CAPTURE 1)  */}
         {/* ============================================================ */}
-        <section className="py-24 bg-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+        <section className="py-20 lg:py-28 bg-white">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Colonne Gauche : Argumentaire Entreprise */}
             <div>
-              <div className="font-display text-sm font-bold text-[#0088B8] uppercase tracking-widest mb-2">
-                Exigence & Précision Mondiale
+              <div className="font-display text-xs sm:text-sm font-bold text-[#E5A800] uppercase tracking-[0.2em] mb-2">
+                POURQUOI HERVÉ LOGISTICS
               </div>
-              <h2 className="mt-1 font-display text-4xl sm:text-5xl font-extrabold text-[#00243D] uppercase tracking-tight leading-none">
-                Une expérience de suivi digne des plus grands armateurs
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-[46px] font-extrabold text-[#111827] uppercase tracking-tight leading-[1.05]">
+                Une expérience de suivi digne des leaders mondiaux
               </h2>
-              <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-                Conçue pour les importateurs et entreprises industrielles exigeantes, notre architecture vous garantit une visibilité totale sur l&apos;acheminement de vos cargaisons maritimes et aériennes.
+              <p className="mt-4 text-sm sm:text-base text-slate-500 leading-relaxed font-normal">
+                Une plateforme SaaS conçue pour les entreprises exigeantes, avec la finition et la fiabilité que vous attendez d&apos;un acteur international.
               </p>
 
-              <div className="mt-10 space-y-5">
-                <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-slate-200 flex gap-4 hover:border-[#42B0D5] hover:bg-white transition-all shadow-xs">
-                  <div className="shrink-0 h-12 w-12 rounded-xl bg-[#EBF6FA] text-[#00243D] flex items-center justify-center font-bold">
-                    <Zap className="h-6 w-6 text-[#42B0D5]" />
+              <div className="mt-8 space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                    <Zap className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-display text-xl font-bold uppercase text-[#00243D]">Télématique Satellite & AIS en direct</h3>
-                    <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      Coordonnées GPS maritimes précises, vitesse en nœuds, escales portuaires et heure estimée d&apos;arrivée (ETA) actualisées en continu.
+                    <h3 className="font-bold text-slate-900 text-sm sm:text-base">
+                      Suivi temps réel
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
+                      Position GPS actualisée, escales, ETA et vitesse en direct.
                     </p>
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-slate-200 flex gap-4 hover:border-[#42B0D5] hover:bg-white transition-all shadow-xs">
-                  <div className="shrink-0 h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-                    <Shield className="h-6 w-6" />
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                    <Shield className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-display text-xl font-bold uppercase text-[#00243D]">Sécurité & Traçabilité Cryptographique</h3>
-                    <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      Scellés numériques haute sécurité, intégrité documentaire des connaissements (Bill of Lading) et sessions chiffrées.
+                    <h3 className="font-bold text-slate-900 text-sm sm:text-base">
+                      Sécurité maximale
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
+                      Chiffrement, RLS, protection multi-couches et journal d&apos;activité.
                     </p>
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-slate-200 flex gap-4 hover:border-[#42B0D5] hover:bg-white transition-all shadow-xs">
-                  <div className="shrink-0 h-12 w-12 rounded-xl bg-[#EBF6FA] text-[#00243D] flex items-center justify-center font-bold">
-                    <Clock className="h-6 w-6 text-[#42B0D5]" />
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                    <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-display text-xl font-bold uppercase text-[#00243D]">Support Dédié & Alertes Étape par Étape</h3>
-                    <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      À chaque franchissement (empotage Busan, dédouanement Asie, appareillage en haute mer), recevez vos notifications immédiates.
+                    <h3 className="font-bold text-slate-900 text-sm sm:text-base">
+                      Notifications instantanées
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
+                      À chaque étape, vous êtes informé automatiquement.
                     </p>
                   </div>
+                </div>
+              </div>
+
+              {/* Attribution de votre code par messagerie */}
+              <div className="mt-8 p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3.5 text-xs text-slate-600">
+                <div className="w-8 h-8 rounded-lg bg-[#42B0D5]/15 text-[#00243D] flex items-center justify-center shrink-0 mt-0.5">
+                  <MessageSquare className="w-4 h-4 text-[#42B0D5]" />
+                </div>
+                <div>
+                  <span className="font-bold text-slate-900 block text-sm">
+                    Attribution directe de votre numéro de suivi
+                  </span>
+                  <span className="text-slate-500 leading-relaxed block mt-0.5">
+                    Transmettez simplement vos informations ou bordereaux par WhatsApp ou messagerie. Notre équipe enregistre votre expédition et vous transmet directement votre numéro de suivi officiel.
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Colonne Droite : Carte aperçu du suivi télématique d'élite */}
-            <div className="relative animate-ship-float">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200 bg-white">
-                {/* En-tête de carte dégradé Maersk Navy */}
-                <div className="bg-gradient-brand p-6 sm:p-7 text-white shadow-md relative">
-                  <div className="flex items-center justify-between">
-                    <div className="font-display text-[11px] uppercase tracking-widest text-[#42B0D5] font-bold bg-white/10 px-2.5 py-1 rounded-sm border border-white/15">
-                      Télématique Satellite Active
-                    </div>
-                    <div className="text-[11px] font-medium text-white/90">
-                      Vitesse : <span className="font-mono font-bold text-[#42B0D5]">18.4 nœuds</span>
-                    </div>
-                  </div>
+            {/* Colonne Droite : Carte démo identique à la capture 1 */}
+            <div className="relative max-w-[480px] w-full mx-auto lg:ml-auto">
+              {/* Halo d'ambiance doux */}
+              <div className="absolute -inset-4 bg-amber-100/40 rounded-3xl blur-2xl -z-10" />
 
-                  <div className="mt-3 font-display text-3xl font-extrabold uppercase text-white tracking-wider flex items-center justify-between">
-                    <span>Busan ➔ Douala</span>
-                    <span className="text-xs font-mono font-bold text-[#42B0D5] bg-black/40 px-2.5 py-1 rounded-sm border border-[#42B0D5]/30">
-                      HL-2026-000001
-                    </span>
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 bg-white">
+                {/* En-tête sombre arrondi de la carte */}
+                <div className="bg-[#121212] p-6 sm:p-7 text-white">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                    NUMÉRO DE SUIVI
                   </div>
-
-                  <div className="mt-2 text-xs text-white/80 font-normal">
-                    Porte-conteneurs : <strong className="text-white font-semibold">MAERSK Mc-Kinney Møller</strong> (IMO 9619907)
+                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-wide mt-1">
+                    ALT-2026-000001
                   </div>
-
-                  <div className="mt-4 flex items-center justify-between text-xs font-bold text-white">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#42B0D5] animate-pulse" />
-                      <span>En mer d&apos;Arabie · 68% complété</span>
-                    </div>
-                    <span className="font-mono text-white/90">ETA : 25 avr. 2026</span>
+                  <div className="flex items-center gap-2 mt-4 text-xs font-semibold text-white/90">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>En transit — 68% complété</span>
                   </div>
-
-                  <div className="mt-3 h-2.5 bg-white/20 rounded-full overflow-hidden p-0.5">
+                  <div className="mt-2.5 h-2 w-full bg-zinc-800 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[#42B0D5] to-emerald-400 rounded-full shadow-xs"
+                      className="h-full bg-gradient-to-r from-yellow-400 via-emerald-400 to-emerald-500 rounded-full"
                       style={{ width: "68%" }}
                     />
                   </div>
                 </div>
 
-                {/* Timeline des étapes maritime */}
-                <div className="p-6 space-y-4 bg-white">
+                {/* Corps blanc de la carte : les 4 étapes exactes de la capture 1 */}
+                <div className="p-6 sm:p-7 space-y-5 bg-white">
+                  {/* Étape 1 : Départ Shanghai */}
                   <div className="flex gap-4">
-                    <div className="relative flex flex-col items-center">
-                      <div className="h-3.5 w-3.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100" />
-                      <div className="w-0.5 flex-1 mt-1 bg-emerald-500" />
+                    <div className="flex flex-col items-center">
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
+                      <div className="w-0.5 bg-emerald-500 flex-1 my-1" />
                     </div>
-                    <div className="pb-3 flex-1">
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-bold text-[#00243D]">Départ Port de Busan (Corée)</div>
-                        <div className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Terminé</div>
+                    <div className="pb-1">
+                      <div className="text-sm font-semibold text-slate-900 leading-tight">
+                        Départ Shanghai
                       </div>
-                      <div className="text-xs text-slate-500 font-medium mt-0.5">Empotage conteneurs 40&apos; HC scellés & appareillage</div>
+                      <div className="text-xs text-slate-400 mt-0.5">
+                        Il y a 12 jours
+                      </div>
                     </div>
                   </div>
 
+                  {/* Étape 2 : Escale Singapour */}
                   <div className="flex gap-4">
-                    <div className="relative flex flex-col items-center">
-                      <div className="h-3.5 w-3.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100" />
-                      <div className="w-0.5 flex-1 mt-1 bg-emerald-500" />
+                    <div className="flex flex-col items-center">
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
+                      <div className="w-0.5 bg-emerald-500 flex-1 my-1" />
                     </div>
-                    <div className="pb-3 flex-1">
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-bold text-[#00243D]">Escale Shanghai & Singapour</div>
-                        <div className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Terminé</div>
+                    <div className="pb-1">
+                      <div className="text-sm font-semibold text-slate-900 leading-tight">
+                        Escale Singapour
                       </div>
-                      <div className="text-xs text-slate-500 font-medium mt-0.5">Contrôle télématique et ravitaillement maritime</div>
+                      <div className="text-xs text-slate-400 mt-0.5">
+                        Il y a 5 jours
+                      </div>
                     </div>
                   </div>
 
+                  {/* Étape 3 : En mer d'Arabie (En cours / Jaune) */}
                   <div className="flex gap-4">
-                    <div className="relative flex flex-col items-center">
-                      <div className="h-3.5 w-3.5 rounded-full bg-[#42B0D5] ring-4 ring-[#42B0D5]/20 animate-pulse" />
-                      <div className="w-0.5 flex-1 mt-1 bg-slate-200" />
+                    <div className="flex flex-col items-center">
+                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-400 mt-1.5 shrink-0 ring-4 ring-amber-100" />
+                      <div className="w-0.5 bg-slate-200 flex-1 my-1" />
                     </div>
-                    <div className="pb-3 flex-1">
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-bold text-[#00243D]">En mer d&apos;Arabie / Océan Indien</div>
-                        <div className="text-[11px] font-bold text-[#00243D] bg-[#EBF6FA] px-2 py-0.5 rounded border border-[#42B0D5]/30 animate-pulse">Position en direct</div>
+                    <div className="pb-1">
+                      <div className="text-sm font-semibold text-yellow-500 leading-tight">
+                        En mer d&apos;Arabie
                       </div>
-                      <div className="text-xs text-slate-600 font-medium mt-0.5">Coordonnées GPS : Lat 02°11&apos;N, Lng 102°15&apos;E</div>
+                      <div className="text-xs text-slate-400 mt-0.5">
+                        Actuellement
+                      </div>
                     </div>
                   </div>
 
+                  {/* Étape 4 : Arrivée Le Havre (À venir / Gris) */}
                   <div className="flex gap-4">
-                    <div className="relative flex flex-col items-center">
-                      <div className="h-3.5 w-3.5 rounded-full bg-slate-300 ring-4 ring-slate-100" />
+                    <div className="flex flex-col items-center">
+                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300 mt-1.5 shrink-0" />
                     </div>
-                    <div className="pb-1 flex-1">
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-medium text-slate-600">Arrivée Port de Douala (Cameroun)</div>
-                        <div className="text-[11px] font-semibold text-slate-400">Prévu dans 4 jours</div>
+                    <div className="pb-1">
+                      <div className="text-sm font-semibold text-slate-900 leading-tight">
+                        Arrivée Le Havre
                       </div>
-                      <div className="text-xs text-slate-400 font-normal mt-0.5">Dédouanement prioritaire et livraison terminal</div>
+                      <div className="text-xs text-slate-400 mt-0.5">
+                        Dans 4 jours (ETA)
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <Link
-                      href="/track/HL-2026-000001"
-                      className="block text-center py-3 rounded-xl bg-[#00243D] hover:bg-[#003B64] text-xs font-display font-bold uppercase tracking-wider text-white transition-all shadow-md cursor-pointer"
-                    >
-                      Consulter le rapport télématique complet →
-                    </Link>
                   </div>
                 </div>
               </div>
-
-              {/* Halo d'ambiance Maersk Blue */}
-              <div className="absolute -z-10 -inset-8 bg-[#42B0D5]/15 opacity-70 blur-3xl rounded-full" />
             </div>
           </div>
         </section>

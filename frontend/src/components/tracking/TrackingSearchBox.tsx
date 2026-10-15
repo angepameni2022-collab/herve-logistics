@@ -47,18 +47,29 @@ export function TrackingSearchBox({
       </form>
 
       {/* Helper text below search bar */}
-      <div className="flex items-center gap-2 mt-3.5 text-xs text-white/80 font-medium">
-        <span className="text-white/60">Numéro officiel d&apos;exemple :</span>
-        <button
-          type="button"
-          onClick={() => {
-            setTrackingNumber("HL-2026-000001");
-            router.push("/track/HL-2026-000001");
-          }}
-          className="font-mono text-white font-bold hover:text-[#42B0D5] border border-white/20 px-2.5 py-0.5 rounded-md glass-dark transition-colors cursor-pointer shadow-xs"
+      <div className="flex flex-wrap items-center justify-between gap-2 mt-3.5 text-xs text-white/80 font-medium">
+        <div className="flex items-center gap-2">
+          <span className="text-white/60">Numéro officiel d&apos;exemple :</span>
+          <button
+            type="button"
+            onClick={() => {
+              setTrackingNumber("ALT-2026-000001");
+              router.push("/track/ALT-2026-000001");
+            }}
+            className="font-mono text-white font-bold hover:text-[#42B0D5] border border-white/20 px-2.5 py-0.5 rounded-md glass-dark transition-colors cursor-pointer shadow-xs"
+          >
+            ALT-2026-000001
+          </button>
+        </div>
+
+        <a
+          href="https://wa.me/447456062192?text=Bonjour%2C%20je%20souhaite%20obtenir%20mon%20code%20de%20suivi%20pour%20mon%20colis."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#42B0D5] hover:text-white underline text-xs transition-colors"
         >
-          HL-2026-000001
-        </button>
+          Obtenir mon code par messagerie →
+        </a>
       </div>
     </div>
   );
