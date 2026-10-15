@@ -2,33 +2,42 @@
 @import "leaflet/dist/leaflet.css";
 
 @theme {
-  --color-primary: #DC2626;
-  --color-primary-hover: #B91C1C;
-  --color-primary-light: #FEF2F2;
-  --color-brand-dark: #18181B;
-  --color-brand-black: #09090B;
-  --color-brand-light: #FEF2F2;
+  --color-primary: #42B0D5;
+  --color-primary-hover: #0088B8;
+  --color-primary-light: #EBF6FA;
+  --color-maersk-blue: #42B0D5;
+  --color-maersk-navy: #00243D;
+  --color-maersk-dark: #001726;
+  --color-maersk-hover: #0088B8;
+  --color-maersk-light: #EBF6FA;
+  --color-brand-dark: #00243D;
+  --color-brand-black: #001726;
+  --color-brand-light: #EBF6FA;
   --color-brand-bg: #F8FAFC;
-  --color-brand-text: #09090B;
+  --color-brand-text: #00243D;
   --color-brand-muted: #64748B;
-  --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-sans), 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), 'Barlow Condensed', sans-serif;
 }
 
 :root {
-  --primary: #DC2626;
-  --primary-hover: #B91C1C;
-  --brand-dark: #18181B;
-  --brand-black: #09090B;
-  --brand-light: #FEF2F2;
+  --primary: #42B0D5;
+  --primary-hover: #0088B8;
+  --maersk-blue: #42B0D5;
+  --maersk-navy: #00243D;
+  --maersk-dark: #001726;
+  --brand-dark: #00243D;
+  --brand-black: #001726;
+  --brand-light: #EBF6FA;
   --brand-bg: #F8FAFC;
-  --brand-text: #09090B;
+  --brand-text: #00243D;
   --brand-muted: #64748B;
 }
 
 body {
   background-color: var(--brand-bg);
   color: var(--brand-text);
-  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,10 +62,69 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #DC2626;
+  background: #42B0D5;
 }
 
-/* Keyframe Animations */
+/* Typography Utility for Barlow Condensed headings */
+.font-display {
+  font-family: var(--font-display), 'Barlow Condensed', sans-serif;
+}
+
+/* Animations inspired by alain-logistics & Maersk maritime telemetry */
+@keyframes shipFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shipGlow {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes pulseMarker {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 4px 12px rgba(0, 36, 61, 0.4), 0 0 0 4px rgba(66, 176, 213, 0.45);
+  }
+  70% {
+    box-shadow: 0 4px 12px rgba(0, 36, 61, 0.4), 0 0 0 16px rgba(66, 176, 213, 0);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(0, 36, 61, 0.4), 0 0 0 0 rgba(66, 176, 213, 0);
+  }
+}
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes radarSweep {
   from {
     transform: rotate(0deg);
@@ -81,28 +149,24 @@ html {
   }
 }
 
-@keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+.animate-ship-float {
+  animation: shipFloat 4s ease-in-out infinite;
 }
 
-@keyframes routeDash {
-  to {
-    stroke-dashoffset: -40;
-  }
+.animate-ship-glow {
+  animation: shipGlow 3s ease-in-out infinite;
 }
 
-@keyframes shimmerGlow {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+.animate-pulse-marker {
+  animation: pulseMarker 1.8s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+.animate-hero-fade {
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-radar-sweep {
@@ -114,41 +178,42 @@ html {
   animation: sonarPing 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.animate-float {
-  animation: floatGentle 4s ease-in-out infinite;
+/* Glassmorphism Dark & Gradient Overlay */
+.glass-dark {
+  background: rgba(0, 36, 61, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-
-.animate-route-dash {
-  animation: routeDash 2s linear infinite;
+.bg-gradient-hero-overlay {
+  background: linear-gradient(180deg, rgba(0, 27, 46, 0.85) 0%, rgba(0, 36, 61, 0.88) 55%, rgba(0, 23, 38, 0.96) 100%);
 }
 
-.animate-shimmer {
-  background: linear-gradient(90deg, rgba(220,38,38,0) 0%, rgba(220,38,38,0.15) 50%, rgba(220,38,38,0) 100%);
-  background-size: 200% 100%;
-  animation: shimmerGlow 3s infinite;
+.bg-gradient-brand {
+  background: linear-gradient(135deg, #00243D 0%, #00365C 50%, #004D80 100%);
 }
 
-/* Custom Leaflet Map styling for modern Red/Dark theme */
+/* Custom Leaflet Map styling for Maritime Navy theme */
 .leaflet-container {
   font-family: inherit;
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  background-color: #09090b !important;
+  background-color: #001726 !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #18181b !important;
+  background: #00243D !important;
   color: #ffffff !important;
   border-radius: 0.75rem !important;
-  border: 1px solid #27272a !important;
+  border: 1px solid #004D80 !important;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5) !important;
   padding: 4px !important;
 }
 
 .leaflet-popup-tip {
-  background: #18181b !important;
+  background: #00243D !important;
 }
 
 .leaflet-popup-content {
@@ -158,22 +223,22 @@ html {
 }
 
 .leaflet-control-zoom a {
-  background-color: #18181b !important;
+  background-color: #00243D !important;
   color: #ffffff !important;
-  border-color: #27272a !important;
+  border-color: #004D80 !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background-color: #DC2626 !important;
+  background-color: #42B0D5 !important;
   color: #ffffff !important;
 }
 
 .leaflet-control-attribution {
-  background: rgba(9, 9, 11, 0.75) !important;
-  color: #a1a1aa !important;
+  background: rgba(0, 23, 38, 0.8) !important;
+  color: #94a3b8 !important;
   font-size: 10px !important;
 }
 
 .leaflet-control-attribution a {
-  color: #f87171 !important;
+  color: #42B0D5 !important;
 }

@@ -11,18 +11,18 @@ interface TrackingTimelineProps {
 
 export function TrackingTimeline({ events }: TrackingTimelineProps) {
   return (
-    <div className="bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-xs">
-      <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-100">
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <div className="flex items-center justify-between pb-6 mb-6 border-b border-slate-100">
         <div>
-          <h3 className="text-lg font-bold text-[#09090B]">Historique des événements</h3>
-          <p className="text-xs text-zinc-500 mt-0.5">Mises à jour certifiées par les autorités de transit</p>
+          <h3 className="font-display text-xl font-bold uppercase text-[#00243D]">Historique des événements</h3>
+          <p className="text-xs text-slate-500 mt-0.5 font-normal">Mises à jour certifiées par les autorités de transit maritime</p>
         </div>
-        <span className="text-xs font-bold px-3 py-1 bg-zinc-100 rounded-lg text-zinc-700">
+        <span className="font-display text-xs font-bold uppercase tracking-wider px-3 py-1 bg-[#EBF6FA] text-[#0088B8] rounded-sm">
           {events.length} étapes
         </span>
       </div>
 
-      <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-[11px] sm:before:left-[15px] before:top-3 before:bottom-3 before:w-0.5 before:bg-zinc-200">
+      <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-[11px] sm:before:left-[15px] before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-200">
         {events.map((evt, index) => {
           const isLatest = index === 0;
 
@@ -33,9 +33,9 @@ export function TrackingTimeline({ events }: TrackingTimelineProps) {
                 className={`absolute -left-6 sm:-left-8 top-1.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 flex items-center justify-center transition-all ${
                   evt.completed
                     ? isLatest
-                      ? "bg-[#DC2626] border-[#DC2626] text-white ring-4 ring-red-100"
-                      : "bg-[#09090B] border-[#09090B] text-white"
-                    : "bg-white border-dashed border-zinc-300 text-zinc-400"
+                      ? "bg-[#42B0D5] border-[#42B0D5] text-[#00243D] ring-4 ring-[#42B0D5]/20 animate-pulse"
+                      : "bg-[#00243D] border-[#00243D] text-white"
+                    : "bg-white border-dashed border-slate-300 text-slate-400"
                 }`}
               >
                 {evt.completed ? (
@@ -46,10 +46,10 @@ export function TrackingTimeline({ events }: TrackingTimelineProps) {
               </div>
 
               {/* Event Content */}
-              <div className="bg-zinc-50/70 group-hover:bg-[#FEF2F2]/40 border border-zinc-200/70 group-hover:border-red-200 rounded-xl p-4.5 transition-all">
+              <div className="bg-slate-50/70 group-hover:bg-[#EBF6FA]/40 border border-slate-200/80 group-hover:border-[#42B0D5]/40 rounded-xl p-4.5 transition-all">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-zinc-500">
-                    <Calendar className="w-3.5 h-3.5 text-[#DC2626]" />
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-500">
+                    <Calendar className="w-3.5 h-3.5 text-[#42B0D5]" />
                     <span>
                       {evt.date} · {evt.time}
                     </span>
@@ -58,11 +58,11 @@ export function TrackingTimeline({ events }: TrackingTimelineProps) {
                 </div>
 
                 <div className="flex items-center gap-2 mb-1.5">
-                  <MapPin className="w-4 h-4 text-[#DC2626] flex-shrink-0" />
-                  <h4 className="text-sm font-bold text-[#09090B]">{evt.location}</h4>
+                  <MapPin className="w-4 h-4 text-[#42B0D5] flex-shrink-0" />
+                  <h4 className="text-sm font-bold text-[#00243D]">{evt.location}</h4>
                 </div>
 
-                <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed pl-6">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6 font-normal">
                   {evt.description}
                 </p>
               </div>

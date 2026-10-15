@@ -42,16 +42,16 @@ export default function ServicesPage() {
       <Header />
 
       <main className="flex-1">
-        {/* HERO SERVICES — LUMINEUX, CHALEUREUX ET GAI */}
-        <section className="bg-gradient-to-b from-white via-red-50/40 to-white text-slate-900 py-20 px-4 sm:px-6 lg:px-8 text-center border-b border-slate-200">
+        {/* HERO SERVICES — MAERSK MARITIME PALETTE */}
+        <section className="bg-gradient-to-b from-white via-[#EBF6FA]/50 to-white text-slate-900 pt-28 sm:pt-36 pb-20 px-4 sm:px-6 lg:px-8 text-center border-b border-slate-200">
           <div className="max-w-3xl mx-auto">
-            <span className="text-xs font-black uppercase tracking-widest text-[#DC2626] bg-red-50 px-3.5 py-1.5 rounded-full border border-red-200 shadow-xs">
-              Solutions globales
+            <span className="font-display text-xs font-bold uppercase tracking-widest text-[#0088B8] bg-[#EBF6FA] px-3.5 py-1.5 rounded-sm border border-[#42B0D5]/30 shadow-xs">
+              Solutions globales · Maersk Network
             </span>
-            <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mt-4 mb-4 tracking-tight">
+            <h1 className="font-display text-4xl sm:text-6xl font-extrabold uppercase text-[#00243D] mt-4 mb-4 tracking-tight">
               {servicesPage.heroTitle}
             </h1>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
               {servicesPage.heroSubtitle}
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function ServicesPage() {
               return (
                 <div
                   key={service.id}
-                  className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-red-300 transition-all duration-300 flex flex-col"
+                  className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-[#42B0D5] transition-all duration-300 flex flex-col"
                 >
                   {/* Grande Image */}
                   <div className="relative h-56 w-full overflow-hidden bg-slate-900">
@@ -75,31 +75,31 @@ export default function ServicesPage() {
                       alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#001726]/90 via-[#00243D]/40 to-transparent" />
                     {service.badge && (
-                      <span className="absolute top-4 right-4 bg-gradient-to-r from-[#DC2626] to-[#E11D48] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                      <span className="absolute top-4 right-4 bg-[#42B0D5] text-[#00243D] font-display text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-sm shadow-md">
                         {service.badge}
                       </span>
                     )}
                     <div className="absolute bottom-4 left-4 flex items-center gap-2.5 text-white">
-                      <div className="w-10 h-10 rounded-xl bg-white text-[#DC2626] shadow-lg flex items-center justify-center font-bold">
+                      <div className="w-10 h-10 rounded-xl bg-white text-[#00243D] shadow-lg flex items-center justify-center font-bold">
                         {icon}
                       </div>
-                      <h2 className="text-xl font-extrabold text-white drop-shadow-sm">{service.title}</h2>
+                      <h2 className="font-display text-2xl font-bold uppercase text-white drop-shadow-sm tracking-tight">{service.title}</h2>
                     </div>
                   </div>
 
                   {/* Body & Description */}
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                      <p className="text-sm text-zinc-600 leading-relaxed mb-5">
+                      <p className="text-sm text-slate-600 leading-relaxed mb-5 font-normal">
                         {service.description}
                       </p>
 
                       <div className="space-y-2 mb-6">
                         {service.features.map((feat) => (
-                          <div key={feat} className="flex items-center gap-2 text-xs text-zinc-600">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#DC2626] flex-shrink-0" />
+                          <div key={feat} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] flex-shrink-0" />
                             <span>{feat}</span>
                           </div>
                         ))}
@@ -107,16 +107,16 @@ export default function ServicesPage() {
                     </div>
 
                     {/* En savoir plus action */}
-                    <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                       <button
                         onClick={() => setSelectedService(service)}
-                        className="inline-flex items-center gap-1.5 text-sm font-bold text-[#DC2626] hover:text-[#09090B] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-display font-bold uppercase tracking-wider text-[#0088B8] hover:text-[#00243D] transition-colors cursor-pointer"
                       >
                         <span>En savoir plus</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
 
-                      <Link href="/contact" className="text-xs text-zinc-400 hover:text-zinc-700 font-semibold">
+                      <Link href="/contact" className="text-xs text-slate-400 hover:text-[#00243D] font-semibold">
                         Devis rapide →
                       </Link>
                     </div>
@@ -128,78 +128,61 @@ export default function ServicesPage() {
         </section>
 
         {/* BANNIÈRE SUPPORT */}
-        <section className="bg-white border-t border-zinc-200 py-12">
+        <section className="bg-white border-t border-slate-200 py-16">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-            <h3 className="text-xl font-extrabold text-[#09090B] mb-2">
+            <h3 className="font-display text-3xl font-extrabold uppercase text-[#00243D] mb-2 tracking-tight">
               Un besoin logistique spécifique ou multimodal ?
             </h3>
-            <p className="text-sm text-zinc-600 max-w-xl mx-auto mb-6">
-              Nos courtiers et ingénieurs transport conçoivent des routes personnalisées combinant fret maritime, fluvial et routier.
+            <p className="text-sm text-slate-600 max-w-xl mx-auto mb-6 font-normal">
+              Nos courtiers et ingénieurs transport conçoivent des routes personnalisées combinant fret maritime, aérien et routier.
             </p>
             <Link href="/contact">
-              <Button size="lg" variant="primary">
-                Demander une étude sur mesure
-              </Button>
+              <button
+                type="button"
+                className="px-7 py-3 rounded-sm bg-[#00243D] hover:bg-[#003B64] text-white font-display font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer"
+              >
+                Demander une étude d&apos;expédition
+              </button>
             </Link>
           </div>
         </section>
-      </main>
 
-      {/* MODAL EN SAVOIR PLUS */}
-      <Modal
-        isOpen={!!selectedService}
-        onClose={() => setSelectedService(null)}
-        title={selectedService?.title || "Détails du service"}
-        description={selectedService?.shortDesc}
-        maxWidth="lg"
-        footer={
-          <>
-            <Button variant="outline" size="sm" onClick={() => setSelectedService(null)}>
-              Fermer
-            </Button>
-            <Link href="/contact" onClick={() => setSelectedService(null)}>
-              <Button variant="primary" size="sm">
-                Obtenir une cotation
-              </Button>
-            </Link>
-          </>
-        }
-      >
+        {/* MODALE DÉTAIL SERVICE */}
         {selectedService && (
-          <div className="space-y-4">
-            <div className="h-44 rounded-xl overflow-hidden relative">
-              <img
-                src={selectedService.image}
-                alt={selectedService.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
-                <span className="text-white font-bold text-sm bg-[#DC2626] px-3 py-1 rounded-full">
-                  {selectedService.badge || "Garantie Hervé Logistics"}
-                </span>
+          <Modal
+            isOpen={!!selectedService}
+            onClose={() => setSelectedService(null)}
+            title={selectedService.title}
+          >
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                {selectedService.description}
+              </p>
+              <div>
+                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-[#00243D] mb-2">Prestations incluses :</h4>
+                <ul className="space-y-2">
+                  {selectedService.features.map((feat) => (
+                    <li key={feat} className="flex items-center gap-2 text-xs text-slate-600">
+                      <CheckCircle2 className="w-4 h-4 text-[#42B0D5]" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="pt-4 border-t border-slate-200 flex justify-end gap-3">
+                <Button variant="outline" size="sm" onClick={() => setSelectedService(null)}>
+                  Fermer
+                </Button>
+                <Link href="/contact">
+                  <Button variant="primary" size="sm" className="bg-[#00243D] hover:bg-[#003B64] text-white font-display uppercase tracking-wider">
+                    Demander un devis
+                  </Button>
+                </Link>
               </div>
             </div>
-
-            <p className="text-sm text-zinc-700 leading-relaxed">
-              {selectedService.description}
-            </p>
-
-            <div className="bg-[#FEF2F2] p-4 rounded-xl border border-red-100">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#09090B] mb-2">
-                Spécifications & Inclus dans l&apos;offre :
-              </h4>
-              <ul className="space-y-1.5 text-xs text-zinc-700">
-                {selectedService.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#DC2626]" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          </Modal>
         )}
-      </Modal>
+      </main>
 
       <Footer />
     </div>

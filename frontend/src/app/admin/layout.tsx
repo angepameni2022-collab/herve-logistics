@@ -28,10 +28,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!mounted || !isAdminAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#FFC700] flex items-center justify-center text-slate-900">
-        <div className="text-center space-y-3 bg-white p-6 rounded-2xl shadow-xl">
-          <div className="w-8 h-8 border-3 border-[#171717] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-slate-700 font-semibold tracking-wide">
+      <div className="min-h-screen bg-[#001726] flex items-center justify-center text-white">
+        <div className="text-center space-y-3 bg-[#00243D] p-6 rounded-2xl border border-[#003B64] shadow-2xl">
+          <div className="w-8 h-8 border-3 border-[#42B0D5] border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs font-display uppercase tracking-wider text-white/80 font-bold">
             Vérification des accès administrateur...
           </p>
         </div>

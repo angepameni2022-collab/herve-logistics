@@ -21,15 +21,15 @@ export function TrackingProgress({ status, progress }: TrackingProgressProps) {
     <div className="w-full bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-xs">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-            Avancement du transit
+          <span className="font-display text-xs font-bold uppercase tracking-wider text-slate-400">
+            Avancement du transit · Maersk Network
           </span>
-          <div className="text-2xl sm:text-3xl font-extrabold text-[#09090B] mt-0.5">
+          <div className="font-display text-3xl sm:text-4xl font-extrabold uppercase text-[#00243D] mt-0.5">
             {progress}% complété
           </div>
         </div>
-        <div className="px-3.5 py-1.5 rounded-full bg-[#FEF2F2] text-[#DC2626] font-bold text-xs sm:text-sm border border-red-200 flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#DC2626] animate-pulse" />
+        <div className="px-3.5 py-1.5 rounded-sm bg-[#EBF6FA] text-[#0088B8] font-display font-bold text-xs sm:text-sm uppercase tracking-wider border border-[#42B0D5]/30 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#42B0D5] animate-pulse" />
           {status.toUpperCase()}
         </div>
       </div>
@@ -69,7 +69,7 @@ export function TrackingProgress({ status, progress }: TrackingProgressProps) {
                   {isCompleted ? (
                     <Check className="w-4 h-4 stroke-[3]" />
                   ) : isCurrent ? (
-                    <Clock className="w-4 h-4 text-[#DC2626] animate-spin" />
+                    <Clock className="w-4 h-4 text-[#42B0D5] animate-spin" />
                   ) : (
                     <span className="w-2 h-2 rounded-full bg-zinc-300" />
                   )}

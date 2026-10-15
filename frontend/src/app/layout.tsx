@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
 import { AppProvider } from "@/context/AppContext";
 
-const jakarta = Plus_Jakarta_Sans({
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-sans",
@@ -55,9 +62,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`h-full ${jakarta.variable}`} suppressHydrationWarning>
+    <html lang="fr" className={`h-full ${barlowCondensed.variable} ${inter.variable}`} suppressHydrationWarning>
       <body
-        className={`min-h-full flex flex-col bg-[#F8FAFC] text-[#09090B] ${jakarta.className} antialiased`}
+        className={`min-h-full flex flex-col bg-[#F8FAFC] text-[#00243D] ${inter.className} antialiased`}
         suppressHydrationWarning
       >
         <ToastProvider>

@@ -34,9 +34,9 @@ const InteractiveLeafletMap = dynamic(
     ssr: false,
     loading: () => (
       <div className="w-full h-[400px] bg-white rounded-2xl border border-zinc-200 flex flex-col items-center justify-center text-zinc-500 gap-3">
-        <div className="w-10 h-10 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-2 border-[#42B0D5] border-t-transparent rounded-full animate-spin" />
         <span className="text-sm font-semibold animate-pulse text-zinc-700">
-          Chargement de la carte blanche en direct...
+          Chargement de la carte en direct...
         </span>
       </div>
     ),

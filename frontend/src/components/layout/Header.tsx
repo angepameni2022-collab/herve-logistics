@@ -34,27 +34,27 @@ export function Header() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-md"
-          : "bg-white/90 backdrop-blur-sm border-b border-slate-200/60 shadow-xs"
+          ? "bg-[#00243D]/95 backdrop-blur-md border-b border-[#003B64] shadow-lg shadow-black/20"
+          : "bg-[#00243D]/90 backdrop-blur-sm border-b border-white/10"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* LOGO HERVÉ LOGISTICS */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+        {/* LOGO HERVÉ LOGISTICS (Charte Maersk) */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative flex h-10 items-center rounded-sm bg-[#DC2626] px-2.5 shadow-sm ring-1 ring-red-700/20">
-            <span className="font-mono text-[20px] font-black leading-none tracking-tight text-white">
+          <div className="relative flex h-10 items-center rounded-sm bg-[#42B0D5] px-2.5 shadow-sm ring-1 ring-black/10">
+            <span className="font-display text-[22px] font-extrabold leading-none tracking-tight text-[#00243D]">
               HV
             </span>
             <span
               aria-hidden="true"
-              className="ml-1 h-0 w-0 border-y-[9px] border-l-[9px] border-y-transparent border-l-white"
+              className="ml-1 h-0 w-0 border-y-[9px] border-l-[9px] border-y-transparent border-l-[#00243D]"
             />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-[19px] font-black uppercase tracking-tight text-slate-900">
-              Hervé <span className="text-[#DC2626]">Logistics</span>
+            <span className="font-display text-[20px] font-extrabold uppercase tracking-tight text-white">
+              Hervé <span className="text-[#42B0D5]">Logistics</span>
             </span>
-            <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+            <span className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">
               Global Logistics
             </span>
           </div>
@@ -68,8 +68,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-[13px] font-bold uppercase tracking-wider transition-colors hover:text-[#DC2626] ${
-                  active ? "text-[#DC2626] border-b-2 border-[#DC2626] pb-1" : "text-slate-700"
+                className={`font-display text-[15px] font-bold uppercase tracking-wider transition-colors hover:text-[#42B0D5] ${
+                  active ? "text-[#42B0D5] border-b-2 border-[#42B0D5] pb-0.5" : "text-white/85"
                 }`}
               >
                 {link.label}
@@ -82,15 +82,15 @@ export function Header() {
         <div className="hidden md:flex items-center gap-3">
           <Link
             href="/connexion"
-            className="inline-flex items-center justify-center whitespace-nowrap h-9 rounded-lg px-4 font-bold uppercase tracking-wider text-xs text-slate-700 hover:text-[#DC2626] hover:bg-red-50/70 border border-slate-200 transition-all"
+            className="inline-flex items-center justify-center whitespace-nowrap h-9 rounded-md px-4 font-display font-bold uppercase tracking-wider text-xs text-white/90 hover:text-white hover:bg-white/10 border border-white/20 transition-all cursor-pointer"
           >
             Connexion
           </Link>
           <Link
             href="/#tracking"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap h-9 px-5 bg-gradient-to-r from-[#DC2626] to-[#E11D48] text-white hover:from-[#B91C1C] hover:to-[#BE123C] font-black uppercase tracking-wider text-xs shadow-md shadow-red-500/25 rounded-lg transition-all active:scale-95"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap h-9 px-5 bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] font-display font-extrabold uppercase tracking-wider text-xs shadow-md shadow-[#42B0D5]/20 rounded-sm transition-all active:scale-95 cursor-pointer"
           >
-            <Search className="w-3.5 h-3.5" />
+            <Search className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>Suivre un colis</span>
           </Link>
         </div>
@@ -98,42 +98,48 @@ export function Header() {
         {/* Bouton Mobile Hamburger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-slate-800 hover:bg-slate-100 transition-colors"
+          className="md:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
           aria-label="Menu"
         >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Menu Déroulant Mobile */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 shadow-xl">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2 text-sm font-bold uppercase tracking-wider ${
-                isActive(link.href) ? "text-[#DC2626]" : "text-slate-700"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="pt-3 border-t border-slate-200 flex flex-col gap-2">
+        <div className="md:hidden bg-[#001F38] border-b border-[#003B64] px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top-4 duration-200 shadow-2xl">
+          <div className="flex flex-col space-y-2">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`font-display text-base font-bold uppercase tracking-wider px-3 py-2.5 rounded-lg transition-colors ${
+                    active ? "bg-[#42B0D5]/15 text-[#42B0D5]" : "text-white/80 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
             <Link
               href="/connexion"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-lg border border-slate-300 text-xs font-bold uppercase text-slate-700 hover:bg-slate-50"
+              className="w-full text-center py-2.5 rounded-lg border border-white/20 font-display font-bold uppercase tracking-wider text-xs text-white"
             >
-              Connexion
+              Connexion Espace Privé
             </Link>
             <Link
               href="/#tracking"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-lg bg-gradient-to-r from-[#DC2626] to-[#E11D48] text-xs font-bold uppercase text-white shadow-md shadow-red-500/20"
+              className="w-full text-center py-2.5 rounded-lg bg-[#42B0D5] text-[#00243D] font-display font-extrabold uppercase tracking-wider text-xs shadow-md"
             >
-              Suivre un colis
+              Suivre un colis en direct
             </Link>
           </div>
         </div>

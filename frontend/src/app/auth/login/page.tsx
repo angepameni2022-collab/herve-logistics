@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Shield, AlertCircle } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
@@ -52,49 +51,48 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-[#FFC700] select-none">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-[#001726] relative overflow-hidden select-none">
+      {/* Halos d'ambiance Maersk Blue */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#42B0D5]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#003B64]/40 rounded-full blur-2xl pointer-events-none" />
+
       {/* Carte Blanche Centrale */}
-      <div className="bg-white rounded-[26px] sm:rounded-[30px] shadow-2xl shadow-black/15 w-full max-w-[440px] p-7 sm:p-10 relative">
+      <div className="bg-white rounded-[26px] sm:rounded-[30px] shadow-2xl shadow-black/40 w-full max-w-[440px] p-7 sm:p-10 relative z-10 border border-slate-100">
         {/* Lien Retour au site */}
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-900 font-medium transition-colors mb-7 group"
+          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#00243D] font-medium transition-colors mb-7 group"
         >
           <span className="text-slate-400 group-hover:-translate-x-0.5 transition-transform">←</span>
           <span>Retour au site</span>
         </Link>
 
-        {/* Logo de marque */}
+        {/* Logo de marque (Charte Maersk) */}
         <div className="flex items-center gap-3.5 mb-7">
-          <div className="w-14 h-14 rounded-2xl bg-[#FFC700] p-1 flex items-center justify-center shadow-xs border border-amber-300/60 flex-shrink-0">
-            <Image
-              src="/images/logo-herve-hv.png"
-              alt="Hervé Transit"
-              width={48}
-              height={48}
-              className="w-full h-full object-contain"
-              priority
-            />
+          <div className="w-14 h-14 rounded-xl bg-[#42B0D5] p-1 flex items-center justify-center shadow-sm flex-shrink-0">
+            <span className="font-display text-[26px] font-extrabold text-[#00243D] leading-none">
+              HV
+            </span>
           </div>
           <div className="leading-tight">
-            <div className="text-xl font-black text-slate-950 tracking-tight flex items-center gap-1.5">
+            <div className="font-display text-2xl font-extrabold text-[#00243D] uppercase tracking-tight flex items-center gap-1.5">
               <span>HERVÉ</span>
-              <span className="text-[#DC2626]">TRANSIT</span>
+              <span className="text-[#42B0D5]">LOGISTICS</span>
             </div>
-            <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-0.5">
-              GLOBAL LOGISTICS
+            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+              GLOBAL LOGISTICS · MAERSK NETWORK
             </div>
           </div>
         </div>
 
         {/* Badge Espace Privé */}
-        <div className="flex items-center gap-1.5 text-xs font-bold text-[#E5A500] uppercase tracking-wider mb-1.5">
-          <Shield className="w-3.5 h-3.5 text-[#E5A500]" />
+        <div className="flex items-center gap-1.5 text-xs font-display font-extrabold text-[#0088B8] uppercase tracking-wider mb-1.5">
+          <Shield className="w-4 h-4 text-[#42B0D5]" />
           <span>ESPACE PRIVÉ</span>
         </div>
 
         {/* Titre & Sous-titre */}
-        <h1 className="text-2xl sm:text-[25px] font-black text-slate-950 tracking-tight leading-snug">
+        <h1 className="font-display text-3xl font-extrabold uppercase text-[#00243D] tracking-tight leading-tight">
           Connexion à votre espace
         </h1>
         <p className="text-xs sm:text-[13px] text-slate-500 mt-2 mb-6 leading-relaxed">
@@ -103,7 +101,7 @@ export default function LoginPage() {
 
         {/* Message d'erreur */}
         {errorMsg && (
-          <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-[#DC2626] font-semibold flex items-center gap-2 mb-4">
+          <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600 font-semibold flex items-center gap-2 mb-4">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{errorMsg}</span>
           </div>
@@ -119,7 +117,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl border border-slate-200/90 bg-white py-3 px-3.5 text-sm text-slate-900 focus:outline-none focus:border-[#FFC700] focus:ring-2 focus:ring-[#FFC700]/30 transition-all font-medium"
+              className="w-full rounded-xl border border-slate-200 bg-white py-3 px-3.5 text-sm text-[#00243D] focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all font-medium"
               required
             />
           </div>
@@ -132,7 +130,7 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-200/90 bg-white py-3 px-3.5 text-sm text-slate-900 focus:outline-none focus:border-[#FFC700] focus:ring-2 focus:ring-[#FFC700]/30 transition-all font-mono"
+              className="w-full rounded-xl border border-slate-200 bg-white py-3 px-3.5 text-sm text-[#00243D] focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all font-mono"
               required
             />
           </div>
@@ -140,7 +138,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#171717] hover:bg-black active:scale-[0.99] text-white font-bold text-sm tracking-wide transition-all shadow-md cursor-pointer disabled:opacity-60"
+            className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#00243D] hover:bg-[#003B64] active:scale-[0.99] text-white font-display font-extrabold uppercase tracking-wider text-sm transition-all shadow-lg shadow-[#00243D]/25 cursor-pointer disabled:opacity-60"
           >
             {isLoading ? "Connexion en cours..." : "Se connecter"}
           </button>
@@ -151,7 +149,7 @@ export default function LoginPage() {
           <span>Vous souhaitez expédier ? </span>
           <Link
             href="/auth/register"
-            className="font-bold text-slate-900 hover:text-[#DC2626] transition-colors"
+            className="font-display font-bold uppercase tracking-wider text-[#00243D] hover:text-[#42B0D5] transition-colors"
           >
             Créer un compte d&apos;expédition →
           </Link>

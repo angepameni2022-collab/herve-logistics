@@ -65,7 +65,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-[#F8FAFC] relative">
-      <div className="absolute top-0 left-0 right-0 h-84 bg-gradient-to-br from-[#DC2626] via-[#E11D48] to-[#B91C1C] border-b border-red-700/30 -z-0 shadow-lg" />
+      <div className="absolute top-0 left-0 right-0 h-84 bg-gradient-brand border-b border-[#003B64] -z-0 shadow-lg" />
 
       <div className="relative z-10 w-full max-w-xl">
         {/* Brand Header */}
@@ -82,10 +82,10 @@ export default function RegisterPage() {
               />
             </div>
             <div className="text-left">
-              <span className="text-2xl font-black text-white tracking-tight leading-none block">
-                HERVÉ <span className="text-white drop-shadow-sm">LOGISTICS</span>
+              <span className="font-display text-2xl font-extrabold text-white tracking-tight leading-none block uppercase">
+                HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
               </span>
-              <span className="text-[10px] font-bold text-red-100 uppercase tracking-widest">
+              <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">
                 Transit Maritime & Aérien International · Corée du Sud
               </span>
             </div>
@@ -93,17 +93,17 @@ export default function RegisterPage() {
         </div>
 
         {/* Card Formulaire */}
-        <div className="bg-white rounded-3xl border border-zinc-200 shadow-2xl p-7 sm:p-10">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-7 sm:p-10">
           {/* Badge Inscription Obligatoire */}
           <div className="mb-6 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#DC2626] text-xs font-bold mb-3">
-              <AlertCircle className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-sm bg-[#EBF6FA] border border-[#42B0D5]/30 text-[#0088B8] font-display text-xs font-bold uppercase tracking-wider mb-3">
+              <AlertCircle className="w-3.5 h-3.5 text-[#42B0D5]" />
               <span>INSCRIPTION OBLIGATOIRE POUR EXPÉDIER</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#09090B]">
+            <h1 className="font-display text-3xl sm:text-4xl font-extrabold uppercase text-[#00243D] tracking-tight">
               Créer mon compte client
             </h1>
-            <p className="text-sm text-zinc-600 mt-2 leading-relaxed">
+            <p className="text-sm text-slate-600 mt-2 leading-relaxed font-normal">
               Pour toute prise en charge de vos marchandises, l&apos;enregistrement de vos coordonnées est obligatoire afin que nos équipes logistiques puissent vous attribuer votre <strong>code de suivi officiel</strong>.
             </p>
           </div>
@@ -254,9 +254,9 @@ export default function RegisterPage() {
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className="w-full bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black"
+                  className="w-full bg-[#00243D] hover:bg-[#003B64] text-white font-display font-extrabold uppercase tracking-wider"
                   isLoading={isLoading}
-                  rightIcon={<ArrowRight className="w-4 h-4" />}
+                  rightIcon={<ArrowRight className="w-4 h-4 text-[#42B0D5]" />}
                 >
                   S&apos;inscrire & Déclarer mes informations
                 </Button>
@@ -264,9 +264,9 @@ export default function RegisterPage() {
             </form>
           )}
 
-          <p className="mt-8 text-center text-xs text-zinc-500">
+          <p className="mt-8 text-center text-xs text-slate-500">
             Vous avez déjà un compte client ?{" "}
-            <Link href="/auth/login" className="font-bold text-[#DC2626] hover:underline">
+            <Link href="/auth/login" className="font-display font-bold uppercase tracking-wider text-[#00243D] hover:text-[#42B0D5] hover:underline">
               Se connecter
             </Link>
           </p>
