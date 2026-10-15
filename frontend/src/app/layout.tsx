@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
@@ -18,12 +18,31 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#121212",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://herve-logistics.vercel.app"),
   title: "Hervé Logistics — Plateforme Officielle de Suivi & Transit International",
   description: "Plateforme logistique internationale : Transport maritime, aérien, routier, conteneurs, fret et suivi en direct par satellite.",
   keywords: ["Hervé Logistics", "Hervé Transit", "suivi de colis", "fret maritime", "transit international", "tracking maritime", "conteneurs 40 HC"],
   authors: [{ name: "Hervé Logistics" }],
+  applicationName: "Hervé Logistics",
+  appleWebApp: {
+    capable: true,
+    title: "Hervé Logistics",
+    statusBarStyle: "black-translucent",
+  },
+  formatDetection: {
+    telephone: true,
+    date: true,
+    address: true,
+    email: true,
+  },
   openGraph: {
     title: "Hervé Logistics — Plateforme Officielle de Suivi & Transit International",
     description: "Plateforme logistique internationale : Transport maritime, aérien, routier, conteneurs, fret et suivi en direct par satellite.",
@@ -31,10 +50,10 @@ export const metadata: Metadata = {
     siteName: "Hervé Logistics",
     images: [
       {
-        url: "/images/logo-herve-hv.png",
-        width: 800,
-        height: 600,
-        alt: "Hervé Logistics",
+        url: "/images/logo-herve-official.png",
+        width: 1024,
+        height: 1024,
+        alt: "Logo Officiel Hervé Logistics",
       },
     ],
     locale: "fr_FR",
@@ -44,15 +63,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Hervé Logistics — Plateforme Officielle de Suivi & Transit International",
     description: "Suivez vos marchandises partout dans le monde avec précision satellite et transparence.",
-    images: ["/images/logo-herve-hv.png"],
+    images: ["/images/logo-herve-official.png"],
   },
   icons: {
     icon: [
-      { url: "/images/logo-herve-hv.png", type: "image/png" },
+      { url: "/images/logo-herve-official.png", type: "image/png" },
       { url: "/icon.png", type: "image/png" },
       { url: "/favicon.ico", type: "image/x-icon" },
     ],
-    apple: "/images/logo-herve-hv.png",
+    apple: "/images/logo-herve-official.png",
   },
 };
 

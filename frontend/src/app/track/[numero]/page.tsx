@@ -11,6 +11,7 @@ import { TrackingSearchBox } from "@/components/tracking/TrackingSearchBox";
 import { useApp } from "@/context/AppContext";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { useToast } from "@/components/ui/Toast";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -19,6 +20,8 @@ import {
   MapPin,
   Printer,
   ShieldCheck,
+  Share2,
+  MessageCircle,
 } from "lucide-react";
 
 export default function TrackingDetailPage({
@@ -29,8 +32,32 @@ export default function TrackingDetailPage({
   const unwrappedParams = use(params);
   const rawNumero = decodeURIComponent(unwrappedParams.numero || "");
   const { getShipmentByNumber } = useApp();
+  const { showToast } = useToast();
 
   const shipment = getShipmentByNumber(rawNumero);
+
+  const handleShare = async () => {
+    const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+    const shareData = {
+      title: `Suivi Colis ${shipment?.trackingNumber || ""} — Hervé Logistics`,
+      text: `Suivez l'acheminement de votre expédition ${shipment?.trackingNumber || ""} en direct sur Hervé Logistics :`,
+      url: shareUrl,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch {
+        // User dismissed share dialog
+      }
+    }
+
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(shareUrl);
+      showToast("Lien de suivi copié ! Prêt à être partagé.", "success");
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
@@ -113,7 +140,7 @@ export default function TrackingDetailPage({
                     <Badge status={shipment.status} size="md" />
                     <span className="text-xs font-display font-bold uppercase tracking-wider bg-[#121212] text-white px-2.5 py-1 rounded-sm inline-flex items-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-[#FFB800]" />
-                      Officiel Herv� Logistics Network
+                      Officiel Hervé Logistics Network
                     </span>
                     <span className="text-xs text-slate-500 font-medium">
                       Mode : {shipment.mode}
@@ -132,13 +159,38 @@ export default function TrackingDetailPage({
                 </div>
 
                 {/* Actions boutons */}
-                <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="flex items-center gap-2 sm:gap-3 flex-wrap flex-shrink-0">
+                  <button
+                    onClick={handleShare}
+                    type="button"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-display font-bold uppercase tracking-wider text-[#121212] bg-[#FFB800] hover:bg-[#E0A200] transition-all shadow-xs"
+                    title="Partager le suivi (WhatsApp, SMS, Copier le lien)"
+                  >
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>Partager</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+                      const text = encodeURIComponent(`Suivez votre expédition Hervé Logistics n° ${shipment.trackingNumber} en temps réel ici : ${shareUrl}`);
+                      window.open(`https://wa.me/?text=${text}`, '_blank');
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-display font-bold uppercase tracking-wider text-white bg-[#25D366] hover:bg-[#20ba59] transition-all shadow-xs"
+                    title="Partager directement sur WhatsApp"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>WhatsApp</span>
+                  </button>
+
                   <button
                     onClick={() => window.print()}
+                    type="button"
                     className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-display font-bold uppercase tracking-wider text-[#121212] bg-slate-100 hover:bg-slate-200 transition-colors"
                   >
                     <Printer className="w-3.5 h-3.5" />
-                    <span>Imprimer le reçu</span>
+                    <span>Imprimer</span>
                   </button>
                   <Link href="/contact">
                     <Button variant="secondary" size="sm">
