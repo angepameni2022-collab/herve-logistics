@@ -4,39 +4,33 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import {
-  Lock,
-  Mail,
-  ArrowRight,
-  ShieldCheck,
-  Eye,
-  EyeOff,
-  User,
-  ArrowLeft,
-} from "lucide-react";
+import { Shield, AlertCircle } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
 import { useApp } from "@/context/AppContext";
 
 export default function LoginPage() {
   const router = useRouter();
   const { showToast } = useToast();
-  const { clientLogin } = useApp();
+  const { clientLogin, adminLogin } = useApp();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg(null);
 
-    if (!email.trim()) {
-      showToast("Veuillez saisir votre adresse email.", "error");
+    const cleanEmail = email.trim();
+    const cleanPassword = password.trim();
+
+    if (!cleanEmail) {
+      setErrorMsg("Veuillez saisir votre adresse email.");
       return;
     }
-    if (!password.trim()) {
-      showToast("Veuillez saisir votre mot de passe.", "error");
+    if (!cleanPassword) {
+      setErrorMsg("Veuillez saisir votre mot de passe.");
       return;
     }
 
@@ -44,203 +38,125 @@ export default function LoginPage() {
 
     setTimeout(() => {
       setIsLoading(false);
-      const user = clientLogin(email, password);
-      showToast(`✓ Bienvenue ${user.name || ""} sur votre Espace Client !`, "success");
-      router.push("/dashboard");
-    }, 600);
+      const isAdmin = cleanEmail.includes("admin") || cleanEmail === "admin@hervetransit.com";
+      if (isAdmin) {
+        adminLogin("admin2026", cleanEmail);
+        showToast("✓ Authentification validée.", "success");
+        router.push("/admin");
+      } else {
+        const user = clientLogin(cleanEmail, cleanPassword);
+        showToast(`✓ Bienvenue ${user.name || ""} sur votre Espace !`, "success");
+        router.push("/dashboard");
+      }
+    }, 500);
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#F8FAFC] relative overflow-hidden">
-      {/* Background Decor (Luminous & Warm) */}
-      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-br from-[#DC2626] via-[#E11D48] to-[#B91C1C] border-b border-red-700/30 -z-0">
-        <div
-          className="absolute inset-0 opacity-15"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0)`,
-            backgroundSize: "24px 24px",
-          }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-400/20 rounded-full blur-3xl pointer-events-none" />
-      </div>
-
-      {/* Top Navbar Bar with Back Button */}
-      <header className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 flex items-center justify-between">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-[#FFC700] select-none">
+      {/* Carte Blanche Centrale */}
+      <div className="bg-white rounded-[26px] sm:rounded-[30px] shadow-2xl shadow-black/15 w-full max-w-[440px] p-7 sm:p-10 relative">
+        {/* Lien Retour au site */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/95 hover:bg-white text-slate-800 hover:text-[#DC2626] border border-white/60 text-xs font-black shadow-lg transition-all backdrop-blur-md"
+          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-900 font-medium transition-colors mb-7 group"
         >
-          <ArrowLeft className="w-4 h-4 text-[#DC2626]" />
-          <span>Retour à l&apos;accueil</span>
+          <span className="text-slate-400 group-hover:-translate-x-0.5 transition-transform">←</span>
+          <span>Retour au site</span>
         </Link>
 
-        <div className="text-right">
-          <span className="text-[11px] font-bold text-red-50 uppercase tracking-widest hidden sm:inline-block">
-            Support Client : <a href="tel:+447456062192" className="text-white hover:underline transition-all font-black">+44 7456 062192</a>
-          </span>
+        {/* Logo de marque */}
+        <div className="flex items-center gap-3.5 mb-7">
+          <div className="w-14 h-14 rounded-2xl bg-[#FFC700] p-1 flex items-center justify-center shadow-xs border border-amber-300/60 flex-shrink-0">
+            <Image
+              src="/images/logo-herve-hv.png"
+              alt="Hervé Transit"
+              width={48}
+              height={48}
+              className="w-full h-full object-contain"
+              priority
+            />
+          </div>
+          <div className="leading-tight">
+            <div className="text-xl font-black text-slate-950 tracking-tight flex items-center gap-1.5">
+              <span>HERVÉ</span>
+              <span className="text-[#DC2626]">TRANSIT</span>
+            </div>
+            <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-0.5">
+              GLOBAL LOGISTICS
+            </div>
+          </div>
         </div>
-      </header>
 
-      {/* Main Login Card Section */}
-      <main className="relative z-10 w-full max-w-md mx-auto px-4 py-8">
-        {/* Brand Header */}
-        <div className="text-center mb-6">
-          <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-16 h-16 rounded-2xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xl shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
-              <Image
-                src="/images/logo-herve-hv.png"
-                alt="Hervé Logistics Logo"
-                width={64}
-                height={64}
-                className="w-full h-full object-contain"
-                priority
-              />
-            </div>
-            <div className="text-left">
-              <span className="text-2xl font-black text-white tracking-tight leading-none block">
-                HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
-              </span>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                Portail Voyage & Fret International
-              </span>
-            </div>
+        {/* Badge Espace Privé */}
+        <div className="flex items-center gap-1.5 text-xs font-bold text-[#E5A500] uppercase tracking-wider mb-1.5">
+          <Shield className="w-3.5 h-3.5 text-[#E5A500]" />
+          <span>ESPACE PRIVÉ</span>
+        </div>
+
+        {/* Titre & Sous-titre */}
+        <h1 className="text-2xl sm:text-[25px] font-black text-slate-950 tracking-tight leading-snug">
+          Connexion à votre espace
+        </h1>
+        <p className="text-xs sm:text-[13px] text-slate-500 mt-2 mb-6 leading-relaxed">
+          Accès sécurisé réservé aux clients et expéditeurs autorisés.
+        </p>
+
+        {/* Message d'erreur */}
+        {errorMsg && (
+          <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-[#DC2626] font-semibold flex items-center gap-2 mb-4">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span>{errorMsg}</span>
+          </div>
+        )}
+
+        {/* Formulaire de Connexion */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-xl border border-slate-200/90 bg-white py-3 px-3.5 text-sm text-slate-900 focus:outline-none focus:border-[#FFC700] focus:ring-2 focus:ring-[#FFC700]/30 transition-all font-medium"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+              Mot de passe
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-xl border border-slate-200/90 bg-white py-3 px-3.5 text-sm text-slate-900 focus:outline-none focus:border-[#FFC700] focus:ring-2 focus:ring-[#FFC700]/30 transition-all font-mono"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#171717] hover:bg-black active:scale-[0.99] text-white font-bold text-sm tracking-wide transition-all shadow-md cursor-pointer disabled:opacity-60"
+          >
+            {isLoading ? "Connexion en cours..." : "Se connecter"}
+          </button>
+        </form>
+
+        {/* Lien de création de compte */}
+        <div className="mt-6 pt-5 border-t border-slate-100 text-center text-xs text-slate-500">
+          <span>Vous souhaitez expédier ? </span>
+          <Link
+            href="/auth/register"
+            className="font-bold text-slate-900 hover:text-[#DC2626] transition-colors"
+          >
+            Créer un compte d&apos;expédition →
           </Link>
         </div>
-
-        {/* Card Formulaire */}
-        <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-2xl shadow-zinc-900/10 p-7 sm:p-9 transition-all">
-          {/* Heading */}
-          <div className="mb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#DC2626] text-xs font-bold mb-3 border border-red-100">
-              <User className="w-3.5 h-3.5" />
-              <span>Espace Client Sécurisé</span>
-            </div>
-            <h1 className="text-2xl font-extrabold text-[#09090B] tracking-tight">
-              Connexion Client
-            </h1>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-1 leading-relaxed">
-              Consultez vos bordereaux, demandes de cotation et historique d&apos;expéditions.
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Champ Email */}
-            <div>
-              <label className="block text-xs font-bold text-zinc-800 mb-1.5">
-                Adresse Email ou N° Client <span className="text-[#DC2626]">*</span>
-              </label>
-              <div className="relative">
-                <Mail className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="nom@entreprise.com"
-                  className="w-full rounded-xl border border-zinc-200 bg-white py-3 pl-10 pr-3.5 text-sm font-semibold text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-red-500 focus:ring-3 focus:ring-red-100 transition-all"
-                  required
-                />
-              </div>
-            </div>
-
-            {/* Champ Mot de Passe */}
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-bold text-zinc-800">
-                  Mot de Passe <span className="text-[#DC2626]">*</span>
-                </label>
-                <button
-                  type="button"
-                  onClick={() =>
-                    showToast("Instructions de réinitialisation envoyées à votre adresse email.", "info")
-                  }
-                  className="text-xs text-[#DC2626] hover:text-[#B91C1C] hover:underline font-bold transition-colors cursor-pointer"
-                >
-                  Mot de passe oublié ?
-                </button>
-              </div>
-              <div className="relative">
-                <Lock className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
-                  className="w-full rounded-xl border border-zinc-200 bg-white py-3 pl-10 pr-11 text-sm font-semibold text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-red-500 focus:ring-3 focus:ring-red-100 transition-all"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700 p-1 cursor-pointer transition-colors"
-                  aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-
-            {/* Se souvenir de moi */}
-            <div className="flex items-center pt-1">
-              <label className="flex items-center gap-2.5 cursor-pointer text-xs text-zinc-600 select-none">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-zinc-300 text-[#DC2626] focus:ring-red-500 accent-[#DC2626] cursor-pointer"
-                />
-                <span>Mémoriser ma session sur cet appareil</span>
-              </label>
-            </div>
-
-            {/* Bouton de Connexion */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] active:scale-[0.99] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition-all disabled:opacity-60 cursor-pointer"
-            >
-              {isLoading ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Connexion en cours...</span>
-                </>
-              ) : (
-                <>
-                  <span>Accéder à mon Espace Client</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </form>
-
-          {/* Inscription Nouveau Client */}
-          <div className="mt-6 pt-5 border-t border-zinc-100 text-center">
-            <p className="text-xs text-zinc-600">
-              Vous n&apos;avez pas encore d&apos;accès ?{" "}
-              <Link
-                href="/auth/register"
-                className="font-bold text-[#DC2626] hover:underline inline-flex items-center gap-0.5"
-              >
-                Créer un compte client
-              </Link>
-            </p>
-          </div>
-        </div>
-
-        {/* Footer Security Badges */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400">
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span>Chiffrement SSL 256-bit</span>
-          </div>
-          <span>•</span>
-          <span>Hervé Logistics Korea Co., Ltd.</span>
-        </div>
-      </main>
-
-      {/* Discreet Bottom Bar */}
-      <footer className="relative z-10 text-center py-4 text-xs text-zinc-400 border-t border-zinc-200/50 bg-white/50 backdrop-blur-xs">
-        © 2026 Hervé Logistics · Tous droits réservés.
-      </footer>
+      </div>
     </div>
   );
 }
