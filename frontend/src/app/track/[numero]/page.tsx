@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use } from "react";
+import React, { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -10,6 +10,7 @@ import { useApp } from "@/context/AppContext";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { useToast } from "@/components/ui/Toast";
+import { Shipment } from "@/data/shipments";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -31,6 +32,7 @@ import {
   TrendingUp,
   Activity,
   CheckCircle2,
+  Loader2,
 } from "lucide-react";
 
 export default function TrackingDetailPage({
@@ -43,7 +45,27 @@ export default function TrackingDetailPage({
   const { getShipmentByNumber } = useApp();
   const { showToast } = useToast();
 
-  const shipment = getShipmentByNumber(rawNumero);
+  const localShipment = getShipmentByNumber(rawNumero);
+  const [apiShipment, setApiShipment] = useState<Shipment | null>(null);
+  const [isSearchingApi, setIsSearchingApi] = useState(false);
+
+  // Si non trouvé en mémoire locale, vérifier immédiatement la base cloud
+  useEffect(() => {
+    if (!localShipment && rawNumero) {
+      setIsSearchingApi(true);
+      fetch(`/api/shipments/${encodeURIComponent(rawNumero)}`)
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.success && json.data) {
+            setApiShipment(json.data);
+          }
+        })
+        .catch(() => {})
+        .finally(() => setIsSearchingApi(false));
+    }
+  }, [localShipment, rawNumero]);
+
+  const shipment = localShipment || apiShipment;
 
   // Logistics calculations matching user screenshot style (alain-logistics)
   const totalDistanceKm = 24284;
@@ -112,8 +134,15 @@ export default function TrackingDetailPage({
             </div>
           </div>
 
-          {/* ÉTAT TRACKING INTROUVABLE */}
-          {!shipment ? (
+          {/* ÉTAT CHARGEMENT BASE CLOUD */}
+          {isSearchingApi && !shipment ? (
+            <div className="max-w-xl mx-auto my-16 bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center shadow-md">
+              <Loader2 className="w-8 h-8 text-[#FFB800] animate-spin mx-auto mb-4" />
+              <p className="text-sm font-semibold text-slate-700">
+                Recherche de l&apos;expédition n° <span className="font-mono font-bold text-[#121212]">{rawNumero}</span> sur le réseau...
+              </p>
+            </div>
+          ) : !shipment ? (
             <div className="max-w-xl mx-auto my-12 bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center shadow-xl">
               <div className="w-16 h-16 rounded-2xl bg-[#FFFBEB] text-[#B45309] flex items-center justify-center mx-auto mb-5 border border-[#FFB800]/30">
                 <AlertTriangle className="w-8 h-8" />

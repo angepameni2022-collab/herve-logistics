@@ -81,8 +81,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [currentUser, setCurrentUser] = useState<UserProfile>(currentUserClient);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(false);
 
-  // Load persisted shipments, clients and auth state on client mount
+  // Load persisted shipments, clients and auth state on client mount + sync with cloud API
   useEffect(() => {
+    let isMounted = true;
+
     try {
       if (typeof window !== "undefined") {
         const savedShipments = localStorage.getItem(STORAGE_KEY_SHIPMENTS);
@@ -114,6 +116,39 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // LocalStorage error fallback
     }
+
+    // Interroger la base de données cloud (/api/shipments) pour synchroniser tous les téléphones
+    async function syncCloudShipments() {
+      try {
+        const res = await fetch("/api/shipments");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+            if (isMounted) {
+              setShipments((prevLocal) => {
+                // Fusionner intelligemment : les données de la base cloud ont la priorité
+                const map = new Map<string, Shipment>();
+                json.data.forEach((s: Shipment) => map.set(s.trackingNumber.toUpperCase(), s));
+                prevLocal.forEach((s: Shipment) => {
+                  if (!map.has(s.trackingNumber.toUpperCase())) {
+                    map.set(s.trackingNumber.toUpperCase(), s);
+                  }
+                });
+                return Array.from(map.values());
+              });
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("API /api/shipments non disponible (mode hors-ligne):", err);
+      }
+    }
+
+    syncCloudShipments();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   // Sync shipments to localStorage whenever updated
@@ -126,6 +161,41 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       // LocalStorage error fallback
     }
   }, [shipments]);
+
+  // Helpers pour persister immédiatement vers MongoDB Cloud
+  const persistShipmentToApi = async (s: Shipment) => {
+    try {
+      await fetch("/api/shipments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(s),
+      });
+    } catch (e) {
+      console.warn("Could not save shipment to /api/shipments:", e);
+    }
+  };
+
+  const updateShipmentToApi = async (trackingNumber: string, update: Partial<Shipment>) => {
+    try {
+      await fetch(`/api/shipments/${encodeURIComponent(trackingNumber)}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(update),
+      });
+    } catch (e) {
+      console.warn("Could not update shipment via API:", e);
+    }
+  };
+
+  const deleteShipmentFromApi = async (trackingNumber: string) => {
+    try {
+      await fetch(`/api/shipments/${encodeURIComponent(trackingNumber)}`, {
+        method: "DELETE",
+      });
+    } catch (e) {
+      console.warn("Could not delete shipment via API:", e);
+    }
+  };
 
   // Sync clients to localStorage whenever updated
   useEffect(() => {
@@ -334,6 +404,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
 
     setShipments((prev) => [newShipment, ...prev]);
+    persistShipmentToApi(newShipment);
 
     setCurrentUser((prev) => ({
       ...prev,
@@ -375,6 +446,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
 
     setShipments((prev) => [newShipment, ...prev]);
+    persistShipmentToApi(newShipment);
     addActivityLog("Admin", "Création", newShipment.trackingNumber, `Nouvel envoi créé (${data.origin} → ${data.destination})`);
     return newShipment;
   };
@@ -384,6 +456,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const now = new Date();
     const dateFormatted = now.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" });
     const timeFormatted = now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+
+    let finalUpdated: Shipment | null = null;
 
     setShipments((prev) =>
       prev.map((s) => {
@@ -405,7 +479,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
               ]
             : s.events;
 
-          return {
+          const updated: Shipment = {
             ...s,
             currentCoordinates: { lat: update.lat, lng: update.lng },
             currentLocationName: update.locationName,
@@ -413,10 +487,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             status: update.status,
             events: updatedEvents,
           };
+          finalUpdated = updated;
+          return updated;
         }
         return s;
       })
     );
+
+    if (finalUpdated) {
+      updateShipmentToApi(trackingNumber, finalUpdated);
+    }
 
     addActivityLog(
       "Admin",
@@ -430,11 +510,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setShipments((prev) =>
       prev.map((s) => (s.trackingNumber === trackingNumber ? { ...s, status, progress } : s))
     );
+    updateShipmentToApi(trackingNumber, { status, progress });
     addActivityLog("Admin", "Modification", trackingNumber, `Statut mis à jour : ${status} (${progress}%)`);
   };
 
   const deleteShipment = (trackingNumber: string) => {
     setShipments((prev) => prev.filter((s) => s.trackingNumber !== trackingNumber));
+    deleteShipmentFromApi(trackingNumber);
     addActivityLog("Admin", "Suppression", trackingNumber, `Suppression de l'envoi`);
   };
 
@@ -448,12 +530,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       prev.map((s) => {
         if (s.trackingNumber === trackingNumber) {
           const updatedEvents = [newEvent, ...s.events];
-          return {
+          const updatedShipment = {
             ...s,
             events: updatedEvents,
             currentLocationName: eventData.location,
             status: eventData.status === "Arrivée prévue" ? s.status : eventData.status,
           };
+          updateShipmentToApi(trackingNumber, updatedShipment);
+          return updatedShipment;
         }
         return s;
       })
