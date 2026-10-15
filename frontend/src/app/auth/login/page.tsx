@@ -150,16 +150,6 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* Lien de création de compte */}
-        <div className="mt-6 pt-5 border-t border-slate-100 text-center text-xs text-slate-500">
-          <span>Vous souhaitez expédier ? </span>
-          <Link
-            href="/auth/register"
-            className="font-display font-bold uppercase tracking-wider text-[#121212] hover:text-[#FFB800] transition-colors"
-          >
-            Créer un compte d&apos;expédition →
-          </Link>
-        </div>
       </div>
     </div>
   );
