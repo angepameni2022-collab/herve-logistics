@@ -15,6 +15,8 @@ import {
   Boxes,
   PackageCheck,
   FileCheck2,
+  Car,
+  Warehouse,
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
@@ -26,6 +28,8 @@ const iconMap: Record<string, React.ReactNode> = {
   Boxes: <Boxes className="w-6 h-6" />,
   PackageCheck: <PackageCheck className="w-6 h-6" />,
   FileCheck2: <FileCheck2 className="w-6 h-6" />,
+  Car: <Car className="w-6 h-6" />,
+  Warehouse: <Warehouse className="w-6 h-6" />,
 };
 
 export default function ServicesPage() {

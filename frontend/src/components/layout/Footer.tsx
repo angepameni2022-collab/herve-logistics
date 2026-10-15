@@ -114,9 +114,22 @@ export function Footer() {
 
       {/* Barre de copyright basse */}
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <p>© 2026 Hervé Logistics. Tous droits réservés.</p>
-          <p className="uppercase tracking-wider text-[10px]">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-white/70">
+            <Link href="/legal" className="hover:text-white transition-colors">
+              Mentions Légales
+            </Link>
+            <span className="text-white/30">·</span>
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Confidentialité
+            </Link>
+            <span className="text-white/30">·</span>
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Conditions Générales (CGV)
+            </Link>
+          </div>
+          <p className="uppercase tracking-wider text-[10px] text-white/40">
             Global Logistics · Import · Export · Sea · Air · Road
           </p>
         </div>

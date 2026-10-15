@@ -76,5 +76,27 @@ export const servicesData: ServiceItem[] = [
     image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1200&q=80",
     badge: "Conseil & Douane",
     features: ["Déclarations douanières simplifiées", "Gestion des accises et taxes", "Certificats de conformité", "Audit logistique"]
+  },
+  {
+    id: "vehicules",
+    title: "Vente & Transport de Véhicules",
+    slug: "vehicules",
+    shortDesc: "Achat, inspection et acheminement maritime sécurisé de véhicules.",
+    description: "Acheminement de véhicules neufs et d'occasion en navires rouliers (RoRo) ou conteneurs scellés. Gestion des formalités de transit, certificat d'inspection et conformité portuaire.",
+    iconName: "Car",
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
+    badge: "RoRo & Conteneur Auto",
+    features: ["Navires rouliers RoRo dédiés", "Inspection technique avant départ", "Sécurisation en conteneur individuel", "Transit et dédouanement carte grise"]
+  },
+  {
+    id: "entreposage",
+    title: "Entreposage & Consolidation",
+    slug: "entreposage",
+    shortDesc: "Stockage sous douane, consolidation multi-fournisseurs et gestion de stocks.",
+    description: "Plateformes logistiques sécurisées aux nœuds portuaires et aéroportuaires stratégiques. Consolidation de vos marchandises, reconditionnement et préparation de commandes avant expédition.",
+    iconName: "Warehouse",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    badge: "Hubs Sous Douane",
+    features: ["Entrepôts sous surveillance 24/7", "Consolidation de cargaisons groupées", "Palettisation et étiquetage", "Cross-docking et expédition rapide"]
   }
 ];

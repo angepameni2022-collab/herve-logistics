@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -75,25 +75,25 @@ export default function AboutPage() {
                 </div>
 
                 <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.2] mb-6">
-                  La même rigueur et transparence que les plus grands transporteurs mondiaux
+                  Une exigence alignée sur les meilleurs standards mondiaux du transport
                 </h2>
 
                 <div className="space-y-5 text-base sm:text-lg text-zinc-300 leading-relaxed">
                   <p className="font-medium text-white/95">
-                    {aboutPage.missionText1 || "Notre mission est simple : offrir à chaque client la même transparence, la même précision et le même niveau de service que les plus grands transporteurs mondiaux — DHL, FedEx, UPS, MSC, Maersk ou CMA CGM — dans une interface fluide, moderne et sécurisée."}
+                    {aboutPage.missionText1 || "Notre mission est simple : offrir à chaque importateur, entreprise et particulier une transparence totale, une précision d'orfèvre et un suivi télématique en temps réel, dans une interface fluide, moderne et hautement sécurisée."}
                   </p>
 
                   <p className="text-zinc-300">
-                    {aboutPage.missionText2 || "Nous accompagnons entreprises, importateurs et particuliers dans le suivi de leurs colis, conteneurs et véhicules à travers plus de 180 pays, 24h/24."}
+                    {aboutPage.missionText2 || "Nous orchestrons le suivi de vos colis, conteneurs maritimes et véhicules à travers plus de 180 pays, en intégrant les données télématiques et les manifestes douaniers 24h/24."}
                   </p>
                 </div>
 
-                {/* Badges Leaders Mondiaux */}
+                {/* Badges Interopérabilité Réseaux */}
                 <div className="mt-8 pt-8 border-t border-zinc-800/80 flex flex-wrap items-center gap-2 sm:gap-3">
                   <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 mr-2">
-                    Exigence & Standards :
+                    Interopérabilité réseaux & corridors :
                   </span>
-                  {["DHL", "FedEx", "UPS", "MSC", "Maersk", "CMA CGM"].map((carrier) => (
+                  {["Lignes Maritimes Océaniques", "Fret Aérien IATA", "Connaissements B/L", "Corridors Portuaires"].map((carrier) => (
                     <span
                       key={carrier}
                       className="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-700/80 text-xs font-mono font-bold text-zinc-200"

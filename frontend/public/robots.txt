@@ -1,0 +1,17 @@
+# Robots.txt for Herve Logistics
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /about
+Allow: /contact
+Allow: /track/
+Allow: /suivi
+Allow: /legal
+Allow: /privacy
+Allow: /terms
+
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+
+Sitemap: https://herve-logistics.vercel.app/sitemap.xml

@@ -184,8 +184,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const getShipmentByNumber = (num: string) => {
     const cleanNum = num.trim().toUpperCase();
-    if (cleanNum === "ALT-2026-000001") {
-      return shipments.find((s) => s.trackingNumber === "HL-2026-000001");
+    if (cleanNum.startsWith("ALT-")) {
+      const hlEquivalent = cleanNum.replace(/^ALT-/, "HL-");
+      const match = shipments.find((s) => s.trackingNumber.toUpperCase() === hlEquivalent);
+      if (match) return match;
+      if (cleanNum === "ALT-2026-000001") {
+        return shipments.find((s) => s.trackingNumber === "HL-2026-000001");
+      }
     }
     return shipments.find((s) => s.trackingNumber.toUpperCase() === cleanNum);
   };

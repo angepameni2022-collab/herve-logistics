@@ -13,6 +13,8 @@ import {
   Boxes,
   Package,
   Globe2,
+  Car,
+  Warehouse,
   Zap,
   Shield,
   Clock,
@@ -82,7 +84,7 @@ export default function HomePage() {
               </p>
 
               {/* Barre de recherche Hero */}
-              <div className="w-full max-w-2xl">
+              <div id="tracking" className="w-full max-w-2xl scroll-mt-28">
                 <TrackingSearchBox />
 
                 <div className="mt-4 p-4 rounded-xl bg-black/75 backdrop-blur-md border border-zinc-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
@@ -152,7 +154,7 @@ export default function HomePage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 3. NOS SERVICES (EXACTEMENT LA STRUCTURE D'ALAIN-LOGISTICS) */}
+        {/* 3. NOS SERVICES (CATALOGUE COMPLET DES 8 SERVICES) */}
         {/* ============================================================ */}
         <section id="services" className="py-24 bg-slate-50/70 border-b border-slate-200/80">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -168,83 +170,149 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {/* Carte 1: Transport Maritime */}
-              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
-                  <Ship className="h-6 w-6" />
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Ship className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Transport Maritime
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    Conteneurs FCL/LCL, navires directs Busan ➔ Douala & Kribi, dédouanement portuaire complet.
+                  </p>
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
-                  Transport Maritime
-                </h3>
-                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
-                  Conteneurs FCL/LCL, fret maritime direct Busan ➔ Douala & Kribi, dédouanement complet.
-                </p>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  FCL · LCL · RoRo
+                </div>
               </div>
 
               {/* Carte 2: Transport Aérien */}
-              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
-                  <Plane className="h-6 w-6" />
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Plane className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Transport Aérien
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    Fret express et standard depuis l&apos;aéroport d&apos;Incheon (ICN), tracking temps réel, conformité IATA.
+                  </p>
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
-                  Transport Aérien
-                </h3>
-                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
-                  Fret express et standard depuis l&apos;aéroport d&apos;Incheon (ICN), tracking temps réel, conformité IATA.
-                </p>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  Express · Standard · Charter
+                </div>
               </div>
 
               {/* Carte 3: Transport Routier */}
-              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
-                  <Truck className="h-6 w-6" />
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Truck className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Transport Routier
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    Livraison porte-à-porte, acheminement vers les villes intérieures, groupage et camions dédiés.
+                  </p>
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
-                  Transport Routier
-                </h3>
-                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
-                  Livraison porte-à-porte, acheminement vers les villes intérieures, groupage et camions dédiés.
-                </p>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  Door-to-Door · Flotte GPS
+                </div>
               </div>
 
-              {/* Carte 4: Conteneurs */}
-              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
-                  <Boxes className="h-6 w-6" />
+              {/* Carte 4: Gestion de Conteneurs */}
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Boxes className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Gestion Conteneurs
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    20&apos;, 40&apos;, High Cube, Reefer. Suivi par coordonnées GPS maritimes et scellés numériques.
+                  </p>
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
-                  Conteneurs
-                </h3>
-                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
-                  20&apos;, 40&apos;, High Cube, Reefer. Suivi par coordonnées GPS maritimes et scellés numériques scellés.
-                </p>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  20&apos; · 40&apos; · HC · Reefer
+                </div>
               </div>
 
-              {/* Carte 5: Colis & Fret */}
-              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
-                  <Package className="h-6 w-6" />
+              {/* Carte 5: Vente & Transport Véhicules */}
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Car className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Transport Véhicules
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    Achat, inspection technique et fret RoRo ou conteneur auto de véhicules neufs et d&apos;occasion.
+                  </p>
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
-                  Colis & Fret
-                </h3>
-                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
-                  Des petits colis aux palettes industrielles complètes, assurance fret maritime incluse.
-                </p>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  RoRo · Auto sécurisé
+                </div>
               </div>
 
-              {/* Carte 6: Import / Export */}
-              <div className="group p-8 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
-                  <Globe2 className="h-6 w-6" />
+              {/* Carte 6: Colis & Fret */}
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Package className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Colis & Fret
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    Des petits colis aux palettes industrielles complètes, assurance fret maritime et notifications.
+                  </p>
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-[#09090B]">
-                  Import / Export
-                </h3>
-                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
-                  Documentation export Asie, licences maritimes, déclarations en douane et certificat d&apos;origine.
-                </p>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  Messagerie · Assurance
+                </div>
+              </div>
+
+              {/* Carte 7: Import / Export */}
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Globe2 className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Import / Export
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    Documentation export Asie, licences maritimes, déclarations en douane et certificat d&apos;origine.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  Douane · Licences · OEA
+                </div>
+              </div>
+
+              {/* Carte 8: Entreposage & Consolidation */}
+              <div className="group p-6 rounded-2xl bg-white border border-zinc-200/90 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#8f1212] flex items-center justify-center text-white shadow-md group-hover:shadow-red-500/30 transition-shadow">
+                    <Warehouse className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-[#09090B]">
+                    Entreposage & Consolidation
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-zinc-500 leading-relaxed">
+                    Hubs logistiques sous douane, consolidation multi-fournisseurs, palettisation et préparation.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-zinc-100 text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
+                  Hubs 24/7 · Stockage sécurisé
+                </div>
               </div>
             </div>
           </div>
