@@ -36,6 +36,42 @@ export interface Shipment {
 
 export const shipmentsData: Shipment[] = [
   {
+    trackingNumber: "HL-2026-393198",
+    clientName: "Société d'Import & Transit",
+    clientEmail: "contact@import-transit.com",
+    sender: "Hervé Logistics Korea (Busan Hub)",
+    recipient: "Société d'Import & Transit SARL",
+    origin: "Busan, Corée du Sud",
+    destination: "Douala, Cameroun",
+    mode: "Maritime",
+    status: "En attente",
+    progress: 5,
+    eta: "15 mai 2026",
+    departureDate: "10 avr. 2026",
+    weight: "16 400 kg",
+    volume: "2 × Conteneur 40' HC",
+    vesselName: "MSCU 4829137",
+    currentLocationName: "Busan, Corée du Sud (Départ)",
+    currentCoordinates: { lat: 35.1028, lng: 129.0403 },
+    waypoints: [
+      { label: "Busan, Corée du Sud (Origine)", lat: 35.10, lng: 129.04, reached: true },
+      { label: "Shanghai, Chine (Escale)", lat: 31.23, lng: 121.47, reached: false },
+      { label: "Détroit de Malacca", lat: 2.19, lng: 102.25, reached: false },
+      { label: "Port de Douala, Cameroun (Arrivée)", lat: 4.05, lng: 9.76, reached: false }
+    ],
+    events: [
+      {
+        id: "evt-393198-1",
+        date: "10 avr. 2026",
+        time: "14:00",
+        status: "En attente",
+        location: "Terminal Portuaire de Busan, Corée du Sud",
+        description: "Dossier d'expédition enregistré. Prise en charge des conteneurs au terminal portuaire de Busan.",
+        completed: true
+      }
+    ]
+  },
+  {
     trackingNumber: "HL-2026-000001",
     clientName: "Jean Dupont",
     clientEmail: "jean.dupont@email.com",

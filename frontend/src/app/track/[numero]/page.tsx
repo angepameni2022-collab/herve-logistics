@@ -128,25 +128,20 @@ export default function TrackingDetailPage({
                 Le numéro <span className="font-mono font-bold text-[#121212] bg-slate-100 px-2 py-0.5 rounded">&ldquo;{rawNumero}&rdquo;</span> ne correspond à aucune expédition active. Vérifiez que le numéro est correct ou contactez votre agent Hervé Logistics.
               </p>
 
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-left text-slate-600 mb-8 space-y-2">
-                <p className="font-bold text-[#121212]">Numéros d&apos;exemple à tester :</p>
-                <div className="flex flex-wrap gap-2">
-                  <Link
-                    href="/track/HL-2026-000001"
-                    className="font-mono font-bold text-[#121212] bg-[#FFB800] px-2.5 py-1 rounded border border-[#E5A800] hover:bg-[#E5A800]"
-                  >
-                    HL-2026-000001 (Maritime - En transit)
-                  </Link>
-                  <Link
-                    href="/track/TL-2025-000124"
-                    className="font-mono font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-slate-300 hover:bg-slate-100"
-                  >
-                    TL-2025-000124 (Aérien - Livré)
-                  </Link>
-                </div>
-              </div>
-
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href="https://wa.me/447456062192?text=Bonjour%2C%20je%20souhaite%20v%C3%A9rifier%20mon%20num%C3%A9ro%20de%20suivi%20colis."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-display font-bold text-xs uppercase tracking-wider transition-all shadow-xs"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Contacter votre agent sur WhatsApp</span>
+                  </button>
+                </a>
                 <Link href="/">
                   <Button variant="outline" size="md">
                     Retour à l&apos;accueil

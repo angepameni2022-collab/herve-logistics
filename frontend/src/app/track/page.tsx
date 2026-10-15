@@ -62,42 +62,11 @@ export default function TrackIndexPage() {
             </div>
           </div>
 
-          {/* Envois récents enregistrés */}
-          <div className="mt-12 text-left bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs">
-            <h3 className="font-display text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
-              Envois actifs enregistrés
-            </h3>
-
-            <div className="space-y-3">
-              {shipments.map((s) => (
-                <Link
-                  key={s.trackingNumber}
-                  href={`/track/${s.trackingNumber}`}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-[#FFB800] hover:bg-[#FFFBEB]/40 transition-all gap-3 group"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="font-mono font-bold text-sm text-[#121212] group-hover:text-[#FFB800]">
-                      {s.trackingNumber}
-                    </span>
-                    <Badge status={s.status} size="sm" />
-                    <span className="text-xs text-slate-500 hidden sm:inline">
-                      {s.mode}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-4 text-xs">
-                    <span className="text-slate-600 flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                      {s.origin} → {s.destination}
-                    </span>
-                    <span className="font-display font-bold uppercase tracking-wider text-[#B45309] flex items-center gap-1">
-                      Voir
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+          {/* Information Confidentialité & Suivi Privé */}
+          <div className="mt-8 text-center text-xs text-slate-500 max-w-md mx-auto">
+            <p>
+              🔒 <strong>Confidentialité garantie</strong> : Les fiches d&apos;acheminement et données de dédouanement sont strictement privées et accessibles uniquement via le numéro officiel remis par votre agent.
+            </p>
           </div>
         </div>
       </main>
