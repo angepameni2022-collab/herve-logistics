@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Shipment } from "@/data/shipments";
-import { Compass, Maximize2, Radio, Ship, Navigation, CheckCircle2 } from "lucide-react";
+import { Compass, Maximize2, Radio, Ship, Navigation, CheckCircle2, MapPin } from "lucide-react";
 import L from "leaflet";
 
 interface InteractiveLeafletMapProps {
@@ -434,6 +434,18 @@ export default function InteractiveLeafletMap({ shipment }: InteractiveLeafletMa
             </span>
           </div>
         </div>
+
+        {/* Position Actuelle floating button matching alain-logistics Photo 2 */}
+        <button
+          onClick={centerOnVessel}
+          type="button"
+          className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-[500] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[#121212] hover:bg-[#27272A] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-1.5 border border-white/20 transition-all cursor-pointer pointer-events-auto"
+          title="Centrer la carte sur la position actuelle"
+        >
+          <span className="w-2 h-2 rounded-full bg-[#FFB800] animate-ping" />
+          <MapPin className="w-3.5 h-3.5 text-[#FFB800]" />
+          <span>Position actuelle</span>
+        </button>
       </div>
     </div>
   );
