@@ -40,68 +40,68 @@ export default function AboutPage() {
       <Header />
 
       <main className="flex-1">
-        {/* HERO À PROPOS — NOIR & ROUGE */}
-        <section className="bg-[#09090B] text-white py-20 px-4 sm:px-6 lg:px-8 text-center border-b border-zinc-800">
+        {/* HERO À PROPOS — LUMINEUX, FRAIS & ACCUEILLANT */}
+        <section className="bg-gradient-to-b from-white via-red-50/40 to-white text-slate-900 py-20 px-4 sm:px-6 lg:px-8 text-center border-b border-slate-200">
           <div className="max-w-3xl mx-auto flex flex-col items-center">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black p-1 mb-6 shadow-2xl shadow-red-600/30 border border-zinc-800 overflow-hidden">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-2 mb-6 shadow-xl shadow-red-500/10 border border-red-100 overflow-hidden">
               <img
                 src="/images/logo-herve-hv.png"
                 alt="Logo Officiel Hervé Logistics"
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="text-xs font-bold uppercase tracking-widest text-red-400 bg-red-950/60 px-3.5 py-1.5 rounded-full border border-red-500/40">
+            <span className="text-xs font-black uppercase tracking-widest text-[#DC2626] bg-red-50 px-3.5 py-1.5 rounded-full border border-red-200">
               Notre Entreprise
             </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-4">
+            <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mt-4 mb-4 tracking-tight">
               {aboutPage.heroTitle}
             </h1>
-            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
               {aboutPage.heroSubtitle}
             </p>
           </div>
         </section>
 
-        {/* SECTION NOTRE MISSION (BIO OFFICIELLE) */}
-        <section className="bg-white border-b border-zinc-200/80 py-16 sm:py-20 relative overflow-hidden">
+        {/* SECTION NOTRE MISSION (LUMINEUSE ET PRESTIGIEUSE) */}
+        <section className="bg-white border-b border-slate-200/80 py-16 sm:py-20 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-[#09090B] text-white rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl border border-zinc-800">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="bg-gradient-to-br from-white via-red-50/50 to-white text-slate-900 rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-xl border border-red-100">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10 max-w-4xl">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-950/80 border border-red-500/40 text-[#DC2626] text-xs font-black tracking-wider uppercase mb-6">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-[#DC2626] text-xs font-black tracking-wider uppercase mb-6 shadow-xs">
                   <Globe className="w-3.5 h-3.5" />
                   <span>NOTRE MISSION & ENGAGEMENT MONDIAL</span>
                 </div>
 
-                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.2] mb-6">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.2] mb-6">
                   Une exigence alignée sur les meilleurs standards mondiaux du transport
                 </h2>
 
-                <div className="space-y-5 text-base sm:text-lg text-zinc-300 leading-relaxed">
-                  <p className="font-medium text-white/95">
+                <div className="space-y-5 text-base sm:text-lg text-slate-700 leading-relaxed font-medium">
+                  <p className="text-slate-900 font-semibold">
                     {aboutPage.missionText1 || "Notre mission est simple : offrir à chaque importateur, entreprise et particulier une transparence totale, une précision d'orfèvre et un suivi télématique en temps réel, dans une interface fluide, moderne et hautement sécurisée."}
                   </p>
 
-                  <p className="text-zinc-300">
+                  <p className="text-slate-600">
                     {aboutPage.missionText2 || "Nous orchestrons le suivi de vos colis, conteneurs maritimes et véhicules à travers plus de 180 pays, en intégrant les données télématiques et les manifestes douaniers 24h/24."}
                   </p>
                 </div>
 
                 {/* Badges Interopérabilité Réseaux */}
-                <div className="mt-8 pt-8 border-t border-zinc-800/80 flex flex-wrap items-center gap-2 sm:gap-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 mr-2">
+                <div className="mt-8 pt-8 border-t border-red-100 flex flex-wrap items-center gap-2 sm:gap-3">
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-500 mr-2">
                     Interopérabilité réseaux & corridors :
                   </span>
                   {["Lignes Maritimes Océaniques", "Fret Aérien IATA", "Connaissements B/L", "Corridors Portuaires"].map((carrier) => (
                     <span
                       key={carrier}
-                      className="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-700/80 text-xs font-mono font-bold text-zinc-200"
+                      className="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-mono font-bold text-slate-800 shadow-xs"
                     >
                       {carrier}
                     </span>
                   ))}
-                  <span className="px-3.5 py-1.5 rounded-lg bg-red-950/60 border border-red-600/40 text-xs font-black text-red-400 ml-auto">
+                  <span className="px-3.5 py-1.5 rounded-lg bg-red-50 border border-red-200 text-xs font-black text-[#DC2626] ml-auto shadow-xs">
                     180+ Pays · 24h/24
                   </span>
                 </div>

@@ -42,22 +42,22 @@ export default function ServicesPage() {
       <Header />
 
       <main className="flex-1">
-        {/* HERO SERVICES — NOIR & ROUGE */}
-        <section className="bg-[#09090B] text-white py-20 px-4 sm:px-6 lg:px-8 text-center border-b border-zinc-800">
+        {/* HERO SERVICES — LUMINEUX, CHALEUREUX ET GAI */}
+        <section className="bg-gradient-to-b from-white via-red-50/40 to-white text-slate-900 py-20 px-4 sm:px-6 lg:px-8 text-center border-b border-slate-200">
           <div className="max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-widest text-red-400 bg-red-950/60 px-3.5 py-1.5 rounded-full border border-red-500/40">
+            <span className="text-xs font-black uppercase tracking-widest text-[#DC2626] bg-red-50 px-3.5 py-1.5 rounded-full border border-red-200 shadow-xs">
               Solutions globales
             </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-4">
+            <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mt-4 mb-4 tracking-tight">
               {servicesPage.heroTitle}
             </h1>
-            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
               {servicesPage.heroSubtitle}
             </p>
           </div>
         </section>
 
-        {/* GRILLE 3x2 / 2x3 DES 6 SERVICES */}
+        {/* GRILLE DES 8 SERVICES */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {servicesData.map((service) => {
@@ -66,23 +66,23 @@ export default function ServicesPage() {
               return (
                 <div
                   key={service.id}
-                  className="group bg-white rounded-2xl border border-zinc-200/90 overflow-hidden shadow-xs hover:shadow-xl hover:border-red-300 transition-all duration-300 flex flex-col"
+                  className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-red-300 transition-all duration-300 flex flex-col"
                 >
                   {/* Grande Image */}
-                  <div className="relative h-56 w-full overflow-hidden bg-zinc-900">
+                  <div className="relative h-56 w-full overflow-hidden bg-slate-900">
                     <img
                       src={service.image}
                       alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#09090B]/90 via-[#09090B]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                     {service.badge && (
-                      <span className="absolute top-4 right-4 bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                      <span className="absolute top-4 right-4 bg-gradient-to-r from-[#DC2626] to-[#E11D48] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                         {service.badge}
                       </span>
                     )}
                     <div className="absolute bottom-4 left-4 flex items-center gap-2.5 text-white">
-                      <div className="w-10 h-10 rounded-xl bg-[#09090B] border border-red-500/40 flex items-center justify-center text-[#DC2626] shadow-md">
+                      <div className="w-10 h-10 rounded-xl bg-white text-[#DC2626] shadow-lg flex items-center justify-center font-bold">
                         {icon}
                       </div>
                       <h2 className="text-xl font-extrabold text-white drop-shadow-sm">{service.title}</h2>

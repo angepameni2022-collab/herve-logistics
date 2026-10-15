@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -52,31 +52,31 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#F8FAFC] relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 right-0 h-96 bg-[#09090B] border-b border-zinc-800 -z-0">
+      {/* Background Decor (Luminous & Warm) */}
+      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-br from-[#DC2626] via-[#E11D48] to-[#B91C1C] border-b border-red-700/30 -z-0">
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-15"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #DC2626 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0)`,
             backgroundSize: "24px 24px",
           }}
         />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-400/20 rounded-full blur-3xl pointer-events-none" />
       </div>
 
       {/* Top Navbar Bar with Back Button */}
       <header className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-bold transition-all backdrop-blur-md"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/95 hover:bg-white text-slate-800 hover:text-[#DC2626] border border-white/60 text-xs font-black shadow-lg transition-all backdrop-blur-md"
         >
           <ArrowLeft className="w-4 h-4 text-[#DC2626]" />
           <span>Retour à l&apos;accueil</span>
         </Link>
 
         <div className="text-right">
-          <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest hidden sm:inline-block">
-            Support Client : <a href="tel:+447456062192" className="text-white hover:text-[#DC2626] transition-colors">+44 7456 062192</a>
+          <span className="text-[11px] font-bold text-red-50 uppercase tracking-widest hidden sm:inline-block">
+            Support Client : <a href="tel:+447456062192" className="text-white hover:underline transition-all font-black">+44 7456 062192</a>
           </span>
         </div>
       </header>

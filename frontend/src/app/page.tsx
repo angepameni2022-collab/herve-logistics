@@ -55,31 +55,27 @@ export default function HomePage() {
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-3xl text-left">
-              {/* Badge: Official Logo Emblem */}
-              <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-zinc-700/80 text-white mb-6 shadow-xl">
-                <div className="w-7 h-7 rounded-lg bg-black p-0.5 overflow-hidden flex-shrink-0 border border-zinc-700/80 shadow-sm">
-                  <img
-                    src="/images/logo-herve-hv.png"
-                    alt="Logo Officiel Hervé Logistics"
-                    className="w-full h-full object-contain"
-                  />
+              {/* Badge: Official Logo Emblem (Bright & Luminous) */}
+              <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-white/60 text-slate-900 mb-6 shadow-xl">
+                <div className="w-7 h-7 rounded-lg bg-[#DC2626] p-0.5 overflow-hidden flex-shrink-0 border border-red-700/30 shadow-xs flex items-center justify-center">
+                  <span className="font-mono text-xs font-black text-white leading-none">HV</span>
                 </div>
                 <div className="flex items-center gap-2 pr-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-white text-xs font-black tracking-wider uppercase">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-slate-900 text-xs font-black tracking-wider uppercase">
                     HERVÉ LOGISTICS · PLATEFORME OFFICIELLE
                   </span>
                 </div>
               </div>
 
               {/* H1 Main Title */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.08] mb-5 drop-shadow-md">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.08] mb-5 drop-shadow-lg">
                 SUIVEZ VOS <span className="text-[#DC2626]">MARCHANDISES</span><br />
                 PARTOUT DANS LE MONDE
               </h1>
 
               {/* Description */}
-              <p className="text-sm sm:text-base lg:text-lg text-zinc-200 max-w-2xl leading-relaxed mb-8 drop-shadow-sm font-medium">
+              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-2xl leading-relaxed mb-8 drop-shadow-md font-medium">
                 Hervé Logistics réunit le maritime, l&apos;aérien, le routier et la livraison de conteneurs sur une seule plateforme. Suivi GPS, escales, ETA et documents — livrés avec la précision des leaders mondiaux.
               </p>
 
@@ -87,19 +83,20 @@ export default function HomePage() {
               <div id="tracking" className="w-full max-w-2xl scroll-mt-28">
                 <TrackingSearchBox />
 
-                <div className="mt-4 p-4 rounded-xl bg-black/75 backdrop-blur-md border border-zinc-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
-                  <div className="text-xs text-zinc-300">
-                    <span className="font-bold text-white block">
+                {/* Carte d'information lumineuse et accueillante */}
+                <div className="mt-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-white/90 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+                  <div className="text-xs text-slate-600">
+                    <span className="font-black text-slate-900 block text-sm">
                       Vous souhaitez expédier des marchandises depuis la Corée ?
                     </span>
-                    <span className="text-zinc-400">
+                    <span className="text-slate-600 font-medium mt-0.5 block">
                       Inscription obligatoire : déposez vos informations pour recevoir votre code officiel Hervé Logistics.
                     </span>
                   </div>
                   <Link href="/auth/register" className="flex-shrink-0 w-full sm:w-auto">
                     <button
                       type="button"
-                      className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
+                      className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#E11D48] hover:from-[#B91C1C] hover:to-[#BE123C] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-red-500/25 active:scale-95 cursor-pointer"
                     >
                       S&apos;inscrire & Expédier
                     </button>
@@ -111,42 +108,42 @@ export default function HomePage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 2. BANDE STATISTIQUES (EXACTEMENT COMME ALAIN-LOGISTICS) */}
+        {/* 2. BANDE STATISTIQUES (LUMINEUSE, GAIE ET CHALEUREUSE) */}
         {/* ============================================================ */}
-        <section className="bg-[#09090B] text-white border-y border-zinc-800">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+        <section className="bg-gradient-to-b from-white via-red-50/30 to-white text-slate-900 border-y border-slate-200/90 py-16 shadow-xs relative overflow-hidden">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div className="text-center p-6 rounded-2xl bg-white border border-red-100 shadow-sm hover:shadow-md hover:border-red-200 transition-all">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-[#DC2626] to-[#E11D48] bg-clip-text text-transparent">
                 180+
               </div>
-              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+              <div className="mt-2 text-xs text-slate-600 uppercase tracking-widest font-extrabold">
                 Pays desservis
               </div>
             </div>
 
-            <div className="text-center">
-              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+            <div className="text-center p-6 rounded-2xl bg-white border border-red-100 shadow-sm hover:shadow-md hover:border-red-200 transition-all">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-[#DC2626] to-[#E11D48] bg-clip-text text-transparent">
                 24/7
               </div>
-              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+              <div className="mt-2 text-xs text-slate-600 uppercase tracking-widest font-extrabold">
                 Suivi temps réel
               </div>
             </div>
 
-            <div className="text-center">
-              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+            <div className="text-center p-6 rounded-2xl bg-white border border-red-100 shadow-sm hover:shadow-md hover:border-red-200 transition-all">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-[#DC2626] to-[#E11D48] bg-clip-text text-transparent">
                 99.4%
               </div>
-              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+              <div className="mt-2 text-xs text-slate-600 uppercase tracking-widest font-extrabold">
                 Taux de livraison
               </div>
             </div>
 
-            <div className="text-center">
-              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-white via-zinc-200 to-[#DC2626] bg-clip-text text-transparent">
+            <div className="text-center p-6 rounded-2xl bg-white border border-red-100 shadow-sm hover:shadow-md hover:border-red-200 transition-all">
+              <div className="font-mono text-4xl lg:text-5xl font-black bg-gradient-to-r from-[#DC2626] to-[#E11D48] bg-clip-text text-transparent">
                 10M+
               </div>
-              <div className="mt-2 text-xs text-white/70 uppercase tracking-widest font-semibold">
+              <div className="mt-2 text-xs text-slate-600 uppercase tracking-widest font-extrabold">
                 Colis suivis
               </div>
             </div>
@@ -374,23 +371,23 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Colonne Droite : Carte aperçu du suivi avec progression verte */}
+            {/* Colonne Droite : Carte aperçu du suivi avec en-tête rouge radieux et progression émeraude */}
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border border-zinc-200">
-                <div className="bg-[#09090B] p-6 sm:p-7 text-white">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-white/70">
-                    Numéro de suivi
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-red-100">
+                <div className="bg-gradient-to-r from-[#DC2626] via-[#E11D48] to-[#B91C1C] p-6 sm:p-7 text-white shadow-md">
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-red-100 font-bold">
+                    Démonstration en direct · HL-2026-000001
                   </div>
-                  <div className="mt-1 font-mono text-2xl font-black text-white">
-                    HL-2026-000001
+                  <div className="mt-1 font-mono text-2xl font-black text-white tracking-wider">
+                    Busan ➔ Douala
                   </div>
-                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-emerald-400">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>En transit — 68% complété</span>
+                  <div className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-white bg-black/20 px-3 py-1 rounded-full backdrop-blur-xs">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>En transit maritime — 68% complété</span>
                   </div>
-                  <div className="mt-3 h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="mt-3 h-2.5 bg-white/25 rounded-full overflow-hidden p-0.5">
                     <div
-                      className="h-full bg-gradient-to-r from-[#DC2626] to-emerald-400 rounded-full"
+                      className="h-full bg-white rounded-full shadow-xs"
                       style={{ width: "68%" }}
                     />
                   </div>
@@ -448,34 +445,37 @@ export default function HomePage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 5. BANNIÈRE CTA DE BAS DE PAGE (EXACTEMENT COMME ALAIN-LOGISTICS) */}
+        {/* 5. BANNIÈRE CTA DE BAS DE PAGE (RADIEUSE, CHALEUREUSE ET GAIE) */}
         {/* ============================================================ */}
-        <section className="py-24 bg-gradient-to-br from-[#09090B] via-[#18181B] to-[#8f1212] text-white relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-br from-[#DC2626] via-[#E11D48] to-[#991B1B] text-white relative overflow-hidden shadow-2xl">
           <div className="mx-auto max-w-4xl text-center px-4 sm:px-6 lg:px-8 relative z-10">
-            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-black uppercase tracking-wider mb-4 border border-white/30">
+              Plateforme Ouverte 24/7
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-sm">
               Prêt à suivre votre marchandise ?
             </h2>
-            <p className="mt-4 text-white/85 text-base sm:text-lg max-w-xl mx-auto">
+            <p className="mt-4 text-red-50 text-base sm:text-lg max-w-xl mx-auto font-medium">
               Entrez votre numéro de suivi officiel et accédez immédiatement à la position exacte et aux documents.
             </p>
 
             <div className="mt-10">
               <form
                 onSubmit={handleCtaSearch}
-                className="flex flex-col sm:flex-row gap-3 p-3 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 max-w-2xl mx-auto"
+                className="flex flex-col sm:flex-row gap-3 p-3 rounded-2xl bg-white shadow-2xl border border-white max-w-2xl mx-auto"
               >
                 <div className="flex-1 flex items-center gap-3 px-4">
-                  <Search className="h-5 w-5 text-white/70" />
+                  <Search className="h-5 w-5 text-slate-400" />
                   <input
                     placeholder="Entrez votre numéro de suivi (ex : HL-2026-000001)"
-                    className="w-full bg-transparent outline-none py-3 text-sm sm:text-base text-white placeholder:text-white/60"
+                    className="w-full bg-transparent outline-none py-3 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 font-medium"
                     value={ctaTracking}
                     onChange={(e) => setCtaTracking(e.target.value)}
                   />
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#DC2626] text-white hover:bg-[#B91C1C] shadow-md h-12 sm:h-auto px-7 text-sm font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-gradient-to-r from-[#DC2626] to-[#E11D48] hover:from-[#B91C1C] hover:to-[#BE123C] text-white shadow-lg h-12 sm:h-auto px-7 text-sm font-black uppercase tracking-wider rounded-xl transition-all cursor-pointer active:scale-95"
                 >
                   <span>Suivre</span>
                   <ArrowRight className="h-4 w-4" />
@@ -486,16 +486,16 @@ export default function HomePage() {
             <div className="mt-8 flex justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-xs font-bold uppercase tracking-wider transition-colors border border-white/40 bg-white/10 text-white hover:bg-white hover:text-[#09090B] h-10 px-5 shadow-xs"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-xl text-xs font-black uppercase tracking-wider transition-all border-2 border-white bg-white text-[#DC2626] hover:bg-red-50 h-11 px-6 shadow-lg"
               >
-                Contactez-nous
+                Contactez nos conseillers
               </Link>
             </div>
           </div>
 
-          {/* Sphères de flou d'ambiance */}
-          <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-red-600/30 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-emerald-600/20 blur-3xl pointer-events-none" />
+          {/* Sphères de lumière festives et lumineuses */}
+          <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-rose-300/30 blur-3xl pointer-events-none" />
         </section>
       </main>
 

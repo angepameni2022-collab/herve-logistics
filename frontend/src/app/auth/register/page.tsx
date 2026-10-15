@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -65,13 +65,13 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-[#F8FAFC] relative">
-      <div className="absolute top-0 left-0 right-0 h-84 bg-[#09090B] border-b border-zinc-800 -z-0" />
+      <div className="absolute top-0 left-0 right-0 h-84 bg-gradient-to-br from-[#DC2626] via-[#E11D48] to-[#B91C1C] border-b border-red-700/30 -z-0 shadow-lg" />
 
       <div className="relative z-10 w-full max-w-xl">
         {/* Brand Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="w-16 h-16 rounded-2xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xl shadow-red-600/20 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
+            <div className="w-16 h-16 rounded-2xl bg-white p-1 flex items-center justify-center border border-white shadow-xl group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
                 src="/images/logo-herve-hv.png"
                 alt="Hervé Logistics Logo"
@@ -83,9 +83,9 @@ export default function RegisterPage() {
             </div>
             <div className="text-left">
               <span className="text-2xl font-black text-white tracking-tight leading-none block">
-                HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
+                HERVÉ <span className="text-white drop-shadow-sm">LOGISTICS</span>
               </span>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+              <span className="text-[10px] font-bold text-red-100 uppercase tracking-widest">
                 Transit Maritime & Aérien International · Corée du Sud
               </span>
             </div>
