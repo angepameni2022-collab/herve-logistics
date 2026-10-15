@@ -78,11 +78,11 @@ export default function ContactPage() {
 
       <main className="flex-1">
         {/* BANNIÈRE SUPÉRIEURE MAERSK DEEP NAVY */}
-        <section className="bg-[#00243D] text-white pt-28 pb-24 sm:pt-36 sm:pb-32 px-4 sm:px-6 lg:px-8 border-b border-[#003B64] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#42B0D5]/10 rounded-full blur-3xl pointer-events-none" />
+        <section className="bg-[#121212] text-white pt-28 pb-24 sm:pt-36 sm:pb-32 px-4 sm:px-6 lg:px-8 border-b border-[#27272A] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFB800]/10 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-6xl mx-auto relative z-10">
             {/* Overline */}
-            <span className="font-display text-xs sm:text-sm font-bold uppercase tracking-widest text-[#42B0D5] block mb-2">
+            <span className="font-display text-xs sm:text-sm font-bold uppercase tracking-widest text-[#FFB800] block mb-2">
               CONTACT & DÉPARTEMENT EXPÉDITION
             </span>
 
@@ -106,12 +106,12 @@ export default function ContactPage() {
               {/* Carte 1 : Email */}
               <a
                 href="mailto:contact@hervelogistics.com"
-                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-[#42B0D5] transition-all flex items-center gap-4 group"
+                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-[#FFB800] transition-all flex items-center gap-4 group"
               >
-                <div className="w-11 h-11 rounded-xl bg-[#EBF6FA] text-[#00243D] border border-[#42B0D5]/30 flex items-center justify-center flex-shrink-0 group-hover:bg-[#42B0D5] group-hover:text-white transition-all">
+                <div className="w-11 h-11 rounded-xl bg-[#FFFBEB] text-[#121212] border border-[#FFB800]/30 flex items-center justify-center flex-shrink-0 group-hover:bg-[#FFB800] group-hover:text-white transition-all">
                   <Mail className="w-5 h-5" />
                 </div>
-                <span className="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-[#0088B8] transition-colors truncate">
+                <span className="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-[#B45309] transition-colors truncate">
                   contact@hervelogistics.com
                 </span>
               </a>
@@ -119,14 +119,14 @@ export default function ContactPage() {
               {/* Carte 2 : Téléphone */}
               <a
                 href="tel:+447456062192"
-                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-[#42B0D5] transition-all flex items-center gap-4 group"
+                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-[#FFB800] transition-all flex items-center gap-4 group"
               >
-                <div className="w-11 h-11 rounded-xl bg-[#EBF6FA] text-[#00243D] border border-[#42B0D5]/30 flex items-center justify-center flex-shrink-0 group-hover:bg-[#42B0D5] group-hover:text-white transition-all">
+                <div className="w-11 h-11 rounded-xl bg-[#FFFBEB] text-[#121212] border border-[#FFB800]/30 flex items-center justify-center flex-shrink-0 group-hover:bg-[#FFB800] group-hover:text-white transition-all">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="font-display text-xs text-slate-400 font-bold uppercase tracking-wider">Téléphone direct</div>
-                  <span className="text-sm sm:text-base font-bold text-[#00243D] group-hover:text-[#0088B8] transition-colors">
+                  <span className="text-sm sm:text-base font-bold text-[#121212] group-hover:text-[#B45309] transition-colors">
                     +44 7456 062192
                   </span>
                 </div>
@@ -157,11 +157,11 @@ export default function ContactPage() {
 
               {/* Carte 3 : Siège social */}
               <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-[#EBF6FA] text-[#00243D] border border-[#42B0D5]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <MapPin className="w-5 h-5 text-[#42B0D5]" />
+                <div className="w-11 h-11 rounded-xl bg-[#FFFBEB] text-[#121212] border border-[#FFB800]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MapPin className="w-5 h-5 text-[#FFB800]" />
                 </div>
                 <div className="space-y-0.5 text-xs sm:text-sm text-slate-600">
-                  <div className="font-display font-bold text-[#00243D] text-base uppercase">
+                  <div className="font-display font-bold text-[#121212] text-base uppercase">
                     Hervé Logistics Korea Co., Ltd.
                   </div>
                   <div>Trade Tower, 511 Yeongdong-daero</div>
@@ -179,7 +179,7 @@ export default function ContactPage() {
                     <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-100 shadow-xs">
                       <CheckCircle2 className="w-7 h-7" />
                     </div>
-                    <h3 className="font-display text-2xl font-bold uppercase text-[#00243D]">
+                    <h3 className="font-display text-2xl font-bold uppercase text-[#121212]">
                       Votre message a été envoyé
                     </h3>
                     <p className="text-sm text-slate-600 max-w-md mx-auto">
@@ -188,7 +188,7 @@ export default function ContactPage() {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="px-6 py-2.5 rounded-sm bg-[#00243D] hover:bg-[#003B64] text-white font-display text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                      className="px-6 py-2.5 rounded-sm bg-[#121212] hover:bg-[#27272A] text-white font-display text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                     >
                       Envoyer un autre message
                     </button>
@@ -205,14 +205,14 @@ export default function ContactPage() {
                     {/* Champ 1 : Nom complet */}
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5">
-                        Nom complet <span className="text-[#0088B8]">*</span>
+                        Nom complet <span className="text-[#B45309]">*</span>
                       </label>
                       <input
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Ex: Paul Martin"
-                        className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all"
+                        className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all"
                         required
                       />
                     </div>
@@ -220,14 +220,14 @@ export default function ContactPage() {
                     {/* Champ 2 : Email */}
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5">
-                        Adresse Email <span className="text-[#0088B8]">*</span>
+                        Adresse Email <span className="text-[#B45309]">*</span>
                       </label>
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="votre.email@domaine.com"
-                        className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all"
+                        className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all"
                         required
                       />
                     </div>
@@ -248,7 +248,7 @@ export default function ContactPage() {
                               setPhone(found.dialCode + " ");
                             }
                           }}
-                          className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all"
+                          className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all"
                         >
                           {COUNTRIES_LIST.map((c) => (
                             <option key={c.code} value={c.name}>
@@ -267,7 +267,7 @@ export default function ContactPage() {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+82 ... ou +237..."
-                          className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all"
+                          className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all"
                         />
                       </div>
                     </div>
@@ -281,7 +281,7 @@ export default function ContactPage() {
                         aria-label="Objet de votre demande"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all"
+                        className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all"
                       >
                         <option value="Demande de cotation / Devis de fret maritime ou aérien">Demande de cotation / Devis de fret maritime ou aérien</option>
                         <option value="Assistance sur le suivi d'une expédition en cours">Assistance sur le suivi d&apos;une expédition en cours</option>
@@ -295,7 +295,7 @@ export default function ContactPage() {
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
                         <label className="block text-xs sm:text-sm font-semibold text-slate-800">
-                          Votre message détaillé <span className="text-[#0088B8]">*</span>
+                          Votre message détaillé <span className="text-[#B45309]">*</span>
                         </label>
                         <span className="text-[11px] text-slate-400">Précisez vos volumes et destinations</span>
                       </div>
@@ -304,7 +304,7 @@ export default function ContactPage() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Bonjour, je souhaite expédier un conteneur depuis Busan vers Douala..."
-                        className="w-full rounded-xl border border-slate-200 bg-white p-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all resize-y"
+                        className="w-full rounded-xl border border-slate-200 bg-white p-3.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all resize-y"
                         required
                       />
                     </div>
@@ -313,9 +313,9 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="w-full py-3.5 px-6 rounded-xl bg-[#00243D] hover:bg-[#003B64] active:scale-[0.99] text-white font-display font-extrabold uppercase tracking-wider text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#00243D]/20 transition-all disabled:opacity-60 cursor-pointer"
+                      className="w-full py-3.5 px-6 rounded-xl bg-[#121212] hover:bg-[#27272A] active:scale-[0.99] text-white font-display font-extrabold uppercase tracking-wider text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#121212]/20 transition-all disabled:opacity-60 cursor-pointer"
                     >
-                      <Send className="w-4 h-4 text-[#42B0D5]" />
+                      <Send className="w-4 h-4 text-[#FFB800]" />
                       <span>{isLoading ? "Envoi en cours..." : "Transmettre ma demande à l'équipe"}</span>
                     </button>
                   </form>

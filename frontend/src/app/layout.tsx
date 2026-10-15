@@ -64,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`h-full ${barlowCondensed.variable} ${inter.variable}`} suppressHydrationWarning>
       <body
-        className={`min-h-full flex flex-col bg-[#F8FAFC] text-[#00243D] ${inter.className} antialiased`}
+        className={`min-h-full flex flex-col bg-[#F8FAFC] text-[#121212] ${inter.className} antialiased`}
         suppressHydrationWarning
       >
         <ToastProvider>

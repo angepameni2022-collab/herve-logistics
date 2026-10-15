@@ -71,17 +71,17 @@ export default function ConnexionPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-[#001726] relative overflow-hidden select-none">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-[#121212] relative overflow-hidden select-none">
       {/* Halos d'ambiance Maersk Blue */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#42B0D5]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#003B64]/40 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#FFB800]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#27272A]/40 rounded-full blur-2xl pointer-events-none" />
 
       {/* Carte Blanche Centrale */}
       <div className="bg-white rounded-[26px] sm:rounded-[30px] shadow-2xl shadow-black/40 w-full max-w-[440px] p-7 sm:p-10 relative z-10 border border-slate-100">
         {/* Lien Retour au site */}
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#00243D] font-medium transition-colors mb-7 group"
+          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#121212] font-medium transition-colors mb-7 group"
         >
           <span className="text-slate-400 group-hover:-translate-x-0.5 transition-transform">←</span>
           <span>Retour au site</span>
@@ -100,24 +100,24 @@ export default function ConnexionPage() {
             />
           </div>
           <div className="leading-tight">
-            <div className="font-display text-2xl font-extrabold text-[#00243D] uppercase tracking-tight flex items-center gap-1.5">
+            <div className="font-display text-2xl font-extrabold text-[#121212] uppercase tracking-tight flex items-center gap-1.5">
               <span>HERVÉ</span>
-              <span className="text-[#42B0D5]">LOGISTICS</span>
+              <span className="text-[#FFB800]">LOGISTICS</span>
             </div>
             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-              GLOBAL LOGISTICS · MAERSK NETWORK
+              GLOBAL LOGISTICS · SUIVI OFFICIEL
             </div>
           </div>
         </div>
 
         {/* Badge Espace Privé */}
-        <div className="flex items-center gap-1.5 text-xs font-display font-extrabold text-[#0088B8] uppercase tracking-wider mb-1.5">
-          <Shield className="w-4 h-4 text-[#42B0D5]" />
+        <div className="flex items-center gap-1.5 text-xs font-display font-extrabold text-[#B45309] uppercase tracking-wider mb-1.5">
+          <Shield className="w-4 h-4 text-[#FFB800]" />
           <span>ESPACE PRIVÉ</span>
         </div>
 
         {/* Titre & Sous-titre */}
-        <h1 className="font-display text-3xl font-extrabold uppercase text-[#00243D] tracking-tight leading-tight">
+        <h1 className="font-display text-3xl font-extrabold uppercase text-[#121212] tracking-tight leading-tight">
           Connexion à votre espace
         </h1>
         <p className="text-xs sm:text-[13px] text-slate-500 mt-2 mb-6 leading-relaxed">
@@ -148,7 +148,7 @@ export default function ConnexionPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white py-3 px-3.5 text-sm text-[#00243D] focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all font-medium"
+              className="w-full rounded-xl border border-slate-200 bg-white py-3 px-3.5 text-sm text-[#121212] focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all font-medium"
               required
             />
           </div>
@@ -161,7 +161,7 @@ export default function ConnexionPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white py-3 px-3.5 text-sm text-[#00243D] focus:outline-none focus:border-[#42B0D5] focus:ring-2 focus:ring-[#42B0D5]/20 transition-all font-mono"
+              className="w-full rounded-xl border border-slate-200 bg-white py-3 px-3.5 text-sm text-[#121212] focus:outline-none focus:border-[#FFB800] focus:ring-2 focus:ring-[#FFB800]/20 transition-all font-mono"
               required
             />
           </div>
@@ -169,7 +169,7 @@ export default function ConnexionPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#00243D] hover:bg-[#003B64] active:scale-[0.99] text-white font-display font-extrabold uppercase tracking-wider text-sm transition-all shadow-lg shadow-[#00243D]/25 cursor-pointer disabled:opacity-60"
+            className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#121212] hover:bg-[#27272A] active:scale-[0.99] text-white font-display font-extrabold uppercase tracking-wider text-sm transition-all shadow-lg shadow-[#121212]/25 cursor-pointer disabled:opacity-60"
           >
             {isLoading ? "Connexion en cours..." : "Se connecter"}
           </button>
@@ -180,7 +180,7 @@ export default function ConnexionPage() {
           <span>Vous souhaitez expédier ? </span>
           <Link
             href="/auth/register"
-            className="font-display font-bold uppercase tracking-wider text-[#00243D] hover:text-[#42B0D5] transition-colors"
+            className="font-display font-bold uppercase tracking-wider text-[#121212] hover:text-[#FFB800] transition-colors"
           >
             Créer un compte d&apos;expédition →
           </Link>

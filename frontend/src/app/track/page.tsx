@@ -18,12 +18,12 @@ export default function TrackIndexPage() {
 
       <main className="flex-1 py-16 sm:py-20 pt-28 sm:pt-36">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-[#EBF6FA] border border-[#42B0D5]/30 text-[#0088B8] font-display text-xs font-bold uppercase tracking-wider mb-4">
-            <Radar className="w-4 h-4 text-[#42B0D5]" />
-            <span>Centre de Suivi Satellitaire · Maersk Network</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-[#FFFBEB] border border-[#FFB800]/30 text-[#B45309] font-display text-xs font-bold uppercase tracking-wider mb-4">
+            <Radar className="w-4 h-4 text-[#FFB800]" />
+            <span>Centre de Suivi Satellitaire · Herv� Logistics Network</span>
           </div>
 
-          <h1 className="font-display text-4xl sm:text-6xl font-extrabold uppercase text-[#00243D] mb-4 tracking-tight">
+          <h1 className="font-display text-4xl sm:text-6xl font-extrabold uppercase text-[#121212] mb-4 tracking-tight">
             Suivre une expédition en temps réel
           </h1>
           <p className="text-base text-slate-600 max-w-xl mx-auto mb-8 font-normal">
@@ -33,9 +33,9 @@ export default function TrackIndexPage() {
           <TrackingSearchBox />
 
           {/* BANNIÈRE : Attribution du code de suivi par messagerie */}
-          <div className="mt-8 bg-[#00243D] text-white rounded-2xl p-6 border border-[#003B64] shadow-xl text-left flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div className="mt-8 bg-[#121212] text-white rounded-2xl p-6 border border-[#27272A] shadow-xl text-left flex flex-col sm:flex-row items-center justify-between gap-5">
             <div>
-              <span className="font-display text-[11px] font-bold uppercase tracking-widest text-[#42B0D5] bg-white/10 px-2.5 py-0.5 rounded-sm inline-block mb-1">
+              <span className="font-display text-[11px] font-bold uppercase tracking-widest text-[#FFB800] bg-white/10 px-2.5 py-0.5 rounded-sm inline-block mb-1">
                 ATTRIBUTION DU CODE DE SUIVI · CONTACTEZ VOTRE AGENT
               </span>
               <h3 className="font-display text-xl font-bold uppercase text-white">
@@ -54,7 +54,7 @@ export default function TrackIndexPage() {
               >
                 <button
                   type="button"
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] font-display font-extrabold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-[#FFB800] hover:bg-[#E5A800] text-[#121212] font-display font-extrabold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
                 >
                   <span>Contacter sur WhatsApp</span>
                 </button>
@@ -73,10 +73,10 @@ export default function TrackIndexPage() {
                 <Link
                   key={s.trackingNumber}
                   href={`/track/${s.trackingNumber}`}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-[#42B0D5] hover:bg-[#EBF6FA]/40 transition-all gap-3 group"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-[#FFB800] hover:bg-[#FFFBEB]/40 transition-all gap-3 group"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="font-mono font-bold text-sm text-[#00243D] group-hover:text-[#42B0D5]">
+                    <span className="font-mono font-bold text-sm text-[#121212] group-hover:text-[#FFB800]">
                       {s.trackingNumber}
                     </span>
                     <Badge status={s.status} size="sm" />
@@ -90,7 +90,7 @@ export default function TrackIndexPage() {
                       <MapPin className="w-3.5 h-3.5 text-slate-400" />
                       {s.origin} → {s.destination}
                     </span>
-                    <span className="font-display font-bold uppercase tracking-wider text-[#0088B8] flex items-center gap-1">
+                    <span className="font-display font-bold uppercase tracking-wider text-[#B45309] flex items-center gap-1">
                       Voir
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </span>

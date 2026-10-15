@@ -224,7 +224,7 @@ function SuiviContent() {
         {/* En-tête */}
         <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
           <div className="p-3.5 flex items-center justify-between border-b border-slate-100">
-            <Link href="/" className="flex items-center gap-2.5 text-[#00243D] no-underline">
+            <Link href="/" className="flex items-center gap-2.5 text-[#121212] no-underline">
               <div className="w-10 h-10 rounded-lg overflow-hidden border border-slate-200 bg-black shadow-xs flex items-center justify-center flex-shrink-0">
                 <Image
                   src="/images/logo-herve-official.png"
@@ -235,8 +235,8 @@ function SuiviContent() {
                 />
               </div>
               <div>
-                <h1 className="font-display text-lg font-extrabold uppercase text-[#00243D] leading-tight">
-                  Hervé <span className="text-[#42B0D5]">Logistics</span>
+                <h1 className="font-display text-lg font-extrabold uppercase text-[#121212] leading-tight">
+                  Hervé <span className="text-[#FFB800]">Logistics</span>
                 </h1>
                 <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                   Suivi maritime international

@@ -59,14 +59,14 @@ export default function HomePage() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 sm:py-24">
             <div className="max-w-3xl text-left animate-hero-fade">
               {/* Badge: Official Live Platform Emblem (Style Maersk Star Blue) */}
-              <div className="inline-flex items-center gap-2.5 rounded-sm bg-[#42B0D5] px-3.5 py-1.5 text-[11px] font-display font-bold uppercase tracking-[0.18em] text-[#00243D] shadow-md">
-                <span className="h-2 w-2 rounded-full bg-[#00243D] animate-pulse" />
+              <div className="inline-flex items-center gap-2.5 rounded-sm bg-[#FFB800] px-3.5 py-1.5 text-[11px] font-display font-bold uppercase tracking-[0.18em] text-[#121212] shadow-md">
+                <span className="h-2 w-2 rounded-full bg-[#121212] animate-pulse" />
                 <span>Plateforme internationale · Temps réel</span>
               </div>
 
               {/* H1 Main Title in Barlow Condensed Uppercase */}
               <h1 className="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold uppercase text-white leading-[0.95] tracking-tight">
-                Suivez vos <span className="text-[#42B0D5]">marchandises</span><br />
+                Suivez vos <span className="text-[#FFB800]">marchandises</span><br />
                 partout dans le monde
               </h1>
 
@@ -97,7 +97,7 @@ export default function HomePage() {
                   >
                     <button
                       type="button"
-                      className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] font-display font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+                      className="w-full sm:w-auto px-5 py-2.5 rounded-sm bg-[#FFB800] hover:bg-[#E5A800] text-[#121212] font-display font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2"
                     >
                       <MessageSquare className="w-4 h-4" />
                       <span>Contacter sur WhatsApp</span>
@@ -112,10 +112,10 @@ export default function HomePage() {
         {/* ============================================================ */}
         {/* 2. BANDE STATISTIQUES (DEEP MARITIME NAVY & MAERSK BLUE)    */}
         {/* ============================================================ */}
-        <section className="bg-[#00243D] text-white border-y border-[#003B64] py-16 shadow-inner relative overflow-hidden">
+        <section className="bg-[#121212] text-white border-y border-[#27272A] py-16 shadow-inner relative overflow-hidden">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center group">
-              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#42B0D5] bg-clip-text text-transparent">
+              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#FFB800] bg-clip-text text-transparent">
                 180+
               </div>
               <div className="mt-2 font-display text-xs text-white/70 uppercase tracking-widest font-semibold">
@@ -127,7 +127,7 @@ export default function HomePage() {
             </div>
 
             <div className="text-center group">
-              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#42B0D5] bg-clip-text text-transparent">
+              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#FFB800] bg-clip-text text-transparent">
                 24/7
               </div>
               <div className="mt-2 font-display text-xs text-white/70 uppercase tracking-widest font-semibold">
@@ -139,7 +139,7 @@ export default function HomePage() {
             </div>
 
             <div className="text-center group">
-              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#42B0D5] bg-clip-text text-transparent">
+              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#FFB800] bg-clip-text text-transparent">
                 99.4%
               </div>
               <div className="mt-2 font-display text-xs text-white/70 uppercase tracking-widest font-semibold">
@@ -151,7 +151,7 @@ export default function HomePage() {
             </div>
 
             <div className="text-center group">
-              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#42B0D5] bg-clip-text text-transparent">
+              <div className="font-display text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-[#FFB800] bg-clip-text text-transparent">
                 10M+
               </div>
               <div className="mt-2 font-display text-xs text-white/70 uppercase tracking-widest font-semibold">
@@ -170,10 +170,10 @@ export default function HomePage() {
         <section id="services" className="py-24 bg-[#F8FAFC] border-b border-slate-200/80">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <div className="font-display text-sm font-bold text-[#0088B8] uppercase tracking-widest mb-2">
+              <div className="font-display text-sm font-bold text-[#B45309] uppercase tracking-widest mb-2">
                 Nos Services Multimodaux
               </div>
-              <h2 className="mt-1 font-display text-4xl sm:text-5xl font-extrabold text-[#00243D] uppercase tracking-tight">
+              <h2 className="mt-1 font-display text-4xl sm:text-5xl font-extrabold text-[#121212] uppercase tracking-tight">
                 Une logistique complète, sans frontières
               </h2>
               <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
@@ -183,17 +183,17 @@ export default function HomePage() {
 
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {/* Carte 1: Transport Maritime */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Ship className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       FCL · LCL · RoRo
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Transport Maritime
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -201,33 +201,33 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Conteneurs 20&apos; & 40&apos; High Cube</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Départs hebdomadaires réguliers</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails de la route</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               {/* Carte 2: Transport Aérien */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Plane className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       Express & IATA
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Transport Aérien
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -235,33 +235,33 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Transit rapide sous 48 à 72 heures</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Colis urgents & haute valeur</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails fret aérien</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               {/* Carte 3: Transport Routier */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Truck className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       Door-to-Door
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Transport Routier
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -269,33 +269,33 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Flotte télématique connectée</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Camions plateaux & bâchés</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails routier</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               {/* Carte 4: Gestion Conteneurs */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Boxes className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       Parcs Maritimes
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Conteneurs
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -303,33 +303,33 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Dry 20&apos;, 40&apos;, High Cube, Open Top</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Conteneurs frigorifiques Reefer</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails conteneurs</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               {/* Carte 5: Vente & Transport Véhicules */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Car className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       RoRo & Sécurisé
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Transport Véhicules
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -337,33 +337,33 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Navires rouliers RoRo dédiés</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Formalités certificat & douane</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails transport auto</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               {/* Carte 6: Colis & Fret */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Package className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       Messagerie Pro
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Colis & Fret
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -371,33 +371,33 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Assurance transport multirisque</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Notifications automatisées en continu</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails colis & fret</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               {/* Carte 7: Import / Export */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Globe2 className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       Douane & OEA
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Import / Export
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -405,33 +405,33 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Connaissements maritimes (Bill of Lading)</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Dédouanement accéléré sous accises</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails import / export</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               {/* Carte 8: Entreposage & Consolidation */}
-              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#42B0D5] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div className="group p-7 rounded-2xl bg-white border border-slate-200 hover:border-[#FFB800] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="h-12 w-12 rounded-xl bg-[#EBF6FA] flex items-center justify-center text-[#00243D] group-hover:bg-[#42B0D5] group-hover:text-white transition-all shadow-xs">
+                    <div className="h-12 w-12 rounded-xl bg-[#FFFBEB] flex items-center justify-center text-[#121212] group-hover:bg-[#FFB800] group-hover:text-white transition-all shadow-xs">
                       <Warehouse className="h-6 w-6" />
                     </div>
                     <span className="font-display text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-sm">
                       Hubs Sécurisés
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold uppercase text-[#00243D] group-hover:text-[#0088B8] transition-colors tracking-tight">
+                  <h3 className="font-display text-2xl font-bold uppercase text-[#121212] group-hover:text-[#B45309] transition-colors tracking-tight">
                     Entreposage
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -439,16 +439,16 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-slate-500 font-medium">
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Stockage sous surveillance vidéo 24/7</span>
                     </li>
                     <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#42B0D5] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB800] shrink-0" />
                       <span>Palettisation, étiquetage & cross-dock</span>
                     </li>
                   </ul>
                 </div>
-                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#00243D] group-hover:text-[#42B0D5] transition-colors">
+                <Link href="/services" className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-display font-bold uppercase tracking-wider text-[#121212] group-hover:text-[#FFB800] transition-colors">
                   <span>Détails entreposage</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -520,8 +520,8 @@ export default function HomePage() {
 
               {/* Attribution de votre code par messagerie */}
               <div className="mt-8 p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3.5 text-xs text-slate-600">
-                <div className="w-8 h-8 rounded-lg bg-[#42B0D5]/15 text-[#00243D] flex items-center justify-center shrink-0 mt-0.5">
-                  <MessageSquare className="w-4 h-4 text-[#42B0D5]" />
+                <div className="w-8 h-8 rounded-lg bg-[#FFB800]/15 text-[#121212] flex items-center justify-center shrink-0 mt-0.5">
+                  <MessageSquare className="w-4 h-4 text-[#FFB800]" />
                 </div>
                 <div>
                   <span className="font-bold text-slate-900 block text-sm">
@@ -648,7 +648,7 @@ export default function HomePage() {
                 className="flex flex-col sm:flex-row gap-3 p-3 rounded-2xl glass-dark shadow-2xl"
               >
                 <div className="flex-1 flex items-center gap-3 px-4">
-                  <Search className="h-5 w-5 text-[#42B0D5]" />
+                  <Search className="h-5 w-5 text-[#FFB800]" />
                   <input
                     placeholder="Entrez votre numéro de suivi (ex : HL-2026-000001)"
                     className="w-full bg-transparent outline-none py-3 text-base text-white placeholder:text-white/60 font-medium"
@@ -658,7 +658,7 @@ export default function HomePage() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] shadow-lg h-12 sm:h-auto px-8 text-base font-display font-bold uppercase tracking-wider rounded-sm transition-all cursor-pointer active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#FFB800] hover:bg-[#E5A800] text-[#121212] shadow-lg h-12 sm:h-auto px-8 text-base font-display font-bold uppercase tracking-wider rounded-sm transition-all cursor-pointer active:scale-95"
                 >
                   <span>Suivre</span>
                   <ArrowRight className="h-4 w-4" />
@@ -669,7 +669,7 @@ export default function HomePage() {
             <div className="mt-8 flex justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-xs font-display font-bold uppercase tracking-wider transition-all border border-white/30 bg-white/10 text-white hover:bg-white hover:text-[#00243D] h-11 px-6 shadow-md"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-xs font-display font-bold uppercase tracking-wider transition-all border border-white/30 bg-white/10 text-white hover:bg-white hover:text-[#121212] h-11 px-6 shadow-md"
               >
                 Contactez nos conseillers
               </Link>
@@ -677,7 +677,7 @@ export default function HomePage() {
           </div>
 
           {/* Sphères de lumière bleues d'ambiance */}
-          <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-[#42B0D5]/20 blur-3xl pointer-events-none" />
+          <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-[#FFB800]/20 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-cyan-400/15 blur-3xl pointer-events-none" />
         </section>
       </main>

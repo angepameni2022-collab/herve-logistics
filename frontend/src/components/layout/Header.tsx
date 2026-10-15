@@ -35,8 +35,8 @@ export function Header() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#00243D]/95 backdrop-blur-md border-b border-[#003B64] shadow-lg shadow-black/20"
-          : "bg-[#00243D]/90 backdrop-blur-sm border-b border-white/10"
+          ? "bg-[#121212]/95 backdrop-blur-md border-b border-[#27272A] shadow-lg shadow-black/40"
+          : "bg-[#121212]/90 backdrop-blur-sm border-b border-white/10"
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
@@ -54,7 +54,7 @@ export function Header() {
           </div>
           <div className="flex flex-col leading-none">
             <span className="font-display text-[20px] font-extrabold uppercase tracking-tight text-white">
-              Hervé <span className="text-[#42B0D5]">Logistics</span>
+              Hervé <span className="text-[#FFB800]">Logistics</span>
             </span>
             <span className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">
               Global Logistics
@@ -70,8 +70,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-display text-[15px] font-bold uppercase tracking-wider transition-colors hover:text-[#42B0D5] ${
-                  active ? "text-[#42B0D5] border-b-2 border-[#42B0D5] pb-0.5" : "text-white/85"
+                className={`font-display text-[15px] font-bold uppercase tracking-wider transition-colors hover:text-[#FFB800] ${
+                  active ? "text-[#FFB800] border-b-2 border-[#FFB800] pb-0.5" : "text-white/85"
                 }`}
               >
                 {link.label}
@@ -90,7 +90,7 @@ export function Header() {
           </Link>
           <Link
             href="/#tracking"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap h-9 px-5 bg-[#42B0D5] hover:bg-[#38A4C8] text-[#00243D] font-display font-extrabold uppercase tracking-wider text-xs shadow-md shadow-[#42B0D5]/20 rounded-sm transition-all active:scale-95 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap h-9 px-5 bg-[#FFB800] hover:bg-[#E5A800] text-[#09090B] font-display font-extrabold uppercase tracking-wider text-xs shadow-md shadow-[#FFB800]/20 rounded-sm transition-all active:scale-95 cursor-pointer"
           >
             <Search className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>Suivre un colis</span>
@@ -109,7 +109,7 @@ export function Header() {
 
       {/* Menu Déroulant Mobile */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#001F38] border-b border-[#003B64] px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top-4 duration-200 shadow-2xl">
+        <div className="md:hidden bg-[#121212] border-b border-[#27272A] px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top-4 duration-200 shadow-2xl">
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => {
               const active = isActive(link.href);
@@ -119,7 +119,7 @@ export function Header() {
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`font-display text-base font-bold uppercase tracking-wider px-3 py-2.5 rounded-lg transition-colors ${
-                    active ? "bg-[#42B0D5]/15 text-[#42B0D5]" : "text-white/80 hover:bg-white/5 hover:text-white"
+                    active ? "bg-[#FFB800]/15 text-[#FFB800]" : "text-white/80 hover:bg-white/5 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -139,7 +139,7 @@ export function Header() {
             <Link
               href="/#tracking"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-lg bg-[#42B0D5] text-[#00243D] font-display font-extrabold uppercase tracking-wider text-xs shadow-md"
+              className="w-full text-center py-2.5 rounded-lg bg-[#FFB800] text-[#09090B] font-display font-extrabold uppercase tracking-wider text-xs shadow-md"
             >
               Suivre un colis en direct
             </Link>

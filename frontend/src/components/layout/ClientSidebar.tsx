@@ -91,8 +91,8 @@ export function ClientSidebar() {
               />
             </div>
             <div>
-              <span className="text-base font-black text-[#00243D] tracking-tight leading-none block font-display uppercase">
-                HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
+              <span className="text-base font-black text-[#121212] tracking-tight leading-none block font-display uppercase">
+                HERVÉ <span className="text-[#FFB800]">LOGISTICS</span>
               </span>
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mt-1 block">
                 Portail Client International
@@ -230,8 +230,8 @@ export function ClientSidebar() {
               className="w-full h-full object-cover"
             />
           </div>
-          <span className="text-base font-black text-[#00243D] tracking-tight font-display uppercase">
-            HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
+          <span className="text-base font-black text-[#121212] tracking-tight font-display uppercase">
+            HERVÉ <span className="text-[#FFB800]">LOGISTICS</span>
           </span>
         </Link>
         <button

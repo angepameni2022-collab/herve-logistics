@@ -65,7 +65,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-[#F8FAFC] relative">
-      <div className="absolute top-0 left-0 right-0 h-84 bg-gradient-brand border-b border-[#003B64] -z-0 shadow-lg" />
+      <div className="absolute top-0 left-0 right-0 h-84 bg-gradient-brand border-b border-[#27272A] -z-0 shadow-lg" />
 
       <div className="relative z-10 w-full max-w-xl">
         {/* Brand Header */}
@@ -83,7 +83,7 @@ export default function RegisterPage() {
             </div>
             <div className="text-left">
               <span className="font-display text-2xl font-extrabold text-white tracking-tight leading-none block uppercase">
-                HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
+                HERVÉ <span className="text-[#FFB800]">LOGISTICS</span>
               </span>
               <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">
                 Transit Maritime & Aérien International · Corée du Sud
@@ -96,11 +96,11 @@ export default function RegisterPage() {
         <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-7 sm:p-10">
           {/* Badge Inscription Obligatoire */}
           <div className="mb-6 text-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-sm bg-[#EBF6FA] border border-[#42B0D5]/30 text-[#0088B8] font-display text-xs font-bold uppercase tracking-wider mb-3">
-              <AlertCircle className="w-3.5 h-3.5 text-[#42B0D5]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-sm bg-[#FFFBEB] border border-[#FFB800]/30 text-[#B45309] font-display text-xs font-bold uppercase tracking-wider mb-3">
+              <AlertCircle className="w-3.5 h-3.5 text-[#FFB800]" />
               <span>INSCRIPTION OBLIGATOIRE POUR EXPÉDIER</span>
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl font-extrabold uppercase text-[#00243D] tracking-tight">
+            <h1 className="font-display text-3xl sm:text-4xl font-extrabold uppercase text-[#121212] tracking-tight">
               Créer mon compte client
             </h1>
             <p className="text-sm text-slate-600 mt-2 leading-relaxed font-normal">
@@ -254,9 +254,9 @@ export default function RegisterPage() {
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className="w-full bg-[#00243D] hover:bg-[#003B64] text-white font-display font-extrabold uppercase tracking-wider"
+                  className="w-full bg-[#121212] hover:bg-[#27272A] text-white font-display font-extrabold uppercase tracking-wider"
                   isLoading={isLoading}
-                  rightIcon={<ArrowRight className="w-4 h-4 text-[#42B0D5]" />}
+                  rightIcon={<ArrowRight className="w-4 h-4 text-[#FFB800]" />}
                 >
                   S&apos;inscrire & Déclarer mes informations
                 </Button>
@@ -266,7 +266,7 @@ export default function RegisterPage() {
 
           <p className="mt-8 text-center text-xs text-slate-500">
             Vous avez déjà un compte client ?{" "}
-            <Link href="/auth/login" className="font-display font-bold uppercase tracking-wider text-[#00243D] hover:text-[#42B0D5] hover:underline">
+            <Link href="/auth/login" className="font-display font-bold uppercase tracking-wider text-[#121212] hover:text-[#FFB800] hover:underline">
               Se connecter
             </Link>
           </p>

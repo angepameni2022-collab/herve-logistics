@@ -37,9 +37,9 @@ export function AdminSidebar() {
     {
       label: "Navigateur GPS Colis",
       href: "/admin/displacement",
-      icon: <Navigation className="w-5 h-5 text-[#42B0D5]" />,
+      icon: <Navigation className="w-5 h-5 text-[#FFB800]" />,
       badge: "LIVE",
-      badgeColor: "bg-[#0088B8]",
+      badgeColor: "bg-[#B45309]",
     },
     { label: "Événements", href: "/admin/events", icon: <CalendarCheck2 className="w-5 h-5" /> },
     { label: "Clients", href: "/admin/clients", icon: <Users className="w-5 h-5" /> },
@@ -48,7 +48,7 @@ export function AdminSidebar() {
       href: "/admin/messages",
       icon: <MessageSquare className="w-5 h-5" />,
       badge: unreadMessagesCount > 0 ? unreadMessagesCount : undefined,
-      badgeColor: "bg-[#42B0D5]",
+      badgeColor: "bg-[#FFB800]",
     },
     { label: "Contenus", href: "/admin/cms", icon: <FileEdit className="w-5 h-5" /> },
     { label: "Journal d'activité", href: "/admin/activity", icon: <History className="w-5 h-5" /> },
@@ -64,7 +64,7 @@ export function AdminSidebar() {
     <div className="flex flex-col h-full justify-between">
       <div>
         {/* Brand Header */}
-        <div className="p-6 border-b border-[#002B49] flex items-center justify-between">
+        <div className="p-6 border-b border-[#27272A] flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-xl bg-black border border-white/20 p-1 flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden">
               <Image
@@ -78,7 +78,7 @@ export function AdminSidebar() {
             </div>
             <div>
               <span className="font-display text-lg font-extrabold text-white tracking-tight leading-none block uppercase">
-                HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
+                HERVÉ <span className="text-[#FFB800]">LOGISTICS</span>
               </span>
               <span className="text-[9px] font-bold uppercase tracking-wider text-white/50">
                 Console Admin · Corée
@@ -107,12 +107,12 @@ export function AdminSidebar() {
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                   active
-                    ? "bg-[#002B49] text-white border border-[#42B0D5]/40 shadow-sm"
+                    ? "bg-[#27272A] text-white border border-[#FFB800]/40 shadow-sm"
                     : "text-white/70 hover:text-white hover:bg-white/5"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className={active ? "text-[#42B0D5]" : "text-white/50 group-hover:text-white"}>
+                  <span className={active ? "text-[#FFB800]" : "text-white/50 group-hover:text-white"}>
                     {item.icon}
                   </span>
                   <span>{item.label}</span>
@@ -121,10 +121,10 @@ export function AdminSidebar() {
                   <span
                     className={`text-xs px-2 py-0.5 rounded-full font-bold ${
                       active
-                        ? "bg-[#42B0D5] text-[#00243D]"
+                        ? "bg-[#FFB800] text-[#09090B]"
                         : item.badgeColor
                         ? `${item.badgeColor} text-white`
-                        : "bg-[#002B49] text-white/70"
+                        : "bg-[#27272A] text-white/70"
                     }`}
                   >
                     {item.badge}
@@ -137,9 +137,9 @@ export function AdminSidebar() {
       </div>
 
       {/* Footer User / Logout */}
-      <div className="p-4 border-t border-[#002B49] bg-[#001320]">
+      <div className="p-4 border-t border-[#27272A] bg-[#09090B]">
         <div className="flex items-center gap-3 px-2 py-2 mb-3">
-          <div className="w-8 h-8 rounded-full bg-[#42B0D5]/20 text-[#42B0D5] flex items-center justify-center font-bold text-xs border border-[#42B0D5]/30">
+          <div className="w-8 h-8 rounded-full bg-[#FFB800]/20 text-[#FFB800] flex items-center justify-center font-bold text-xs border border-[#FFB800]/30">
             {currentUser?.name ? currentUser.name.slice(0, 2).toUpperCase() : "AD"}
           </div>
           <div className="flex-1 min-w-0">
@@ -176,7 +176,7 @@ export function AdminSidebar() {
   return (
     <>
       {/* Mobile Top Bar */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#001726] border-b border-[#002B49] z-30 px-4 flex items-center justify-between">
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#121212] border-b border-[#27272A] z-30 px-4 flex items-center justify-between">
         <Link href="/admin" className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-black border border-white/20 p-0.5 flex items-center justify-center flex-shrink-0 overflow-hidden">
             <Image
@@ -189,7 +189,7 @@ export function AdminSidebar() {
             />
           </div>
           <span className="font-display text-base font-extrabold uppercase text-white">
-            HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
+            HERVÉ <span className="text-[#FFB800]">LOGISTICS</span>
           </span>
         </Link>
         <button
@@ -202,7 +202,7 @@ export function AdminSidebar() {
       </div>
 
       {/* Desktop Persistent Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 bg-[#001726] border-r border-[#002B49] fixed inset-y-0 left-0 z-30">
+      <aside className="hidden md:flex flex-col w-64 bg-[#121212] border-r border-[#27272A] fixed inset-y-0 left-0 z-30">
         <NavContent />
       </aside>
 
@@ -213,7 +213,7 @@ export function AdminSidebar() {
             className="fixed inset-0 bg-black/70 backdrop-blur-xs"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="relative w-72 max-w-full bg-[#001726] h-full z-10 shadow-2xl">
+          <div className="relative w-72 max-w-full bg-[#121212] h-full z-10 shadow-2xl">
             <NavContent />
           </div>
         </div>

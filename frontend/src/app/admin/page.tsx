@@ -47,10 +47,10 @@ export default function AdminDashboardPage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="font-display text-xs font-bold uppercase tracking-wider text-[#0088B8]">
-            Administration Centrale · Maersk Network
+          <span className="font-display text-xs font-bold uppercase tracking-wider text-[#B45309]">
+            Administration Centrale · Herv� Logistics
           </span>
-          <h1 className="font-display text-3xl sm:text-4xl font-extrabold uppercase text-[#00243D] mt-0.5 tracking-tight">
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold uppercase text-[#121212] mt-0.5 tracking-tight">
             Tableau de bord
           </h1>
           <p className="text-sm text-zinc-500">
