@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -80,21 +80,21 @@ export function ClientSidebar() {
         {/* Brand Header */}
         <div className="p-5 sm:p-6 border-b border-zinc-100 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-md shadow-red-500/10 group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
+            <div className="w-12 h-12 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-md group-hover:scale-105 transition-transform flex-shrink-0 overflow-hidden">
               <Image
-                src="/images/logo-herve-hv.png"
+                src="/images/logo-herve-official.png"
                 alt="Hervé Logistics Logo"
                 width={48}
                 height={48}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
                 priority
               />
             </div>
             <div>
-              <span className="text-base font-black text-[#09090B] tracking-tight leading-none block">
-                HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
+              <span className="text-base font-black text-[#00243D] tracking-tight leading-none block font-display uppercase">
+                HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mt-1 block">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mt-1 block">
                 Portail Client International
               </span>
             </div>
@@ -223,15 +223,15 @@ export function ClientSidebar() {
         <Link href="/dashboard" className="flex items-center gap-2.5">
           <div className="w-10 h-10 rounded-xl bg-black p-0.5 flex items-center justify-center border border-zinc-800 shadow-xs overflow-hidden flex-shrink-0">
             <Image
-              src="/images/logo-herve-hv.png"
+              src="/images/logo-herve-official.png"
               alt="Hervé Logistics Logo"
               width={40}
               height={40}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover"
             />
           </div>
-          <span className="text-base font-black text-[#09090B] tracking-tight">
-            HERVÉ <span className="text-[#DC2626]">LOGISTICS</span>
+          <span className="text-base font-black text-[#00243D] tracking-tight font-display uppercase">
+            HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>
           </span>
         </Link>
         <button

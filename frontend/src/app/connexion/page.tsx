@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Shield, AlertCircle } from "lucide-react";
 import { useApp } from "@/context/AppContext";
@@ -86,12 +87,17 @@ export default function ConnexionPage() {
           <span>Retour au site</span>
         </Link>
 
-        {/* Logo de marque (Charte Maersk) */}
+        {/* Logo de marque Officiel */}
         <div className="flex items-center gap-3.5 mb-7">
-          <div className="w-14 h-14 rounded-xl bg-[#42B0D5] p-1 flex items-center justify-center shadow-sm flex-shrink-0">
-            <span className="font-display text-[26px] font-extrabold text-[#00243D] leading-none">
-              HV
-            </span>
+          <div className="w-14 h-14 rounded-xl bg-black p-1 flex items-center justify-center shadow-md border border-slate-200 overflow-hidden flex-shrink-0">
+            <Image
+              src="/images/logo-herve-official.png"
+              alt="Hervé Logistics"
+              width={56}
+              height={56}
+              className="w-full h-full object-cover"
+              priority
+            />
           </div>
           <div className="leading-tight">
             <div className="font-display text-2xl font-extrabold text-[#00243D] uppercase tracking-tight flex items-center gap-1.5">

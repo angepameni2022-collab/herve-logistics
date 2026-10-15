@@ -66,10 +66,15 @@ export function AdminSidebar() {
         {/* Brand Header */}
         <div className="p-6 border-b border-[#002B49] flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-[#42B0D5] p-1 flex items-center justify-center shadow-sm flex-shrink-0">
-              <span className="font-display text-[22px] font-extrabold text-[#00243D] leading-none">
-                HV
-              </span>
+            <div className="w-11 h-11 rounded-xl bg-black border border-white/20 p-1 flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden">
+              <Image
+                src="/images/logo-herve-official.png"
+                alt="Hervé Logistics"
+                width={44}
+                height={44}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
             <div>
               <span className="font-display text-lg font-extrabold text-white tracking-tight leading-none block uppercase">
@@ -173,8 +178,15 @@ export function AdminSidebar() {
       {/* Mobile Top Bar */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#001726] border-b border-[#002B49] z-30 px-4 flex items-center justify-between">
         <Link href="/admin" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-[#42B0D5] p-0.5 flex items-center justify-center flex-shrink-0">
-            <span className="font-display text-base font-extrabold text-[#00243D]">HV</span>
+          <div className="w-9 h-9 rounded-xl bg-black border border-white/20 p-0.5 flex items-center justify-center flex-shrink-0 overflow-hidden">
+            <Image
+              src="/images/logo-herve-official.png"
+              alt="Hervé Logistics"
+              width={36}
+              height={36}
+              className="w-full h-full object-cover"
+              priority
+            />
           </div>
           <span className="font-display text-base font-extrabold uppercase text-white">
             HERVÉ <span className="text-[#42B0D5]">LOGISTICS</span>

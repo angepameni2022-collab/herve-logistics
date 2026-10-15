@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface StatsColis {
@@ -223,13 +224,19 @@ function SuiviContent() {
         {/* En-tête */}
         <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
           <div className="p-3.5 flex items-center justify-between border-b border-slate-100">
-            <Link href="/" className="flex items-center gap-2.5 text-[#16130f] no-underline">
-              <div className="w-9 h-9 bg-[#d62828] text-white rounded-lg flex items-center justify-center font-extrabold text-xl font-['Barlow_Condensed',sans-serif]">
-                HV
+            <Link href="/" className="flex items-center gap-2.5 text-[#00243D] no-underline">
+              <div className="w-10 h-10 rounded-lg overflow-hidden border border-slate-200 bg-black shadow-xs flex items-center justify-center flex-shrink-0">
+                <Image
+                  src="/images/logo-herve-official.png"
+                  alt="Hervé Logistics Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
-                <h1 className="font-['Barlow_Condensed',sans-serif] text-lg font-extrabold uppercase text-[#d62828] leading-tight">
-                  Hervé Transit
+                <h1 className="font-display text-lg font-extrabold uppercase text-[#00243D] leading-tight">
+                  Hervé <span className="text-[#42B0D5]">Logistics</span>
                 </h1>
                 <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                   Suivi maritime international

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Mail, Phone } from "lucide-react";
 
 export function Footer() {
@@ -14,13 +15,13 @@ export function Footer() {
         {/* Colonne 1: Marque & Description */}
         <div className="md:col-span-2">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex h-10 items-center rounded-sm bg-[#42B0D5] px-2.5 shadow-sm ring-1 ring-black/10">
-              <span className="font-display text-[22px] font-extrabold leading-none tracking-tight text-[#00243D]">
-                HV
-              </span>
-              <span
-                aria-hidden="true"
-                className="ml-1 h-0 w-0 border-y-[9px] border-l-[9px] border-y-transparent border-l-[#00243D]"
+            <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-white/20 bg-black shadow-md flex items-center justify-center flex-shrink-0">
+              <Image
+                src="/images/logo-herve-official.png"
+                alt="Hervé Logistics Logo"
+                width={48}
+                height={48}
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="flex flex-col leading-none">

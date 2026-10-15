@@ -43,11 +43,11 @@ export default function AboutPage() {
         {/* HERO À PROPOS — MAERSK NETWORK */}
         <section className="bg-gradient-to-b from-white via-[#EBF6FA]/50 to-white text-slate-900 pt-28 sm:pt-36 pb-20 px-4 sm:px-6 lg:px-8 text-center border-b border-slate-200">
           <div className="max-w-3xl mx-auto flex flex-col items-center">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-2 mb-6 shadow-xl shadow-[#42B0D5]/10 border border-[#42B0D5]/30 overflow-hidden">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black p-2 mb-6 shadow-xl shadow-[#00243D]/20 border border-slate-200 overflow-hidden">
               <img
-                src="/images/logo-herve-hv.png"
+                src="/images/logo-herve-official.png"
                 alt="Logo Officiel Hervé Logistics"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <span className="font-display text-xs font-bold uppercase tracking-widest text-[#0088B8] bg-[#EBF6FA] px-3.5 py-1.5 rounded-sm border border-[#42B0D5]/30">
